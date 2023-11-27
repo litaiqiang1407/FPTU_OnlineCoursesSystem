@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FPTU_OnlineCoursesSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34f2733f16609f0671b53dedbeeea92f5f0cc572")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+804dd7e0cdac73cb9c994149be7fc88125156de5")]
 [assembly: System.Reflection.AssemblyProductAttribute("FPTU_OnlineCoursesSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FPTU_OnlineCoursesSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

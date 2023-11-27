@@ -5,7 +5,7 @@ namespace FPTU_OnlineCoursesSystem
 {
     public partial class AdministratorForm : Form
     {
-
+        
         private Form activeForm = null;
         private Button lastClickedButton;
 
@@ -27,7 +27,7 @@ namespace FPTU_OnlineCoursesSystem
             btnReports.Click += Button_Click;
         }
 
-
+        // Open form for each button
         private void OpenFormForButton(Button button)
         {
             switch (button.AccessibleName)
@@ -57,6 +57,8 @@ namespace FPTU_OnlineCoursesSystem
                     break;
             }
         }
+
+        // Hover effect for buttons
         private void hoverEffect(Button button, string imagePath)
         {
             // Event handler for mouse entering the button area
@@ -80,6 +82,7 @@ namespace FPTU_OnlineCoursesSystem
             };
         }
 
+        // Apply hover effect for buttons
         private void applyHoverEffect()
         {
             hoverEffect(btnInstructors, Path.Combine(Images.BaseImagePath, Images.instructors));
@@ -91,6 +94,7 @@ namespace FPTU_OnlineCoursesSystem
             hoverEffect(btnReports, Path.Combine(Images.BaseImagePath, Images.reports));
         }
 
+        // Apply button effect for clicked button
         private void applyButtonEffect(Button button)
         {
             button.Text = button.AccessibleName;
@@ -99,6 +103,7 @@ namespace FPTU_OnlineCoursesSystem
             button.BackColor = Color.White;
         }
 
+        // Reset button effect for last clicked button
         private void resetButtonEffect(Button button)
         {
             string imageName = button.AccessibleName.ToLower() + ".png";
@@ -109,18 +114,21 @@ namespace FPTU_OnlineCoursesSystem
 
         }
 
-
+        // Button click event handler
         private void Button_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
 
+            // If the clicked button is the same as the last clicked button, do nothing
             if (lastClickedButton != null)
             {
                 resetButtonEffect(lastClickedButton);
             }
 
+            // Apply button effect for clicked button
             applyButtonEffect(clickedButton);
 
+            // Set last clicked button
             lastClickedButton = clickedButton;
 
             OpenFormForButton(clickedButton);

@@ -115,34 +115,17 @@ namespace FPTU_OnlineCoursesSystem
 
         private void LoadCategoriesRevenueList(string selectedMonth, string selectedYear)
         {
-            
+
             try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string categoryRevenueQuery = "SELECT Category.CategoryID AS 'ID', Category.CategoryName AS 'Category', " +
-                                                  "COUNT(Course.CourseID) AS 'Courses', " +
-                                                  "ISNULL(SUM(Course.NumberOfEnrollments), 0) AS 'Sold', " +
-                                                  "FORMAT(ISNULL(SUM(Course.NumberOfEnrollments * Course.CoursePrice), 0), 'C') AS 'Revenue($)' " +
-                                                  "FROM Category " +
-                                                  "LEFT JOIN Course ON Category.CategoryID = Course.CategoryID " +
-                                                  "LEFT JOIN Enrollment ON Course.CourseID = Enrollment.CourseID " +
-                                                  "WHERE (@Month IS NULL OR MONTH(Enrollment.EnrollmentDate) = @Month) " +
-                                                  "AND (@Year IS NULL OR YEAR(Enrollment.EnrollmentDate) = @Year) " +
-                                                  "GROUP BY Category.CategoryID, Category.CategoryName";
+            {               
+                SqlParameter[] parameters = {
+                                            new SqlParameter("@Month", (object)selectedMonth ?? DBNull.Value),
+                                            new SqlParameter("@Year", (object)selectedYear ?? DBNull.Value)
+                                            };
 
-                    SqlCommand command = new SqlCommand(categoryRevenueQuery, connection);
-                    command.Parameters.AddWithValue("@Month", (object)selectedMonth ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@Year", (object)selectedYear ?? DBNull.Value);
+                CRUD.ViewData(DGVCategoryList, ReportQueryString.categoryRevenueQuery, parameters);
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-                    DGVCategoryList.DataSource = dataTable;
-
-                    CalculateTotal(selectedMonth, selectedYear);
-                }
+                CalculateTotal(selectedMonth, selectedYear);
             }
             catch (Exception ex)
             {
