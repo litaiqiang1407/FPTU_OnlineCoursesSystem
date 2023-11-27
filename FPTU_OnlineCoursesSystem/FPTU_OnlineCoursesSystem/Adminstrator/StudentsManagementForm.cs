@@ -1,175 +1,266 @@
-﻿using FPTU_OnlineCoursesSystem.DBInteraction;
+﻿using FPTU_OnlineCoursesSystem.DataValidator;
+using FPTU_OnlineCoursesSystem.DBInteraction;
 using FPTU_OnlineCoursesSystem.UIInteraction;
 using FPTU_OnlineCoursesSystem.Variables;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace FPTU_OnlineCoursesSystem
 {
     public partial class StudentsManagementForm : Form
     {
-        // Database connection string 
-        string connectionString = "Data Source=TAIKUN\\SQLEXPRESS;Initial Catalog=FPTU_OnlineCourseSystem_DB;Integrated Security=True; MultipleActiveResultSets=true";
 
         public StudentsManagementForm()
         {
             InitializeComponent();
+            initializeFilterComboBoxes();
             viewData();
+            setupButtonHoverEffects();
+            dynamicColumnFiltering();
+            attachFilterEventHandlers();
             getNextID();
+            inputControls = new Control[] { valueID, inputName, inputGender, inputEmail, inputPhone, inputBirthdate, valueEnrollments };
         }
+
+        #region Variables
 
         string tableName = StudentVariables.tableName;
 
-        // Load student data into DataGridView
-        private void viewData()
+        Control[] inputControls;
+
+        ComboBox[] filterComboBoxes;
+
+        private void initializeFilterComboBoxes()
         {
-           CRUD.ViewData(DGVStudent, StudentQueryString.dataQuery);
+            filterComboBoxes = new ComboBox[] { filterGender, filterEnrollments };
         }
 
+        private DateTime? parsedBirthdate()
+        {
+            return Helpers.ParseDate(inputBirthdate.Text);
+        }
+
+        private object[] inputInsertValues()
+        {
+            string name = inputName.Text;
+            string gender = inputGender.Text;
+            string email = inputEmail.Text;
+            string phone = inputPhone.Text;
+            DateTime? birthdate = parsedBirthdate();
+
+            return new object[] { name, gender, email, phone, birthdate };
+        }
+
+        private object[] inputUpdateValues()
+        {
+            string ID = valueID.Text;
+            string name = inputName.Text;
+            string gender = inputGender.Text;
+            string email = inputEmail.Text;
+            string phone = inputPhone.Text;
+            DateTime? birthdate = parsedBirthdate();
+
+            return new object[] { ID, name, gender, email, phone, birthdate };
+        }
+
+        #endregion
+
+        #region UIInteraction
         // Get the next available valueID
         private void getNextID()
         {
             valueID.Text = Helpers.GetNextID(tableName);
         }
 
-        private bool IsValidMail(string email)
+        private void setupButtonHoverEffects()
         {
-            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            return Regex.IsMatch(email, emailPattern);
+            ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClear });
+
+            ButtonHover.ApplyHoverEffect(btnRefresh, Path.Combine(Images.BaseImagePath, Images.RefreshIconPath),
+                Path.Combine(Images.BaseImagePath, Images.HoverRefreshIconPath));
+
+            ButtonHover.ApplyHoverEffect(btnSearch, Path.Combine(Images.BaseImagePath, Images.SearchIconPath),
+                Path.Combine(Images.BaseImagePath, Images.HoverSearchIconPath));
         }
 
-        private bool IsValidText(string input)
+        private void clearAllInputs()
         {
-            return !string.IsNullOrWhiteSpace(input) && input.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+            ButtonClick.ClearAllInputs(tableName, inputControls);
         }
 
-        private bool IsValidDate(string input)
+        private void clearAndLoad()
         {
-            DateTime parsedDate;
-            return DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate);
+            clearAllInputs();
+            viewData();
         }
 
+        #endregion
 
-        // Validate a field based on provided validation function and display appropriate messages
-        private void ValidateField(TextBox textBox, Label requiredLabel, string requiredMessage, Func<string, bool> validationFunc, string validationMessage)
+        #region Validation
+
+        private bool validateName()
         {
-            string fieldText = textBox.Text;
-
-            if (string.IsNullOrEmpty(fieldText) || !validationFunc(fieldText))
-            {
-                requiredLabel.Text = string.IsNullOrEmpty(fieldText) ? requiredMessage : validationMessage;
-                requiredLabel.Visible = true;
-                textBox.Focus();
-            }
-            else
-            {
-                requiredLabel.Visible = false;
-            }
+            return Validator.ValidateField(inputName, labelName,
+                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, "Student's name" + ValidationMessages.InvalidText,
+                true);
         }
+
+        private bool validateEmail()
+        {
+            return Validator.ValidateField(inputEmail, labelEmail,
+                "Email", Validator.IsValidEmail, ValidationMessages.InvalidEmail,
+                true);
+        }
+
+        private bool validatePhoneNumber()
+        {
+            return Validator.ValidateField(inputPhone, labelPhone,
+                "", Validator.IsValidPhoneNumber, ValidationMessages.InvalidPhoneNumber,
+                false);
+        }
+
+        private bool validateBirthdate()
+        {
+            return Validator.ValidateField(inputBirthdate, labelBirthdate,
+                "", Validator.IsValidDate, ValidationMessages.InvalidDate,
+                false);
+        }
+
+        private bool validateAllFields()
+        {
+            bool isValidName = validateName();
+            bool isValidEmail = validateEmail();
+            bool isValidPhoneNumber = validatePhoneNumber();
+            bool isValidBirthdate = validateBirthdate();
+
+
+            return Validator.ValidateAllFields(
+                (isValidName, () => validateName(), inputName),
+                (isValidEmail, () => validateEmail(), inputEmail),
+                (isValidPhoneNumber, () => validatePhoneNumber(), inputPhone),
+                (isValidBirthdate, () => validateBirthdate(), inputBirthdate)
+                );
+        }
+
+        #endregion
+
+        #region CRUD
+
+        // Load student data into DataGridView
+        private void viewData()
+        {
+            CRUD.ViewData(DGVStudent, StudentQueryString.dataQuery);
+        }
+
+        private void insertStudentData(object[] inputInsertValue)
+        {
+            CRUD.InsertData(StudentQueryString.insertQuery, StudentVariables.paramaters, inputInsertValue);
+        }
+
+        private void updateStudentData(object[] inputUpdateValue)
+        {
+            CRUD.UpdateData(StudentQueryString.updateQuery, StudentVariables.fullParamaters, inputUpdateValue);
+        }
+
+        private void deleteStudentData(int ID)
+        {
+            CRUD.DeleteData(tableName, ID);
+        }
+
+        #endregion
+
+        #region Searching
+
+        private void searchData(string searchValue)
+        {
+            Searching.SearchData(DGVStudent, StudentQueryString.searchQuery, searchValue);
+        }
+        private void dynamicColumnFiltering()
+        {
+            Searching.DynamicColumnFiltering(filterComboBoxes, StudentQueryString.comboBoxesQuery, StudentVariables.columnFilters);
+        }
+
+        private void filterData()
+        {
+            Searching.FilterData(DGVStudent, StudentQueryString.filterQuery, filterComboBoxes, StudentVariables.columnFilters);
+        }
+
+        #endregion
 
         private void DGVStudent_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = DGVStudent.Rows[e.RowIndex];
-
-                if (row != null)
-                {
-                    valueID.Text = row.Cells["ID"].Value.ToString();
-                    inputGender.Text = row.Cells["Gender"].Value.ToString();
-                    inputName.Text = row.Cells["Name"].Value.ToString();
-                    inputEmailAddress.Text = row.Cells["Email"].Value.ToString();
-                    valueEnrollments.Text = row.Cells["Enrollments"].Value.ToString();
-                    inputPhoneNumber.Text = row.Cells["Phone Number"].Value.ToString();
-                    inputBirthDate.Text = row.Cells["BirthDate"].Value.ToString();
-                }
-            }
+            CellClick.DGVCellClick(sender, e, inputControls, StudentVariables.columnNames, btnUpdate, btnDelete);
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            if (!validateAllFields())
+            {
+                Helpers.ShowError("Please check student's information again.");
+                return;
+            }
 
+            insertStudentData(inputInsertValues());
+            Helpers.ShowSuccess("Student created successfully.");
+
+            clearAndLoad();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // Retrieve values from input fields
-            int studentID = Convert.ToInt32(valueID.Text);
-            string studentName = inputName.Text;
-            string studentGender = inputGender.Text;
-            string studentEmail = inputEmailAddress.Text;
-            string studentPhoneNumber = inputPhoneNumber.Text;
-            int studentEnrollments = Convert.ToInt32(valueEnrollments.Text);
-            string studentBirthDate = inputBirthDate.Text;
-
-            // Validate input fields
-            if (!IsValidText(studentName) && !IsValidMail(studentEmail) && !IsValidDate(studentBirthDate))
+            if (!validateAllFields())
             {
-                ValidateField(inputName, requiredName, "Name is required", IsValidText, "Name is invalid");
-                ValidateField(inputEmailAddress, requiredEmail, "Email address is required", IsValidMail, "Email address is invalid");
-                ValidateField(inputBirthDate, requiredBirthDate, "Birth date is required", IsValidDate, "Birth date is invalid");
-                MessageBox.Show("Error: Please enter valid data for the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            } 
-            else if (!IsValidText(studentName))
-            {
-                ValidateField(inputName, requiredName, "Name is required", IsValidText, "Name is invalid");
-                MessageBox.Show("Error: Please enter valid data for the Name fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (!IsValidMail(studentEmail))
-            {
-                ValidateField(inputEmailAddress, requiredEmail, "Email address is required", IsValidMail, "Email address is invalid");
-                MessageBox.Show("Error: Please enter valid data for the Email Address fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (!IsValidDate(studentBirthDate))
-            {
-                ValidateField(inputBirthDate, requiredBirthDate, "Birth date is required", IsValidDate, "Birth date is invalid");
-                MessageBox.Show("Error: Please enter valid data for the Birth Date fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Helpers.ShowError("Please check student's information again.");
                 return;
             }
 
-            // Execute an SQL INSERT statement to add a new record
-            // Update the query accordingly based on table structure
-            try
+            updateStudentData(inputUpdateValues());
+            Helpers.ShowSuccess("Student updated successfully.");
+
+            clearAndLoad();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(valueID.Text);
+
+            deleteStudentData(id);
+            Helpers.ShowSuccess("Student deleted successfully.");
+
+            clearAndLoad();
+        }
+
+        private void inputSearch_TextChanged(object sender, EventArgs e)
+        {
+            searchData(inputSearch.Text);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            inputSearch_TextChanged(sender, e);
+        }
+
+        private void FilterComboboxes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filterData();
+        }
+
+        private void attachFilterEventHandlers()
+        {
+            foreach (var comboBox in filterComboBoxes)
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    string updateStudentQuery = "UPDATE Student SET StudentName = @StudentName, " +
-                                                "StudentGender = @StudentGender, StudentEmail = @StudentEmail, StudentPhone = @StudentPhone, " +
-                                                "StudentBirthDate = @StudentBirthDate WHERE StudentID = @StudentID";
-                    
-                    SqlCommand command = new SqlCommand(updateStudentQuery, connection);
-
-                    command.Parameters.AddWithValue("@StudentID", studentID);
-                    command.Parameters.AddWithValue("@StudentName", studentName);
-                    command.Parameters.AddWithValue("@StudentGender", studentGender);
-                    command.Parameters.AddWithValue("@StudentEmail", studentEmail);
-                    command.Parameters.AddWithValue("@StudentPhone", studentPhoneNumber);
-                    command.Parameters.AddWithValue("@StudentBirthDate", DateTime.ParseExact(studentBirthDate, "dd/MM/yyyy", CultureInfo.InvariantCulture));
-
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Student updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                viewData();
+                comboBox.SelectedIndexChanged += FilterComboboxes_SelectedIndexChanged;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while updating the student: " + ex.Message);
-            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            inputSearch.Text = string.Empty;
+            ButtonClick.RefreshComboboxes(filterComboBoxes);
+            viewData();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearAllInputs();
         }
     }
 }

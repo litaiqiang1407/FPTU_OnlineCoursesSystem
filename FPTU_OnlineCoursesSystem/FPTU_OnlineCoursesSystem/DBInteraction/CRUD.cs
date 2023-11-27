@@ -31,36 +31,31 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
             }
         }
 
-        // Method to check if a value already exists in a table and insert a new record if it doesn't
-        public static void Upsert(string tableName, string columnName, string value)
+        // Method to check if a value already exists in a table insert a new record if it doesn't
+        public static void UpsertData(string tableName, string columnName, object value)
         {
-            using (SqlConnection connection = DBConnection.GetConnection())
+            try
             {
-                try
-                {
-                    connection.Open();
+                string checkQuery = $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @{columnName}";
+                SqlParameter[] parameters = { new SqlParameter($"@{columnName}", value) };
 
-                    // Check if the value already exists in the related table
-                    string checkRelatedTableQuery = $"SELECT {tableName}ID FROM {tableName} WHERE {columnName} = @{columnName}";
-                    SqlCommand checkCommand = new SqlCommand(checkRelatedTableQuery, connection);
-                    checkCommand.Parameters.AddWithValue($"@{columnName}", value);
-                    object result = checkCommand.ExecuteScalar();
+                int count = (int)DBConnection.ExecuteQuery(checkQuery, parameters).Rows[0][0];
 
-                    if (result == null)
-                    {
-                        // If the value doesn't exist, add a new record to the related table
-                        string insertRelatedTableQuery = $"INSERT INTO {tableName} ({columnName}) VALUES (@{columnName})";
-                        SqlCommand insertCommand = new SqlCommand(insertRelatedTableQuery, connection);
-                        insertCommand.Parameters.AddWithValue($"@{columnName}", value);
-                        insertCommand.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
+                if (count == 0)
                 {
-                    Helpers.ShowError("Check related table - " + ex.Message);
+                    string insertQuery = $"INSERT INTO {tableName} ({columnName}) VALUES (@{columnName})";
+                    SqlParameter[] insertParameters = { new SqlParameter($"@{columnName}", value) };
+
+                    DBConnection.ExecuteQuery(insertQuery, insertParameters);
                 }
             }
+            catch (Exception ex)
+            {
+                Helpers.ShowError("UpsertData - " + ex.Message);
+            }
         }
+
+
 
         // Method to insert data into the database
         public static void InsertData(string queryString, string[] columnNames, object[] inputValues)
@@ -103,7 +98,7 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
         }
 
         // Method to delete data from the database
-        public static void DeleteData(string queryString, string tableName, object value)
+        public static void DeleteData(string tableName, object value)
         {
             try
             {
@@ -114,10 +109,13 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
                 {
                     return;
                 }
+
+                string deleteQuery = $"DELETE FROM {tableName} WHERE {tableName}ID = @{tableName}ID";
+
                 SqlParameter[] parameters = new SqlParameter[1];
                 parameters[0] = new SqlParameter($"@{tableName}ID", value);
 
-                DBConnection.ExecuteNonQuery(queryString, parameters);
+                DBConnection.ExecuteNonQuery(deleteQuery, parameters);
             }
             catch (Exception ex)
             {

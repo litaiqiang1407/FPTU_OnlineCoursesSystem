@@ -35,27 +35,27 @@
             label27 = new Label();
             filterGender = new ComboBox();
             label26 = new Label();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
             btnCreate = new Button();
-            btnClearAll = new Button();
-            requiredName = new Label();
-            requiredEmail = new Label();
-            requiredBirthDate = new Label();
-            requiredGender = new Label();
+            btnClear = new Button();
+            labelName = new Label();
+            labelEmail = new Label();
+            labelBirthdate = new Label();
+            labelPhone = new Label();
             valueID = new Label();
             inputGender = new ComboBox();
-            inputBirthDate = new TextBox();
+            inputBirthdate = new TextBox();
             label18 = new Label();
             label19 = new Label();
-            inputEmailAddress = new TextBox();
+            inputEmail = new TextBox();
             label6 = new Label();
             label7 = new Label();
-            inputPhoneNumber = new TextBox();
+            inputPhone = new TextBox();
             label4 = new Label();
             label5 = new Label();
             inputName = new TextBox();
@@ -78,6 +78,7 @@
             // 
             // filterEnrollments
             // 
+            filterEnrollments.AccessibleName = "Enrollments";
             filterEnrollments.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             filterEnrollments.ForeColor = Color.FromArgb(255, 109, 0);
             filterEnrollments.FormattingEnabled = true;
@@ -98,6 +99,7 @@
             // 
             // filterGender
             // 
+            filterGender.AccessibleName = "Gender";
             filterGender.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             filterGender.ForeColor = Color.FromArgb(255, 109, 0);
             filterGender.FormattingEnabled = true;
@@ -116,14 +118,15 @@
             label26.Size = new Size(200, 33);
             label26.TabIndex = 60;
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.Location = new Point(21, 241);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(840, 30);
-            inputSearchValue.TabIndex = 55;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.Location = new Point(21, 241);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(840, 30);
+            inputSearch.TabIndex = 55;
+            inputSearch.TextChanged += inputSearch_TextChanged;
             // 
             // label23
             // 
@@ -142,6 +145,8 @@
             btnRefresh.BackgroundImageLayout = ImageLayout.Center;
             btnRefresh.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnRefresh.FlatAppearance.BorderSize = 2;
+            btnRefresh.FlatAppearance.MouseDownBackColor = Color.White;
+            btnRefresh.FlatAppearance.MouseOverBackColor = Color.White;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnRefresh.ForeColor = Color.White;
@@ -150,6 +155,7 @@
             btnRefresh.Size = new Size(70, 30);
             btnRefresh.TabIndex = 57;
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnSearch
             // 
@@ -158,6 +164,8 @@
             btnSearch.BackgroundImageLayout = ImageLayout.Center;
             btnSearch.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnSearch.FlatAppearance.BorderSize = 2;
+            btnSearch.FlatAppearance.MouseDownBackColor = Color.White;
+            btnSearch.FlatAppearance.MouseOverBackColor = Color.White;
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSearch.ForeColor = Color.White;
@@ -166,12 +174,15 @@
             btnSearch.Size = new Size(70, 30);
             btnSearch.TabIndex = 56;
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 
             btnDelete.BackColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderSize = 2;
+            btnDelete.FlatAppearance.MouseDownBackColor = Color.White;
+            btnDelete.FlatAppearance.MouseOverBackColor = Color.White;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnDelete.ForeColor = Color.White;
@@ -181,12 +192,15 @@
             btnDelete.TabIndex = 54;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnUpdate
             // 
             btnUpdate.BackColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderSize = 2;
+            btnUpdate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnUpdate.FlatAppearance.MouseOverBackColor = Color.White;
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnUpdate.ForeColor = Color.White;
@@ -203,6 +217,8 @@
             btnCreate.BackColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderSize = 2;
+            btnCreate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnCreate.FlatAppearance.MouseOverBackColor = Color.White;
             btnCreate.FlatStyle = FlatStyle.Flat;
             btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnCreate.ForeColor = Color.White;
@@ -214,68 +230,71 @@
             btnCreate.UseVisualStyleBackColor = false;
             btnCreate.Click += btnCreate_Click;
             // 
-            // btnClearAll
+            // btnClear
             // 
-            btnClearAll.BackColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderSize = 2;
-            btnClearAll.FlatStyle = FlatStyle.Flat;
-            btnClearAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnClearAll.ForeColor = Color.White;
-            btnClearAll.Location = new Point(699, 165);
-            btnClearAll.Name = "btnClearAll";
-            btnClearAll.Size = new Size(300, 32);
-            btnClearAll.TabIndex = 51;
-            btnClearAll.Text = "Clear All";
-            btnClearAll.UseVisualStyleBackColor = false;
+            btnClear.BackColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderSize = 2;
+            btnClear.FlatAppearance.MouseDownBackColor = Color.White;
+            btnClear.FlatAppearance.MouseOverBackColor = Color.White;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(699, 165);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(300, 32);
+            btnClear.TabIndex = 51;
+            btnClear.Text = "Clear All";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
-            // requiredName
+            // labelName
             // 
-            requiredName.AutoSize = true;
-            requiredName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            requiredName.ForeColor = Color.Red;
-            requiredName.Location = new Point(40, 197);
-            requiredName.Name = "requiredName";
-            requiredName.Size = new Size(171, 17);
-            requiredName.TabIndex = 47;
-            requiredName.Text = "Please enter student's name";
-            requiredName.Visible = false;
+            labelName.AutoSize = true;
+            labelName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelName.ForeColor = Color.Red;
+            labelName.Location = new Point(40, 197);
+            labelName.Name = "labelName";
+            labelName.Size = new Size(71, 17);
+            labelName.TabIndex = 47;
+            labelName.Text = "labelName";
+            labelName.Visible = false;
             // 
-            // requiredEmail
+            // labelEmail
             // 
-            requiredEmail.AutoSize = true;
-            requiredEmail.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            requiredEmail.ForeColor = Color.Red;
-            requiredEmail.Location = new Point(369, 197);
-            requiredEmail.Name = "requiredEmail";
-            requiredEmail.Size = new Size(89, 17);
-            requiredEmail.TabIndex = 46;
-            requiredEmail.Text = "labelRequired";
-            requiredEmail.Visible = false;
+            labelEmail.AutoSize = true;
+            labelEmail.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelEmail.ForeColor = Color.Red;
+            labelEmail.Location = new Point(369, 197);
+            labelEmail.Name = "labelEmail";
+            labelEmail.Size = new Size(67, 17);
+            labelEmail.TabIndex = 46;
+            labelEmail.Text = "labelEmail";
+            labelEmail.Visible = false;
             // 
-            // requiredBirthDate
+            // labelBirthdate
             // 
-            requiredBirthDate.AutoSize = true;
-            requiredBirthDate.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            requiredBirthDate.ForeColor = Color.Red;
-            requiredBirthDate.Location = new Point(699, 122);
-            requiredBirthDate.Name = "requiredBirthDate";
-            requiredBirthDate.Size = new Size(89, 17);
-            requiredBirthDate.TabIndex = 45;
-            requiredBirthDate.Text = "labelRequired";
-            requiredBirthDate.Visible = false;
+            labelBirthdate.AutoSize = true;
+            labelBirthdate.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelBirthdate.ForeColor = Color.Red;
+            labelBirthdate.Location = new Point(699, 122);
+            labelBirthdate.Name = "labelBirthdate";
+            labelBirthdate.Size = new Size(88, 17);
+            labelBirthdate.TabIndex = 45;
+            labelBirthdate.Text = "labelBirthdate";
+            labelBirthdate.Visible = false;
             // 
-            // requiredGender
+            // labelPhone
             // 
-            requiredGender.AutoSize = true;
-            requiredGender.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            requiredGender.ForeColor = Color.Red;
-            requiredGender.Location = new Point(205, 122);
-            requiredGender.Name = "requiredGender";
-            requiredGender.Size = new Size(135, 17);
-            requiredGender.TabIndex = 44;
-            requiredGender.Text = "Please select this field";
-            requiredGender.Visible = false;
+            labelPhone.AutoSize = true;
+            labelPhone.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelPhone.ForeColor = Color.Red;
+            labelPhone.Location = new Point(369, 122);
+            labelPhone.Name = "labelPhone";
+            labelPhone.Size = new Size(72, 17);
+            labelPhone.TabIndex = 44;
+            labelPhone.Text = "labelPhone";
+            labelPhone.Visible = false;
             // 
             // valueID
             // 
@@ -299,15 +318,15 @@
             inputGender.TabIndex = 41;
             inputGender.Text = "Select gender";
             // 
-            // inputBirthDate
+            // inputBirthdate
             // 
-            inputBirthDate.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputBirthDate.ForeColor = Color.Black;
-            inputBirthDate.Location = new Point(700, 91);
-            inputBirthDate.Name = "inputBirthDate";
-            inputBirthDate.PlaceholderText = "dd/mm/yyyy";
-            inputBirthDate.Size = new Size(133, 30);
-            inputBirthDate.TabIndex = 39;
+            inputBirthdate.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputBirthdate.ForeColor = Color.Black;
+            inputBirthdate.Location = new Point(700, 91);
+            inputBirthdate.Name = "inputBirthdate";
+            inputBirthdate.PlaceholderText = "dd/mm/yyyy";
+            inputBirthdate.Size = new Size(133, 30);
+            inputBirthdate.TabIndex = 39;
             // 
             // label18
             // 
@@ -325,20 +344,20 @@
             label19.ForeColor = Color.FromArgb(255, 109, 0);
             label19.Location = new Point(699, 70);
             label19.Name = "label19";
-            label19.Size = new Size(79, 20);
+            label19.Size = new Size(77, 20);
             label19.TabIndex = 38;
-            label19.Text = "BirthDate";
+            label19.Text = "Birthdate";
             label19.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // inputEmailAddress
+            // inputEmail
             // 
-            inputEmailAddress.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputEmailAddress.ForeColor = Color.Black;
-            inputEmailAddress.Location = new Point(370, 166);
-            inputEmailAddress.Name = "inputEmailAddress";
-            inputEmailAddress.PlaceholderText = "Enter student's email address";
-            inputEmailAddress.Size = new Size(298, 30);
-            inputEmailAddress.TabIndex = 30;
+            inputEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputEmail.ForeColor = Color.Black;
+            inputEmail.Location = new Point(370, 166);
+            inputEmail.Name = "inputEmail";
+            inputEmail.PlaceholderText = "Enter student's email address";
+            inputEmail.Size = new Size(298, 30);
+            inputEmail.TabIndex = 30;
             // 
             // label6
             // 
@@ -361,15 +380,15 @@
             label7.Text = "Email";
             label7.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // inputPhoneNumber
+            // inputPhone
             // 
-            inputPhoneNumber.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputPhoneNumber.ForeColor = Color.Black;
-            inputPhoneNumber.Location = new Point(370, 91);
-            inputPhoneNumber.Name = "inputPhoneNumber";
-            inputPhoneNumber.PlaceholderText = "Enter phone number";
-            inputPhoneNumber.Size = new Size(298, 30);
-            inputPhoneNumber.TabIndex = 27;
+            inputPhone.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputPhone.ForeColor = Color.Black;
+            inputPhone.Location = new Point(370, 91);
+            inputPhone.Name = "inputPhone";
+            inputPhone.PlaceholderText = "Enter phone number";
+            inputPhone.Size = new Size(298, 30);
+            inputPhone.TabIndex = 27;
             // 
             // label4
             // 
@@ -500,27 +519,27 @@
             panelStudents.Controls.Add(label27);
             panelStudents.Controls.Add(filterGender);
             panelStudents.Controls.Add(label26);
-            panelStudents.Controls.Add(inputSearchValue);
+            panelStudents.Controls.Add(inputSearch);
             panelStudents.Controls.Add(label23);
             panelStudents.Controls.Add(btnRefresh);
             panelStudents.Controls.Add(btnSearch);
             panelStudents.Controls.Add(btnDelete);
             panelStudents.Controls.Add(btnUpdate);
             panelStudents.Controls.Add(btnCreate);
-            panelStudents.Controls.Add(btnClearAll);
-            panelStudents.Controls.Add(requiredName);
-            panelStudents.Controls.Add(requiredEmail);
-            panelStudents.Controls.Add(requiredBirthDate);
-            panelStudents.Controls.Add(requiredGender);
+            panelStudents.Controls.Add(btnClear);
+            panelStudents.Controls.Add(labelName);
+            panelStudents.Controls.Add(labelEmail);
+            panelStudents.Controls.Add(labelBirthdate);
+            panelStudents.Controls.Add(labelPhone);
             panelStudents.Controls.Add(valueID);
             panelStudents.Controls.Add(inputGender);
-            panelStudents.Controls.Add(inputBirthDate);
+            panelStudents.Controls.Add(inputBirthdate);
             panelStudents.Controls.Add(label18);
             panelStudents.Controls.Add(label19);
-            panelStudents.Controls.Add(inputEmailAddress);
+            panelStudents.Controls.Add(inputEmail);
             panelStudents.Controls.Add(label6);
             panelStudents.Controls.Add(label7);
-            panelStudents.Controls.Add(inputPhoneNumber);
+            panelStudents.Controls.Add(inputPhone);
             panelStudents.Controls.Add(label4);
             panelStudents.Controls.Add(label5);
             panelStudents.Controls.Add(inputName);
@@ -625,27 +644,27 @@
         private Label label27;
         private ComboBox filterGender;
         private Label label26;
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Label label23;
         private Button btnRefresh;
         private Button btnSearch;
         private Button btnDelete;
         private Button btnUpdate;
         private Button btnCreate;
-        private Button btnClearAll;
-        private Label requiredName;
-        private Label requiredEmail;
-        private Label requiredBirthDate;
-        private Label requiredGender;
+        private Button btnClear;
+        private Label labelName;
+        private Label labelEmail;
+        private Label labelBirthdate;
+        private Label labelPhone;
         private Label valueID;
         private ComboBox inputGender;
-        private TextBox inputBirthDate;
+        private TextBox inputBirthdate;
         private Label label18;
         private Label label19;
-        private TextBox inputEmailAddress;
+        private TextBox inputEmail;
         private Label label6;
         private Label label7;
-        private TextBox inputPhoneNumber;
+        private TextBox inputPhone;
         private Label label4;
         private Label label5;
         private TextBox inputName;

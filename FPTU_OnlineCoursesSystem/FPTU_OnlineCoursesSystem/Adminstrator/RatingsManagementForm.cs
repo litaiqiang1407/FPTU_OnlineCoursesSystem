@@ -1,148 +1,183 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using FPTU_OnlineCoursesSystem.UIInteraction;
+using FPTU_OnlineCoursesSystem.Variables;
+using FPTU_OnlineCoursesSystem.DBInteraction;
+using FPTU_OnlineCoursesSystem.DataValidator;
 
 namespace FPTU_OnlineCoursesSystem
 {
     public partial class RatingsManagementForm : Form
     {
-        // Database connection string 
-        string connectionString = "Data Source=TAIKUN\\SQLEXPRESS;Initial Catalog=FPTU_OnlineCourseSystem_DB;Integrated Security=True; MultipleActiveResultSets=true";
 
         public RatingsManagementForm()
         {
             InitializeComponent();
-            LoadRatingData();
-            valueRatingID.Text = GetNextValueID();
+            setupButtonHoverEffects();
+            viewData();
+            getNextID();
+            inputControls = new Control[] { valueRatingID, valueStudentID, inputStudentName, valueCourseID, inputCourseName, valueRating, inputReview };
         }
 
-        // Load rating data into DataGridView
-        private void LoadRatingData()
+        #region Variables
+
+        string tableName = RatingVariables.tableName;
+        Control[] inputControls;
+
+        private object[] inputUpdateValues()
         {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT Rating.RatingID AS 'Rating ID', Rating.StudentID AS 'Student ID', Student.StudentName AS 'Student Name', " +
-                               "Rating.CourseID AS 'Course ID', Course.CourseName AS 'Course Name', Rating.RatingValue AS 'Value', Rating.Review AS 'Review' " +
-                               "FROM Rating " +
-                               "INNER JOIN Student ON Rating.StudentID = Student.StudentID " +
-                               "INNER JOIN Course ON Rating.CourseID = Course.CourseID";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
+            string ratingID = valueRatingID.Text;
+            string studentName = inputStudentName.Text;
+            string courseName = inputCourseName.Text;
+            string review = inputReview.Text;
 
-                    connection.Open();
-                    adapter.Fill(dataTable);
-                    DGVRating.DataSource = dataTable;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+            return new object[] { ratingID, studentName, courseName, review };
         }
+
+        #endregion
+
+        #region UIInteraction
 
         // Get the next available valueID
-        private string GetNextValueID()
+        private void getNextID()
         {
-            int nextValueID = 1;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT MAX(EnrollmentID) FROM Enrollment";
-                    SqlCommand command = new SqlCommand(query, connection);
-
-                    connection.Open();
-                    object result = command.ExecuteScalar();
-
-                    if (result != null && result != DBNull.Value)
-                    {
-                        nextValueID = Convert.ToInt32(result) + 1;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while fetching the next valueID: " + ex.Message);
-            }
-
-            string nextValueIDText = nextValueID.ToString();
-            return nextValueIDText;
+            valueRatingID.Text = Helpers.GetNextID(tableName);
         }
+
+        private void setupButtonHoverEffects()
+        {
+            ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClear });
+
+            ButtonHover.ApplyHoverEffect(btnRefresh, Path.Combine(Images.BaseImagePath, Images.RefreshIconPath),
+                Path.Combine(Images.BaseImagePath, Images.HoverRefreshIconPath));
+
+            ButtonHover.ApplyHoverEffect(btnSearch, Path.Combine(Images.BaseImagePath, Images.SearchIconPath),
+                Path.Combine(Images.BaseImagePath, Images.HoverSearchIconPath));
+        }
+
+        private void clearAllInputs()
+        {
+            ButtonClick.ClearAllInputs(tableName, inputControls);
+        }
+
+        private void clearAndLoad()
+        {
+            clearAllInputs();
+            viewData();
+        }
+
+        #endregion
+
+        #region Validation
+
+        private bool validateStudentName()
+        {
+            return Validator.ValidateField(inputStudentName, labelStudentName,
+                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, "Student's name" + ValidationMessages.InvalidText,
+                true);
+        }
+
+        private bool validateCourseName()
+        {
+            return Validator.ValidateField(inputCourseName, labelCourseName,
+                "Course name" + ValidationMessages.RequiredField, Validator.IsValidText, "Course's name" + ValidationMessages.InvalidText,
+                true);
+        }
+
+        private bool validateAllFields()
+        {
+            bool isValidStudentName = validateStudentName();
+            bool isValidCourseName = validateCourseName();
+
+            return Validator.ValidateAllFields(
+                (isValidCourseName, () => validateCourseName(), inputCourseName),
+                (isValidStudentName, () => validateStudentName(), inputStudentName)
+                );
+        }
+
+        #endregion
+
+        #region CRUD
+
+        // Load student data into DataGridView
+        private void viewData()
+        {
+            CRUD.ViewData(DGVRating, RatingQueryString.dataQuery);
+        }
+
+        private void upsertData()
+        {
+            CRUD.UpsertData("Course", "CourseName", inputCourseName.Text);
+            CRUD.UpsertData("Student", "StudentName", inputStudentName.Text);
+        }
+
+        private void updateRatingData(object[] inputUpdateValue)
+        {
+            CRUD.UpdateData(RatingQueryString.updateQuery, RatingVariables.paramaters, inputUpdateValue);
+        }
+
+        private void deleteRatingData(int ID)
+        {
+            CRUD.DeleteData(tableName, ID);
+        }
+        #endregion
+
+        #region Searching
+
+        private void searchData(string searchValue)
+        {
+            Searching.SearchData(DGVRating, RatingQueryString.searchQuery, searchValue);
+        }
+
+        #endregion
 
         private void DGVRating_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = DGVRating.Rows[e.RowIndex];
-
-                if (row != null)
-                {
-                    valueRatingID.Text = row.Cells["Rating ID"].Value.ToString();
-                    valueCourseID.Text = row.Cells["Course ID"].Value.ToString();
-                    valueStudentID.Text = row.Cells["Student ID"].Value.ToString();
-                    inputStudentName.Text = row.Cells["Student Name"].Value.ToString();
-                    inputCourseName.Text = row.Cells["Course Name"].Value.ToString();
-                    inputReview.Text = row.Cells["Review"].Value.ToString();
-                }
-            }
+            CellClick.DGVCellClick(sender, e, inputControls, RatingVariables.columnNames, btnUpdate, btnDelete);
         }
 
-        private void ClearInputFields()
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            valueRatingID.Text = GetNextValueID();
-            valueCourseID.Text = "";
-            valueStudentID.Text = "";
-            inputStudentName.Text = "";
-            inputCourseName.Text = "";
-            inputReview.Text = "";
+            if (!validateAllFields())
+            {
+                Helpers.ShowError("Please check rating's information again.");
+                return;
+            }
+
+            upsertData();
+            updateRatingData(inputUpdateValues());
+
+            clearAndLoad();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            // Retrieve the RatingID to be deleted
-            string ratingID = valueRatingID.Text;
+            int ratingID = int.Parse(valueRatingID.Text);
 
-            // Execute an SQL DELETE statement to remove the record
-            // Update the query accordingly based on your table structure
-            string deleteRatingQuery = "DELETE FROM Rating WHERE RatingID = @RatingID";
+            deleteRatingData(ratingID);
 
-            // Confirm message box before deleting the record
-            DialogResult confirmDeletion = MessageBox.Show("Are you sure you want to delete this rating?",
-                                                    "Confirm Deletion",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirmDeletion == DialogResult.Yes)
-            {
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        SqlCommand command = new SqlCommand(deleteRatingQuery, connection);
-                        command.Parameters.AddWithValue("@RatingID", ratingID);
+            clearAndLoad();
+        }
 
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while deleting the record: " + ex.Message);
-                }
+        private void inputSearch_TextChanged(object sender, EventArgs e)
+        {
+            searchData(inputSearch.Text);
+        }
 
-                LoadRatingData();
-                ClearInputFields();
-            }
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            inputSearch_TextChanged(sender, e);
+        }
 
-            
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            inputSearch.Text = string.Empty;
+            viewData();
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearAllInputs();
+
         }
     }
 }

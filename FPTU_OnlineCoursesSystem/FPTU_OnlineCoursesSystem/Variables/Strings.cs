@@ -45,18 +45,6 @@
         public static string[] columnAdminAccountNames = { "AdminAccountEmail", "AdminAccountPasswordHash" };
     }
 
-    public static class CategoryVariables
-    {
-        public static string tableName = "Category";
-
-        public static string[] columnNames = { "ID", "Name", "Description" };
-    }
-
-    public static class  StudentVariables
-    {
-        public static string tableName = "Student";
-    }
-
     public static class InstructorVariables
     {
         public static string tableName = "Instructor";
@@ -67,7 +55,32 @@
 
         public static string[] fullParamaters = paramaters.Prepend("InstructorID").ToArray();
 
-        public static string[] columnFilters = { "InstructorGender", "Specialization", "Experience"  };
+        public static string[] columnFilters = { "InstructorGender", "Specialization", "Experience" };
+    }
+
+    public static class  StudentVariables
+    {
+        public static string tableName = "Student";
+
+        public static string[] columnNames = { "ID", "Name", "Gender", "Email", "Phone Number", "Birthdate", "Enrollments" };
+
+        public static string[] paramaters = { "StudentName", "StudentGender", "StudentEmail", "StudentPhone", "StudentBirthDate" };
+
+        public static string[] fullParamaters = paramaters.Prepend("StudentID").ToArray();
+
+        public static string[] columnFilters = { "StudentGender", "NumberOfEnrollments" };
+    }
+
+
+    public static class CategoryVariables
+    {
+        public static string tableName = "Category";
+
+        public static string[] columnNames = { "ID", "Name", "Description" };
+
+        public static string[] paramaters = { "CategoryName", "CategoryDescription" };
+
+        public static string[] fullParamaters = paramaters.Prepend("CategoryID").ToArray();
     }
 
     public static class CourseVariables
@@ -85,5 +98,30 @@
         public static string[] columnFilters = { "Category", "Instructor", "Date", "RatingValue", "CoursePrice" };
     }
 
+    public static class EnrollmentVariables
+    {
+        public static string tableName = "Enrollment";
+
+        public static string[] columnNames = { "Enrollment ID", "Student ID", "Student Name", "Course ID", "Course Name", "Date", "Status", "Payment" };
+
+        public static string[] paramaters = { "EnrollmentID", "StudentName", "CourseName","EnrollmentDate", "EnrollmentStatus", "PaymentStatus" };
+
+        //public static string[] fullParamaters = paramaters.Prepend("EnrollmentID").ToArray();
+
+        public static string[] columnFilters = { "EnrollmentDate", "EnrollmentStatus", "PaymentStatus" };
+    }
+
+    public static class RatingVariables
+    {
+        public static string tableName = "Rating";
+
+        public static string[] columnNames = { "Rating ID", "Student ID", "Student Name", "Course ID", "Course Name", "Value", "Review" };
+
+        public static string[] paramaters = { "RatingID", "StudentName", "CourseName", "Review" };
+
+        //public static string[] fullParamaters = paramaters.Prepend("RatingID").ToArray();
+
+        public static string[] columnFilters = { "RatingValue" };
+    }
     
 }

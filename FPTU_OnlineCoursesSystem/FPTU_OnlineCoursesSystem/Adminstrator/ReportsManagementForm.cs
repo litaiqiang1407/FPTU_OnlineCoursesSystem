@@ -306,10 +306,13 @@ namespace FPTU_OnlineCoursesSystem
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string monthlyRevenueQuery = "SELECT ISNULL(SUM(Course.NumberOfEnrollments * Course.CoursePrice), 0) AS MonthlyRevenue " +
-                                             "FROM Course INNER JOIN Enrollment ON Course.CourseID = Enrollment.CourseID " +
+                string monthlyRevenueQuery = "SELECT " +
+                                             "ISNULL(SUM(Course.NumberOfEnrollments * Course.CoursePrice), 0) AS MonthlyRevenue " +
+                                             "FROM Course " +
+                                             "INNER JOIN Enrollment ON Course.CourseID = Enrollment.CourseID " +
                                              "WHERE Course.CategoryID = (SELECT CategoryID FROM Category WHERE CategoryName = @CategoryName) " +
-                                             "AND MONTH(Enrollment.EnrollmentDate) = @Month AND (@Year IS NULL OR YEAR(Enrollment.EnrollmentDate) = @Year)";
+                                             "AND MONTH(Enrollment.EnrollmentDate) = @Month " +
+                                             "AND (@Year IS NULL OR YEAR(Enrollment.EnrollmentDate) = @Year)";
 
                 using (SqlCommand command = new SqlCommand(monthlyRevenueQuery, connection))
                 {

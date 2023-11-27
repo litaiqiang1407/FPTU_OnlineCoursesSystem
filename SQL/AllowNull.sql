@@ -43,3 +43,20 @@ ALTER COLUMN EnrollmentStatus VARCHAR(10) NULL;
 -- Modify the Rating table to allow null values
 ALTER TABLE Rating
 ALTER COLUMN RatingValue FLOAT NULL;
+
+
+-- Modify the Student table to allow null values
+ALTER TABLE Student
+ALTER COLUMN StudentGender VARCHAR(10) NULL;
+
+ALTER TABLE Student
+ALTER COLUMN StudentBirthDate DATE NULL;
+
+
+-- Modify the Course table to allow null values
+
+ALTER TABLE Course
+ALTER COLUMN CategoryID INT NULL;
+
+ALTER TABLE Course
+ALTER COLUMN InstructorID INT NULL;

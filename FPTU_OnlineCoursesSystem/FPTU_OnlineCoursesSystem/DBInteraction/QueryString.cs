@@ -47,7 +47,7 @@
 
         public static string genderQuery = "SELECT DISTINCT InstructorGender FROM Instructor";
 
-        public static string[] comboboxesQuery = { genderQuery, specializationQuery, experienceQuery  };
+        public static string[] comboBoxesQuery = { genderQuery, specializationQuery, experienceQuery  };
 
         public static string filterQuery = "SELECT " +
                                            "InstructorID AS 'ID', " +
@@ -75,22 +75,85 @@
                                            "InstructorPhone = @InstructorPhone, InstructorBirthDate = @InstructorBirthDate " +
                                            "WHERE InstructorID = @InstructorID";
 
-        public static string deleteQuery = "DELETE FROM Instructor WHERE InstructorID = @InstructorID";
-
     }
 
     public static class StudentQueryString
     {
-        public static string dataQuery = "SELECT StudentID AS 'ID', StudentName AS 'Name', StudentGender AS Gender, StudentEmail AS Email, " +
-                                         "StudentPhone AS 'Phone Number', CONVERT(varchar, StudentBirthDate, 103) AS BirthDate, " +
-                                         "NumberOfEnrollments AS 'Enrollments' FROM Student";
+        public static string dataQuery = "SELECT " +
+                                         "StudentID AS 'ID', " +
+                                         "StudentName AS 'Name', " +
+                                         "StudentGender AS 'Gender', " +
+                                         "StudentEmail AS 'Email', " +
+                                         "StudentPhone AS 'Phone Number', " +
+                                         "CONVERT(varchar, StudentBirthDate, 103) AS 'Birthdate', " +
+                                         "NumberOfEnrollments AS 'Enrollments' " +
+                                         "FROM Student";
+
+        public static string searchQuery = "SELECT " +
+                                           "StudentID AS 'ID', " +
+                                           "StudentName AS 'Name', " +
+                                           "StudentGender AS 'Gender', " +
+                                           "StudentEmail AS 'Email', " +
+                                           "StudentPhone AS 'Phone Number', " +
+                                           "CONVERT(varchar, StudentBirthDate, 103) AS 'Birthdate', " +
+                                           "NumberOfEnrollments AS 'Enrollments' " +
+                                           "FROM Student " +
+                                           "WHERE StudentName LIKE @SearchValue " +
+                                           "OR StudentGender LIKE @SearchValue " +
+                                           "OR StudentEmail LIKE @SearchValue " +
+                                           "OR StudentPhone LIKE @SearchValue " +
+                                           "OR StudentBirthDate LIKE @SearchValue ";
+
+        public static string genderQuery = "SELECT DISTINCT StudentGender FROM Student";
+
+        public static string enrollmentsQuery = "SELECT DISTINCT NumberOfEnrollments FROM Student";
+
+        public static string[] comboBoxesQuery = { genderQuery, enrollmentsQuery };
+
+        public static string filterQuery = "SELECT " +
+                                           "StudentID AS 'ID', " +
+                                           "StudentName AS 'Name', " +
+                                           "StudentGender AS 'Gender', " +
+                                           "StudentEmail AS 'Email', " +
+                                           "StudentPhone AS 'Phone Number', " +
+                                           "CONVERT(varchar, StudentBirthDate, 103) AS 'Birthdate', " +
+                                           "NumberOfEnrollments AS 'Enrollments' " +
+                                           "FROM Student " +
+                                           "WHERE (@StudentGender IS NULL OR StudentGender = @StudentGender) " +
+                                           "AND (@NumberOfEnrollments IS NULL OR NumberOfEnrollments = @NumberOfEnrollments) ";
+
+        public static string insertQuery = "INSERT INTO Student (StudentName, StudentGender, StudentEmail, StudentPhone, StudentBirthDate) " +
+                                           "VALUES (@StudentName, @StudentGender, @StudentEmail, @StudentPhone, @StudentBirthDate)";
+
+        public static string updateQuery = "UPDATE Student SET StudentName = @StudentName, " +
+                                           "StudentGender = @StudentGender, " +
+                                           "StudentEmail = @StudentEmail, " +
+                                           "StudentPhone = @StudentPhone, " +
+                                           "StudentBirthDate = @StudentBirthDate " +
+                                           "WHERE StudentID = @StudentID";
     }
 
     public static class CategoryQueryString
     {
-        public static string dataQuery = "SELECT CategoryID AS 'ID', CategoryName AS 'Name', CategoryDescription AS 'Description' FROM Category";
+        public static string dataQuery = "SELECT " +
+                                         "CategoryID AS 'ID', " +
+                                         "CategoryName AS 'Name', " +
+                                         "CategoryDescription AS 'Description' " +
+                                         "FROM Category";
+        public static string searchQuery = "SELECT " +
+                                           "CategoryID AS 'ID', " +
+                                           "CategoryName AS 'Name', " +
+                                           "CategoryDescription AS 'Description' " +
+                                           "FROM Category " +
+                                           "WHERE CategoryName LIKE @SearchValue " +
+                                           "OR CategoryDescription LIKE @SearchValue";
+        public static string insertQuery = "INSERT INTO Category (CategoryName, CategoryDescription) " +
+                                           "VALUES (@CategoryName, @CategoryDescription)";
 
-        public static string deleteQuery = "DELETE FROM Category WHERE CategoryID = @CategoryID";
+        public static string updateQuery = "UPDATE Category SET CategoryName = @CategoryName, " +
+                                           "CategoryDescription = @CategoryDescription " +
+                                           "WHERE CategoryID = @CategoryID";
+
     }
 
     public static class CourseQueryString
@@ -176,12 +239,114 @@
                                            "InstructorID = (SELECT InstructorID FROM Instructor WHERE InstructorName = @InstructorName), " +
                                            "CreationDate = @CreationDate, CoursePrice = @CoursePrice WHERE CourseID = @CourseID";
 
-        // A string to delete a course record from the database
-        public static string deleteQuery = "DELETE FROM Course WHERE CourseID = @CourseID";
+
 
     }
 
+    public static class EnrollmentQueryString
+    {
+        public static string dataQuery = "SELECT " +
+                                         "Enrollment.EnrollmentID AS 'Enrollment ID', " +
+                                         "Enrollment.StudentID AS 'Student ID', " +
+                                         "Student.StudentName AS 'Student Name', " +
+                                         "Enrollment.CourseID AS 'Course ID', " +
+                                         "Course.CourseName AS 'Course Name', " +
+                                         "CONVERT(VARCHAR, Enrollment.EnrollmentDate, 103) AS 'Date', " +
+                                         "Enrollment.EnrollmentStatus AS 'Status', " +
+                                         "Enrollment.PaymentStatus AS 'Payment' " +
+                                         "FROM Enrollment " +
+                                         "INNER JOIN Student ON Enrollment.StudentID = Student.StudentID " +
+                                         "INNER JOIN Course ON Enrollment.CourseID = Course.CourseID";
 
+        public static string searchQuery = "SELECT " +
+                                           "Enrollment.EnrollmentID AS 'Enrollment ID', " +
+                                           "Enrollment.StudentID AS 'Student ID', " +
+                                           "Student.StudentName AS 'Student Name', " +
+                                           "Enrollment.CourseID AS 'Course ID', " +
+                                           "Course.CourseName AS 'Course Name', " +
+                                           "CONVERT(VARCHAR, Enrollment.EnrollmentDate, 103) AS 'Date', " +
+                                           "Enrollment.EnrollmentStatus AS 'Status', " +
+                                           "Enrollment.PaymentStatus AS 'Payment' " +
+                                           "FROM Enrollment " +
+                                           "INNER JOIN Student ON Enrollment.StudentID = Student.StudentID " +
+                                           "INNER JOIN Course ON Enrollment.CourseID = Course.CourseID " +
+                                           "WHERE Enrollment.EnrollmentID LIKE @SearchValue " +
+                                           "OR Student.StudentName LIKE @SearchValue " +
+                                           "OR Course.CourseName LIKE @SearchValue " +
+                                           "OR CONVERT(VARCHAR, Enrollment.EnrollmentDate, 103) LIKE @SearchValue " +
+                                           "OR Enrollment.EnrollmentStatus LIKE @SearchValue " +
+                                           "OR Enrollment.PaymentStatus LIKE @SearchValue";
+
+        public static string enrollmentDateQuery = "SELECT DISTINCT CONVERT(VARCHAR, Enrollment.EnrollmentDate, 103) AS 'EnrollmentDate' FROM Enrollment";
+
+        public static string enrollmentStatusQuery = "SELECT DISTINCT Enrollment.EnrollmentStatus AS 'EnrollmentStatus' FROM Enrollment";
+
+        public static string paymentStatusQuery = "SELECT DISTINCT Enrollment.PaymentStatus AS 'PaymentStatus' FROM Enrollment";
+
+        public static string[] comboBoxesQuery = { enrollmentDateQuery, enrollmentStatusQuery, paymentStatusQuery };
+
+        public static string filterQuery = "SELECT " +
+                                           "Enrollment.EnrollmentID AS 'Enrollment ID', " +
+                                           "Enrollment.StudentID AS 'Student ID', " +
+                                           "Student.StudentName AS 'Student Name', " +
+                                           "Enrollment.CourseID AS 'Course ID', " +
+                                           "Course.CourseName AS 'Course Name', " +
+                                           "CONVERT(VARCHAR, Enrollment.EnrollmentDate, 103) AS 'Date', " +
+                                           "Enrollment.EnrollmentStatus AS 'Status', " +
+                                           "Enrollment.PaymentStatus AS 'Payment' " +
+                                           "FROM Enrollment " +
+                                           "INNER JOIN Student ON Enrollment.StudentID = Student.StudentID " +
+                                           "INNER JOIN Course ON Enrollment.CourseID = Course.CourseID " +
+                                           "WHERE (@EnrollmentDate IS NULL OR CONVERT(VARCHAR, Enrollment.EnrollmentDate, 103) = @EnrollmentDate) " +
+                                           "AND (@EnrollmentStatus IS NULL OR Enrollment.EnrollmentStatus = @EnrollmentStatus) " +
+                                           "AND (@PaymentStatus IS NULL OR Enrollment.PaymentStatus = @PaymentStatus)";
+
+        public static string updateQuery = "UPDATE Enrollment SET " +
+                                           "StudentID = (SELECT StudentID FROM Student WHERE StudentName = @StudentName), " +
+                                           "CourseID = (SELECT CourseID FROM Course WHERE CourseName = @CourseName), " +
+                                           "EnrollmentDate = @EnrollmentDate, " +
+                                           "EnrollmentStatus = @EnrollmentStatus, " +
+                                           "PaymentStatus = @PaymentStatus " +
+                                           "WHERE EnrollmentID = @EnrollmentID";
+    }
+
+    public static class RatingQueryString
+    {
+        public static string dataQuery = "SELECT " +
+                                         "Rating.RatingID AS 'Rating ID', " +
+                                         "Rating.StudentID AS 'Student ID', " +
+                                         "Student.StudentName AS 'Student Name', " +
+                                         "Rating.CourseID AS 'Course ID', " +
+                                         "Course.CourseName AS 'Course Name', " +
+                                         "Rating.RatingValue AS 'Value', " +
+                                         "Rating.Review AS 'Review' " +
+                                         "FROM Rating " +
+                                         "INNER JOIN Student ON Rating.StudentID = Student.StudentID " +
+                                         "INNER JOIN Course ON Rating.CourseID = Course.CourseID";
+
+        public static string searchQuery = "SELECT " +
+                                           "Rating.RatingID AS 'Rating ID', " +
+                                           "Rating.StudentID AS 'Student ID', " +
+                                           "Student.StudentName AS 'Student Name', " +
+                                           "Rating.CourseID AS 'Course ID', " +
+                                           "Course.CourseName AS 'Course Name', " +
+                                           "Rating.RatingValue AS 'Value', " +
+                                           "Rating.Review AS 'Review' " +
+                                           "FROM Rating " +
+                                           "INNER JOIN Student ON Rating.StudentID = Student.StudentID " +
+                                           "INNER JOIN Course ON Rating.CourseID = Course.CourseID " +
+                                           "WHERE Rating.RatingID LIKE @SearchValue " +
+                                           "OR Student.StudentName LIKE @SearchValue " +
+                                           "OR Course.CourseName LIKE @SearchValue " +
+                                           "OR Rating.RatingValue LIKE @SearchValue " +
+                                           "OR Rating.Review LIKE @SearchValue";
+
+        public static string updateQuery = "UPDATE Rating SET " +
+                                           "StudentID = (SELECT StudentID FROM Student WHERE StudentName = @StudentName), " +
+                                           "CourseID = (SELECT CourseID FROM Course WHERE CourseName = @CourseName), " + 
+                                           "Review = @Review " +
+                                           "WHERE RatingID = @RatingID";
+    }           
 
     public static class ReportQueryString
     {

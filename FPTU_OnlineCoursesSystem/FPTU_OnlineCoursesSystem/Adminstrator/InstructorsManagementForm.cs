@@ -18,8 +18,8 @@ namespace FPTU_OnlineCoursesSystem
             dynamicColumnFiltering();
             attachFilterEventHandlers();
             getNextID();
-            inputControls = new Control[] { valueID, inputInstructorName, inputGender, 
-                inputSpecialization, inputExperience, inputEmailAddress, inputPhoneNumber, inputBirthdate };
+            inputControls = new Control[] { valueID, inputName, inputGender, 
+                inputSpecialization, inputExperience, inputEmail, inputPhone, inputBirthdate };
         }
 
         #region Variables
@@ -42,12 +42,12 @@ namespace FPTU_OnlineCoursesSystem
 
         private object[] inputInsertValues()
         {
-            string name = inputInstructorName.Text;
-            string email = inputEmailAddress.Text;
+            string name = inputName.Text;
+            string email = inputEmail.Text;
             string gender = inputGender.Text;
             string specialization = inputSpecialization.Text;
             string experience = inputExperience.Text;
-            string phoneNumber = inputPhoneNumber.Text;
+            string phoneNumber = inputPhone.Text;
             DateTime? birthdate = parsedBirthdate();
 
             return new object[] { name, email, gender, specialization, experience, phoneNumber, birthdate };
@@ -56,12 +56,12 @@ namespace FPTU_OnlineCoursesSystem
         private object[] inputUpdateValues()
         {
             string id = valueID.Text;
-            string name = inputInstructorName.Text;
+            string name = inputName.Text;
             string gender = inputGender.Text;
             string specialization = inputSpecialization.Text;
             string experience = inputExperience.Text;
-            string email = inputEmailAddress.Text;
-            string phoneNumber = inputPhoneNumber.Text;
+            string email = inputEmail.Text;
+            string phoneNumber = inputPhone.Text;
             DateTime? birthdate = parsedBirthdate();
 
             return new object[] { id, name, gender, specialization, experience, email, phoneNumber, birthdate };
@@ -77,7 +77,7 @@ namespace FPTU_OnlineCoursesSystem
 
         private void setupButtonHoverEffects()
         {
-            ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClearAll });
+            ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClear });
 
             ButtonHover.ApplyHoverEffect(btnRefresh, Path.Combine(Images.BaseImagePath, Images.RefreshIconPath),
                 Path.Combine(Images.BaseImagePath, Images.HoverRefreshIconPath));
@@ -103,14 +103,14 @@ namespace FPTU_OnlineCoursesSystem
 
         private bool validateName()
         {
-            return Validator.ValidateField(inputInstructorName, labelInstructorNameRequired,
+            return Validator.ValidateField(inputName, labelName,
                 "Instructor name" + ValidationMessages.RequiredField, Validator.IsValidText, "Instructor's name" + ValidationMessages.InvalidText,
                 true);
         }
 
         private bool validateEmail()
         {
-            return Validator.ValidateField(inputEmailAddress, labelEmailAddress,
+            return Validator.ValidateField(inputEmail, labelEmailAddress,
                 "", Validator.IsValidEmail, ValidationMessages.InvalidEmail,
                 false);
         }
@@ -131,12 +131,12 @@ namespace FPTU_OnlineCoursesSystem
 
         private bool validatePhoneNumber()
         {
-            return Validator.ValidateField(inputPhoneNumber, labelPhoneNumber,
+            return Validator.ValidateField(inputPhone, labelPhone,
                 "", Validator.IsValidPhoneNumber, ValidationMessages.InvalidPhoneNumber,
                 false);
         }
 
-        private bool ValidateAllFields()
+        private bool validateAllFields()
         {
             bool isValidName = validateName();
             bool isValidEmail = validateEmail();
@@ -145,11 +145,11 @@ namespace FPTU_OnlineCoursesSystem
             bool isValidPhoneNumber = validatePhoneNumber();
 
             return Validator.ValidateAllFields(
-                (isValidName, () => validateName(), inputInstructorName),
-                (isValidEmail, () => validateEmail(), inputEmailAddress),
+                (isValidName, () => validateName(), inputName),
+                (isValidEmail, () => validateEmail(), inputEmail),
                 (isValidSpecialization, () => validateSpecialization(), inputSpecialization),
                 (isValidBirthdate, () => validateBirthdate(), inputBirthdate),
-                (isValidPhoneNumber, () => validatePhoneNumber(), inputPhoneNumber)
+                (isValidPhoneNumber, () => validatePhoneNumber(), inputPhone)
                 );
         }
 
@@ -172,13 +172,12 @@ namespace FPTU_OnlineCoursesSystem
             CRUD.UpdateData(InstructorQueryString.updateQuery, InstructorVariables.fullParamaters, inputUpdateValue);
         }   
 
-        private void deleteInstructorData(int instructorID)
+        private void deleteInstructorData(int ID)
         {
-            CRUD.DeleteData(InstructorQueryString.deleteQuery, tableName, instructorID);
+            CRUD.DeleteData(tableName, ID);
         }
 
         #endregion
-
 
         #region Searching
 
@@ -188,7 +187,7 @@ namespace FPTU_OnlineCoursesSystem
         }
         private void dynamicColumnFiltering()
         {
-            Searching.DynamicColumnFiltering(filterComboBoxes, InstructorQueryString.comboboxesQuery, InstructorVariables.columnFilters);
+            Searching.DynamicColumnFiltering(filterComboBoxes, InstructorQueryString.comboBoxesQuery, InstructorVariables.columnFilters);
         }
 
         private void filterData()
@@ -200,37 +199,45 @@ namespace FPTU_OnlineCoursesSystem
         #region EventHandlers
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (!ValidateAllFields())
+            if (!validateAllFields())
             {
                 Helpers.ShowError("Please check instructor's information again.");
                 return;
             }
 
             insertInstructorData(inputInsertValues());
+            Helpers.ShowSuccess("Instructor created successfully.");
+
             clearAndLoad();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (!ValidateAllFields())
+            if (!validateAllFields())
             {
                 Helpers.ShowError("Please check instructor's information again.");
                 return;
             }
+
             updateInstructorData(inputUpdateValues());
+            Helpers.ShowSuccess("Instructor updated successfully.");
+
             clearAndLoad();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int id = int.Parse(valueID.Text);
+
             deleteInstructorData(id);
+            Helpers.ShowSuccess("Instructor deleted successfully.");
+
             clearAndLoad();
         }
 
         private void inputSearchValue_TextChanged(object sender, EventArgs e)
         {
-            searchData(inputSearchValue.Text);
+            searchData(inputSearch.Text);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -258,7 +265,7 @@ namespace FPTU_OnlineCoursesSystem
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            inputSearchValue.Text = string.Empty;
+            inputSearch.Text = string.Empty;
             ButtonClick.RefreshComboboxes(filterComboBoxes);
             viewData();
         }

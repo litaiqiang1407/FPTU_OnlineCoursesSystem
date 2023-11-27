@@ -77,7 +77,7 @@ namespace FPTU_OnlineCoursesSystem
 
         private void setButtonHoverEffects()
         {
-            ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClearAll });
+            ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClear });
 
             ButtonHover.ApplyHoverEffect(btnRefresh, Path.Combine(Images.BaseImagePath, Images.RefreshIconPath),
                 Path.Combine(Images.BaseImagePath, Images.HoverRefreshIconPath));
@@ -172,32 +172,29 @@ namespace FPTU_OnlineCoursesSystem
             CRUD.ViewData(DGVCourse, CourseQueryString.dataQuery);
         }
 
-        // Check if the input values already exist in the related tables
-        private void upsert()
+        private void upsertData()
         {
-            CRUD.Upsert("Instructor", "InstructorName", inputInstructor.Text);
-            CRUD.Upsert("Category", "CategoryName", inputCategory.Text);
+            CRUD.UpsertData("Category", "CategoryName", inputCategory.Text);
+            CRUD.UpsertData("Instructor", "InstructorName", inputInstructor.Text);
         }
 
         // Insert data into the database
         private void insertCourseData(object[] inputInsertValues)
         {
+            
             CRUD.InsertData(CourseQueryString.insertQuery, CourseVariables.paramaters, inputInsertValues);
-            Helpers.ShowSuccess("Course created successfully!");
         }
 
         // Update data in the database
         private void updateCourseData(object[] inputUpdateValues)
         {
             CRUD.UpdateData(CourseQueryString.updateQuery, CourseVariables.fullParamaters, inputUpdateValues);
-            Helpers.ShowSuccess("Course updated successfully!");
         }
 
         // Delete data from the database
-        private void deleteCourseData(int courseID)
+        private void deleteCourseData(int ID)
         {
-            CRUD.DeleteData(CourseQueryString.deleteQuery, tableName, courseID);
-            Helpers.ShowSuccess("Course deleted successfully!");
+            CRUD.DeleteData(tableName, ID);
         }
 
         #endregion
@@ -234,7 +231,7 @@ namespace FPTU_OnlineCoursesSystem
         // Search data
         private void inputSearchValue_TextChanged(object sender, EventArgs e)
         {
-            searchData(inputSearchValue.Text);
+            searchData(inputSearch.Text);
         }
 
         private void attachFilterEventHandlers()
@@ -258,8 +255,11 @@ namespace FPTU_OnlineCoursesSystem
             {
                 return;
             }
-            upsert();
+
+            upsertData();
             insertCourseData(inputInsertValues());
+            Helpers.ShowSuccess("Course created successfully!");
+
             clearAndReloadData();
         }
 
@@ -270,8 +270,11 @@ namespace FPTU_OnlineCoursesSystem
             {
                 return;
             }
-            upsert();
+
+            upsertData();
             updateCourseData(inputUpdateValues());
+            Helpers.ShowSuccess("Course updated successfully!");
+
             clearAndReloadData();
         }
 
@@ -279,14 +282,17 @@ namespace FPTU_OnlineCoursesSystem
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int courseID = Convert.ToInt32(valueID.Text);
+
             deleteCourseData(courseID);
+            Helpers.ShowSuccess("Course deleted successfully!");
+
             clearAndReloadData();
         }
 
         // Refresh data
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            inputSearchValue.Text = string.Empty;
+            inputSearch.Text = string.Empty;
             ButtonClick.RefreshComboboxes(filterComboBoxes);
             viewData();
         }

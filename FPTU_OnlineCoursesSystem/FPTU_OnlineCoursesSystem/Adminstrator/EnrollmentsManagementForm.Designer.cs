@@ -33,18 +33,22 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             filterEnrollmentDate = new ComboBox();
             label26 = new Label();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
-            btnClearAll = new Button();
+            btnClear = new Button();
             valueEnrollmentID = new Label();
             inputCourseName = new TextBox();
             label18 = new Label();
             label19 = new Label();
             panelCourses = new Panel();
+            labelEnrollmentDate = new Label();
+            labelCourseName = new Label();
+            labelStudentName = new Label();
+            btnCreate = new Button();
             filterPaymentStatus = new ComboBox();
             label9 = new Label();
             filterEnrollmentStatus = new ComboBox();
@@ -72,13 +76,13 @@
             label2 = new Label();
             label1 = new Label();
             button1 = new Button();
-            btnCreate = new Button();
             panelCourses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVEnrollment).BeginInit();
             SuspendLayout();
             // 
             // filterEnrollmentDate
             // 
+            filterEnrollmentDate.AccessibleName = "Enrollment Date";
             filterEnrollmentDate.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             filterEnrollmentDate.ForeColor = Color.FromArgb(255, 109, 0);
             filterEnrollmentDate.FormattingEnabled = true;
@@ -97,14 +101,15 @@
             label26.Size = new Size(200, 33);
             label26.TabIndex = 60;
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.Location = new Point(21, 241);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(838, 30);
-            inputSearchValue.TabIndex = 55;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.Location = new Point(21, 241);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(838, 30);
+            inputSearch.TabIndex = 55;
+            inputSearch.TextChanged += inputSearch_TextChanged;
             // 
             // label23
             // 
@@ -123,6 +128,8 @@
             btnRefresh.BackgroundImageLayout = ImageLayout.Center;
             btnRefresh.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnRefresh.FlatAppearance.BorderSize = 2;
+            btnRefresh.FlatAppearance.MouseDownBackColor = Color.White;
+            btnRefresh.FlatAppearance.MouseOverBackColor = Color.White;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnRefresh.ForeColor = Color.White;
@@ -131,6 +138,7 @@
             btnRefresh.Size = new Size(70, 30);
             btnRefresh.TabIndex = 57;
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnSearch
             // 
@@ -139,6 +147,8 @@
             btnSearch.BackgroundImageLayout = ImageLayout.Center;
             btnSearch.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnSearch.FlatAppearance.BorderSize = 2;
+            btnSearch.FlatAppearance.MouseDownBackColor = Color.White;
+            btnSearch.FlatAppearance.MouseOverBackColor = Color.White;
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSearch.ForeColor = Color.White;
@@ -147,12 +157,15 @@
             btnSearch.Size = new Size(70, 30);
             btnSearch.TabIndex = 56;
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 
             btnDelete.BackColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderSize = 2;
+            btnDelete.FlatAppearance.MouseDownBackColor = Color.White;
+            btnDelete.FlatAppearance.MouseOverBackColor = Color.White;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnDelete.ForeColor = Color.White;
@@ -162,12 +175,15 @@
             btnDelete.TabIndex = 54;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnUpdate
             // 
             btnUpdate.BackColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderSize = 2;
+            btnUpdate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnUpdate.FlatAppearance.MouseOverBackColor = Color.White;
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnUpdate.ForeColor = Color.White;
@@ -177,21 +193,25 @@
             btnUpdate.TabIndex = 53;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
-            // btnClearAll
+            // btnClear
             // 
-            btnClearAll.BackColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderSize = 2;
-            btnClearAll.FlatStyle = FlatStyle.Flat;
-            btnClearAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnClearAll.ForeColor = Color.White;
-            btnClearAll.Location = new Point(700, 165);
-            btnClearAll.Name = "btnClearAll";
-            btnClearAll.Size = new Size(300, 32);
-            btnClearAll.TabIndex = 51;
-            btnClearAll.Text = "Clear All";
-            btnClearAll.UseVisualStyleBackColor = false;
+            btnClear.BackColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderSize = 2;
+            btnClear.FlatAppearance.MouseDownBackColor = Color.White;
+            btnClear.FlatAppearance.MouseOverBackColor = Color.White;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(700, 165);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(300, 32);
+            btnClear.TabIndex = 51;
+            btnClear.Text = "Clear All";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // valueEnrollmentID
             // 
@@ -237,6 +257,9 @@
             // panelCourses
             // 
             panelCourses.BackColor = Color.White;
+            panelCourses.Controls.Add(labelEnrollmentDate);
+            panelCourses.Controls.Add(labelCourseName);
+            panelCourses.Controls.Add(labelStudentName);
             panelCourses.Controls.Add(btnCreate);
             panelCourses.Controls.Add(filterPaymentStatus);
             panelCourses.Controls.Add(label9);
@@ -253,13 +276,13 @@
             panelCourses.Controls.Add(valueStudentID);
             panelCourses.Controls.Add(filterEnrollmentDate);
             panelCourses.Controls.Add(label26);
-            panelCourses.Controls.Add(inputSearchValue);
+            panelCourses.Controls.Add(inputSearch);
             panelCourses.Controls.Add(label23);
             panelCourses.Controls.Add(btnRefresh);
             panelCourses.Controls.Add(btnSearch);
             panelCourses.Controls.Add(btnDelete);
             panelCourses.Controls.Add(btnUpdate);
-            panelCourses.Controls.Add(btnClearAll);
+            panelCourses.Controls.Add(btnClear);
             panelCourses.Controls.Add(valueEnrollmentID);
             panelCourses.Controls.Add(inputCourseName);
             panelCourses.Controls.Add(label18);
@@ -284,8 +307,63 @@
             panelCourses.Size = new Size(1260, 800);
             panelCourses.TabIndex = 2;
             // 
+            // labelEnrollmentDate
+            // 
+            labelEnrollmentDate.AutoSize = true;
+            labelEnrollmentDate.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelEnrollmentDate.ForeColor = Color.Red;
+            labelEnrollmentDate.Location = new Point(40, 197);
+            labelEnrollmentDate.Name = "labelEnrollmentDate";
+            labelEnrollmentDate.Size = new Size(125, 17);
+            labelEnrollmentDate.TabIndex = 90;
+            labelEnrollmentDate.Text = "labelEnrollmentDate";
+            labelEnrollmentDate.Visible = false;
+            // 
+            // labelCourseName
+            // 
+            labelCourseName.AutoSize = true;
+            labelCourseName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCourseName.ForeColor = Color.Red;
+            labelCourseName.Location = new Point(369, 197);
+            labelCourseName.Name = "labelCourseName";
+            labelCourseName.Size = new Size(112, 17);
+            labelCourseName.TabIndex = 89;
+            labelCourseName.Text = "labelCourseName";
+            labelCourseName.Visible = false;
+            // 
+            // labelStudentName
+            // 
+            labelStudentName.AutoSize = true;
+            labelStudentName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelStudentName.ForeColor = Color.Red;
+            labelStudentName.Location = new Point(369, 122);
+            labelStudentName.Name = "labelStudentName";
+            labelStudentName.Size = new Size(115, 17);
+            labelStudentName.TabIndex = 88;
+            labelStudentName.Text = "labelStudentName";
+            labelStudentName.Visible = false;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.FromArgb(255, 109, 0);
+            btnCreate.Enabled = false;
+            btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnCreate.FlatAppearance.BorderSize = 2;
+            btnCreate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnCreate.FlatAppearance.MouseOverBackColor = Color.White;
+            btnCreate.FlatStyle = FlatStyle.Flat;
+            btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCreate.ForeColor = Color.White;
+            btnCreate.Location = new Point(1040, 60);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(200, 40);
+            btnCreate.TabIndex = 87;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            // 
             // filterPaymentStatus
             // 
+            filterPaymentStatus.AccessibleName = "Payment Status";
             filterPaymentStatus.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             filterPaymentStatus.ForeColor = Color.FromArgb(255, 109, 0);
             filterPaymentStatus.FormattingEnabled = true;
@@ -306,6 +384,7 @@
             // 
             // filterEnrollmentStatus
             // 
+            filterEnrollmentStatus.AccessibleName = "Enrollment Status";
             filterEnrollmentStatus.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             filterEnrollmentStatus.ForeColor = Color.FromArgb(255, 109, 0);
             filterEnrollmentStatus.FormattingEnabled = true;
@@ -594,24 +673,6 @@
             button1.TabIndex = 0;
             button1.UseVisualStyleBackColor = true;
             // 
-            // btnCreate
-            // 
-            btnCreate.BackColor = Color.FromArgb(255, 109, 0);
-            btnCreate.Enabled = false;
-            btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnCreate.FlatAppearance.BorderSize = 2;
-            btnCreate.FlatAppearance.MouseDownBackColor = Color.White;
-            btnCreate.FlatAppearance.MouseOverBackColor = Color.White;
-            btnCreate.FlatStyle = FlatStyle.Flat;
-            btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCreate.ForeColor = Color.White;
-            btnCreate.Location = new Point(1040, 60);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(200, 40);
-            btnCreate.TabIndex = 87;
-            btnCreate.Text = "Create";
-            btnCreate.UseVisualStyleBackColor = false;
-            // 
             // EnrollmentsManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -631,13 +692,13 @@
         #endregion
         private ComboBox filterEnrollmentDate;
         private Label label26;
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Label label23;
         private Button btnRefresh;
         private Button btnSearch;
         private Button btnDelete;
         private Button btnUpdate;
-        private Button btnClearAll;
+        private Button btnClear;
         private Label valueEnrollmentID;
         private TextBox inputCourseName;
         private Label label18;
@@ -671,5 +732,8 @@
         private ComboBox filterEnrollmentStatus;
         private Label label8;
         private Button btnCreate;
+        private Label labelStudentName;
+        private Label labelCourseName;
+        private Label labelEnrollmentDate;
     }
 }

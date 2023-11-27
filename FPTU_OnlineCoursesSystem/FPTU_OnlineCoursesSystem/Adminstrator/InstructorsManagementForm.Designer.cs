@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstructorsManagementForm));
             panelInstructors = new Panel();
-            labelPhoneNumber = new Label();
+            labelPhone = new Label();
             DGVInstructor = new DataGridView();
             filterGender = new ComboBox();
             label28 = new Label();
@@ -40,17 +40,17 @@
             label27 = new Label();
             filterSpecialization = new ComboBox();
             label26 = new Label();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
             btnCreate = new Button();
-            btnClearAll = new Button();
+            btnClear = new Button();
             labelSpecialization = new Label();
             labelExperienceRequired = new Label();
-            labelInstructorNameRequired = new Label();
+            labelName = new Label();
             labelEmailAddress = new Label();
             labelBirthdate = new Label();
             labelGender = new Label();
@@ -60,18 +60,18 @@
             inputBirthdate = new TextBox();
             label18 = new Label();
             label19 = new Label();
-            inputPhoneNumber = new TextBox();
+            inputPhone = new TextBox();
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
-            inputEmailAddress = new TextBox();
+            inputEmail = new TextBox();
             label6 = new Label();
             label7 = new Label();
             inputSpecialization = new TextBox();
             label4 = new Label();
             label5 = new Label();
-            inputInstructorName = new TextBox();
+            inputName = new TextBox();
             label16 = new Label();
             label17 = new Label();
             label14 = new Label();
@@ -86,7 +86,7 @@
             // 
             // panelInstructors
             // 
-            panelInstructors.Controls.Add(labelPhoneNumber);
+            panelInstructors.Controls.Add(labelPhone);
             panelInstructors.Controls.Add(DGVInstructor);
             panelInstructors.Controls.Add(filterGender);
             panelInstructors.Controls.Add(label28);
@@ -94,17 +94,17 @@
             panelInstructors.Controls.Add(label27);
             panelInstructors.Controls.Add(filterSpecialization);
             panelInstructors.Controls.Add(label26);
-            panelInstructors.Controls.Add(inputSearchValue);
+            panelInstructors.Controls.Add(inputSearch);
             panelInstructors.Controls.Add(label23);
             panelInstructors.Controls.Add(btnRefresh);
             panelInstructors.Controls.Add(btnSearch);
             panelInstructors.Controls.Add(btnDelete);
             panelInstructors.Controls.Add(btnUpdate);
             panelInstructors.Controls.Add(btnCreate);
-            panelInstructors.Controls.Add(btnClearAll);
+            panelInstructors.Controls.Add(btnClear);
             panelInstructors.Controls.Add(labelSpecialization);
             panelInstructors.Controls.Add(labelExperienceRequired);
-            panelInstructors.Controls.Add(labelInstructorNameRequired);
+            panelInstructors.Controls.Add(labelName);
             panelInstructors.Controls.Add(labelEmailAddress);
             panelInstructors.Controls.Add(labelBirthdate);
             panelInstructors.Controls.Add(labelGender);
@@ -114,18 +114,18 @@
             panelInstructors.Controls.Add(inputBirthdate);
             panelInstructors.Controls.Add(label18);
             panelInstructors.Controls.Add(label19);
-            panelInstructors.Controls.Add(inputPhoneNumber);
+            panelInstructors.Controls.Add(inputPhone);
             panelInstructors.Controls.Add(label8);
             panelInstructors.Controls.Add(label9);
             panelInstructors.Controls.Add(label10);
             panelInstructors.Controls.Add(label11);
-            panelInstructors.Controls.Add(inputEmailAddress);
+            panelInstructors.Controls.Add(inputEmail);
             panelInstructors.Controls.Add(label6);
             panelInstructors.Controls.Add(label7);
             panelInstructors.Controls.Add(inputSpecialization);
             panelInstructors.Controls.Add(label4);
             panelInstructors.Controls.Add(label5);
-            panelInstructors.Controls.Add(inputInstructorName);
+            panelInstructors.Controls.Add(inputName);
             panelInstructors.Controls.Add(label16);
             panelInstructors.Controls.Add(label17);
             panelInstructors.Controls.Add(label14);
@@ -140,17 +140,17 @@
             panelInstructors.Size = new Size(1260, 800);
             panelInstructors.TabIndex = 0;
             // 
-            // labelPhoneNumber
+            // labelPhone
             // 
-            labelPhoneNumber.AutoSize = true;
-            labelPhoneNumber.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            labelPhoneNumber.ForeColor = Color.Red;
-            labelPhoneNumber.Location = new Point(864, 122);
-            labelPhoneNumber.Name = "labelPhoneNumber";
-            labelPhoneNumber.Size = new Size(120, 17);
-            labelPhoneNumber.TabIndex = 66;
-            labelPhoneNumber.Text = "labelPhoneNumber";
-            labelPhoneNumber.Visible = false;
+            labelPhone.AutoSize = true;
+            labelPhone.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelPhone.ForeColor = Color.Red;
+            labelPhone.Location = new Point(864, 122);
+            labelPhone.Name = "labelPhone";
+            labelPhone.Size = new Size(72, 17);
+            labelPhone.TabIndex = 66;
+            labelPhone.Text = "labelPhone";
+            labelPhone.Visible = false;
             // 
             // DGVInstructor
             // 
@@ -158,14 +158,14 @@
             DGVInstructor.BackgroundColor = Color.White;
             DGVInstructor.BorderStyle = BorderStyle.None;
             DGVInstructor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            DGVInstructor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            DGVInstructor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DGVInstructor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVInstructor.EnableHeadersVisualStyles = false;
             DGVInstructor.GridColor = Color.FromArgb(255, 72, 0);
@@ -175,11 +175,11 @@
             DGVInstructor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             DGVInstructor.RowHeadersVisible = false;
             DGVInstructor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 138, 51);
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            DGVInstructor.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(255, 138, 51);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            DGVInstructor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             DGVInstructor.RowTemplate.Height = 29;
             DGVInstructor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVInstructor.Size = new Size(1220, 450);
@@ -249,16 +249,16 @@
             label26.Size = new Size(200, 33);
             label26.TabIndex = 60;
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.ForeColor = Color.Black;
-            inputSearchValue.Location = new Point(21, 241);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(838, 30);
-            inputSearchValue.TabIndex = 0;
-            inputSearchValue.TextChanged += inputSearchValue_TextChanged;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.ForeColor = Color.Black;
+            inputSearch.Location = new Point(21, 241);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(838, 30);
+            inputSearch.TabIndex = 0;
+            inputSearch.TextChanged += inputSearchValue_TextChanged;
             // 
             // label23
             // 
@@ -364,23 +364,23 @@
             btnCreate.UseVisualStyleBackColor = false;
             btnCreate.Click += btnCreate_Click;
             // 
-            // btnClearAll
+            // btnClear
             // 
-            btnClearAll.BackColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderSize = 2;
-            btnClearAll.FlatAppearance.MouseDownBackColor = Color.White;
-            btnClearAll.FlatAppearance.MouseOverBackColor = Color.White;
-            btnClearAll.FlatStyle = FlatStyle.Flat;
-            btnClearAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnClearAll.ForeColor = Color.White;
-            btnClearAll.Location = new Point(864, 165);
-            btnClearAll.Name = "btnClearAll";
-            btnClearAll.Size = new Size(135, 32);
-            btnClearAll.TabIndex = 51;
-            btnClearAll.Text = "Clear All";
-            btnClearAll.UseVisualStyleBackColor = false;
-            btnClearAll.Click += btnClearAll_Click;
+            btnClear.BackColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderSize = 2;
+            btnClear.FlatAppearance.MouseDownBackColor = Color.White;
+            btnClear.FlatAppearance.MouseOverBackColor = Color.White;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(864, 165);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(135, 32);
+            btnClear.TabIndex = 51;
+            btnClear.Text = "Clear All";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClearAll_Click;
             // 
             // labelSpecialization
             // 
@@ -406,17 +406,17 @@
             labelExperienceRequired.Text = "labelExperience";
             labelExperienceRequired.Visible = false;
             // 
-            // labelInstructorNameRequired
+            // labelName
             // 
-            labelInstructorNameRequired.AutoSize = true;
-            labelInstructorNameRequired.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            labelInstructorNameRequired.ForeColor = Color.Red;
-            labelInstructorNameRequired.Location = new Point(40, 197);
-            labelInstructorNameRequired.Name = "labelInstructorNameRequired";
-            labelInstructorNameRequired.Size = new Size(126, 17);
-            labelInstructorNameRequired.TabIndex = 47;
-            labelInstructorNameRequired.Text = "labelInstructorName";
-            labelInstructorNameRequired.Visible = false;
+            labelName.AutoSize = true;
+            labelName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelName.ForeColor = Color.Red;
+            labelName.Location = new Point(40, 197);
+            labelName.Name = "labelName";
+            labelName.Size = new Size(71, 17);
+            labelName.TabIndex = 47;
+            labelName.Text = "labelName";
+            labelName.Visible = false;
             // 
             // labelEmailAddress
             // 
@@ -425,9 +425,9 @@
             labelEmailAddress.ForeColor = Color.Red;
             labelEmailAddress.Location = new Point(369, 197);
             labelEmailAddress.Name = "labelEmailAddress";
-            labelEmailAddress.Size = new Size(115, 17);
+            labelEmailAddress.Size = new Size(67, 17);
             labelEmailAddress.TabIndex = 46;
-            labelEmailAddress.Text = "labelEmailAddress";
+            labelEmailAddress.Text = "labelEmail";
             labelEmailAddress.Visible = false;
             // 
             // labelBirthdate
@@ -522,15 +522,15 @@
             label19.Text = "Birthdate";
             label19.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // inputPhoneNumber
+            // inputPhone
             // 
-            inputPhoneNumber.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputPhoneNumber.ForeColor = Color.Black;
-            inputPhoneNumber.Location = new Point(865, 91);
-            inputPhoneNumber.Name = "inputPhoneNumber";
-            inputPhoneNumber.PlaceholderText = "Enter number";
-            inputPhoneNumber.Size = new Size(133, 30);
-            inputPhoneNumber.TabIndex = 36;
+            inputPhone.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputPhone.ForeColor = Color.Black;
+            inputPhone.Location = new Point(865, 91);
+            inputPhone.Name = "inputPhone";
+            inputPhone.PlaceholderText = "Enter number";
+            inputPhone.Size = new Size(133, 30);
+            inputPhone.TabIndex = 36;
             // 
             // label8
             // 
@@ -574,15 +574,15 @@
             label11.Text = "Experience";
             label11.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // inputEmailAddress
+            // inputEmail
             // 
-            inputEmailAddress.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputEmailAddress.ForeColor = Color.Black;
-            inputEmailAddress.Location = new Point(370, 166);
-            inputEmailAddress.Name = "inputEmailAddress";
-            inputEmailAddress.PlaceholderText = "Enter instructor's email address";
-            inputEmailAddress.Size = new Size(298, 30);
-            inputEmailAddress.TabIndex = 30;
+            inputEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputEmail.ForeColor = Color.Black;
+            inputEmail.Location = new Point(370, 166);
+            inputEmail.Name = "inputEmail";
+            inputEmail.PlaceholderText = "Enter instructor's email address";
+            inputEmail.Size = new Size(298, 30);
+            inputEmail.TabIndex = 30;
             // 
             // label6
             // 
@@ -636,15 +636,15 @@
             label5.Text = "Specialization";
             label5.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // inputInstructorName
+            // inputName
             // 
-            inputInstructorName.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputInstructorName.ForeColor = Color.Black;
-            inputInstructorName.Location = new Point(41, 166);
-            inputInstructorName.Name = "inputInstructorName";
-            inputInstructorName.PlaceholderText = "Enter instructor's name";
-            inputInstructorName.Size = new Size(298, 30);
-            inputInstructorName.TabIndex = 24;
+            inputName.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputName.ForeColor = Color.Black;
+            inputName.Location = new Point(41, 166);
+            inputName.Name = "inputName";
+            inputName.PlaceholderText = "Enter instructor's name";
+            inputName.Size = new Size(298, 30);
+            inputName.TabIndex = 24;
             // 
             // label16
             // 
@@ -758,17 +758,17 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private TextBox inputInstructorName;
+        private TextBox inputName;
         private Label label16;
         private Label label17;
         private Label label14;
         private Label label15;
-        private TextBox inputPhoneNumber;
+        private TextBox inputPhone;
         private Label label8;
         private Label label9;
         private Label label10;
         private Label label11;
-        private TextBox inputEmailAddress;
+        private TextBox inputEmail;
         private Label label6;
         private Label label7;
         private TextBox inputSpecialization;
@@ -784,13 +784,13 @@
         private Label labelBirthdate;
         private Label labelSpecialization;
         private Label labelExperienceRequired;
-        private Label labelInstructorNameRequired;
+        private Label labelName;
         private Label labelEmailAddress;
-        private Button btnClearAll;
+        private Button btnClear;
         private Button btnDelete;
         private Button btnUpdate;
         private Button btnCreate;
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Button btnRefresh;
         private Button btnSearch;
         private Label label23;
@@ -801,6 +801,6 @@
         private ComboBox filterSpecialization;
         private Label label26;
         private DataGridView DGVInstructor;
-        private Label labelPhoneNumber;
+        private Label labelPhone;
     }
 }

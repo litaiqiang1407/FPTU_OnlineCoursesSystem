@@ -39,3 +39,4 @@ D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_On
 D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\bin\Debug\net7.0-windows\BCrypt.Net-Next.dll
 D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\obj\Debug\net7.0-windows\FPTU_OnlineCoursesSystem.CoursesManagementForm.resources
 D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\obj\Debug\net7.0-windows\FPTU_OnlineCoursesSystem.PasswordRecoveryForm.resources
+D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\obj\Debug\net7.0-windows\FPTU_OnlineCoursesSystem.sourcelink.json

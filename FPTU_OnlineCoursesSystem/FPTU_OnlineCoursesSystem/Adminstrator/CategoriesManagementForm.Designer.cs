@@ -31,14 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesManagementForm));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
             btnCreate = new Button();
-            label22 = new Label();
+            labelName = new Label();
             valueID = new Label();
             inputDescription = new TextBox();
             label4 = new Label();
@@ -56,14 +56,15 @@
             ((System.ComponentModel.ISupportInitialize)DGVCategory).BeginInit();
             SuspendLayout();
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.Location = new Point(21, 241);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(840, 30);
-            inputSearchValue.TabIndex = 55;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.Location = new Point(21, 241);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(840, 30);
+            inputSearch.TabIndex = 55;
+            inputSearch.TextChanged += inputSearch_TextChanged;
             // 
             // label23
             // 
@@ -82,6 +83,8 @@
             btnRefresh.BackgroundImageLayout = ImageLayout.Center;
             btnRefresh.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnRefresh.FlatAppearance.BorderSize = 2;
+            btnRefresh.FlatAppearance.MouseDownBackColor = Color.White;
+            btnRefresh.FlatAppearance.MouseOverBackColor = Color.White;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnRefresh.ForeColor = Color.White;
@@ -90,6 +93,7 @@
             btnRefresh.Size = new Size(70, 30);
             btnRefresh.TabIndex = 57;
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnSearch
             // 
@@ -98,6 +102,8 @@
             btnSearch.BackgroundImageLayout = ImageLayout.Center;
             btnSearch.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnSearch.FlatAppearance.BorderSize = 2;
+            btnSearch.FlatAppearance.MouseDownBackColor = Color.White;
+            btnSearch.FlatAppearance.MouseOverBackColor = Color.White;
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSearch.ForeColor = Color.White;
@@ -106,12 +112,15 @@
             btnSearch.Size = new Size(70, 30);
             btnSearch.TabIndex = 56;
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 
             btnDelete.BackColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderSize = 2;
+            btnDelete.FlatAppearance.MouseDownBackColor = Color.White;
+            btnDelete.FlatAppearance.MouseOverBackColor = Color.White;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnDelete.ForeColor = Color.White;
@@ -128,6 +137,8 @@
             btnUpdate.BackColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderSize = 2;
+            btnUpdate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnUpdate.FlatAppearance.MouseOverBackColor = Color.White;
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnUpdate.ForeColor = Color.White;
@@ -137,12 +148,15 @@
             btnUpdate.TabIndex = 53;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnCreate
             // 
             btnCreate.BackColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderSize = 2;
+            btnCreate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnCreate.FlatAppearance.MouseOverBackColor = Color.White;
             btnCreate.FlatStyle = FlatStyle.Flat;
             btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnCreate.ForeColor = Color.White;
@@ -152,18 +166,19 @@
             btnCreate.TabIndex = 52;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
-            // label22
+            // labelName
             // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label22.ForeColor = Color.Red;
-            label22.Location = new Point(40, 197);
-            label22.Name = "label22";
-            label22.Size = new Size(179, 17);
-            label22.TabIndex = 47;
-            label22.Text = "Please enter category's name";
-            label22.Visible = false;
+            labelName.AutoSize = true;
+            labelName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelName.ForeColor = Color.Red;
+            labelName.Location = new Point(40, 197);
+            labelName.Name = "labelName";
+            labelName.Size = new Size(71, 17);
+            labelName.TabIndex = 47;
+            labelName.Text = "labelName";
+            labelName.Visible = false;
             // 
             // valueID
             // 
@@ -287,14 +302,14 @@
             // panelCategory
             // 
             panelCategory.Controls.Add(DGVCategory);
-            panelCategory.Controls.Add(inputSearchValue);
+            panelCategory.Controls.Add(inputSearch);
             panelCategory.Controls.Add(label23);
             panelCategory.Controls.Add(btnRefresh);
             panelCategory.Controls.Add(btnSearch);
             panelCategory.Controls.Add(btnDelete);
             panelCategory.Controls.Add(btnUpdate);
             panelCategory.Controls.Add(btnCreate);
-            panelCategory.Controls.Add(label22);
+            panelCategory.Controls.Add(labelName);
             panelCategory.Controls.Add(valueID);
             panelCategory.Controls.Add(inputDescription);
             panelCategory.Controls.Add(label4);
@@ -364,14 +379,14 @@
         }
 
         #endregion
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Label label23;
         private Button btnRefresh;
         private Button btnSearch;
         private Button btnDelete;
         private Button btnUpdate;
         private Button btnCreate;
-        private Label label22;
+        private Label labelName;
         private Label valueID;
         private TextBox inputDescription;
         private Label label4;

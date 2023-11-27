@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CoursesManagementForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             filterCreationDate = new ComboBox();
             label28 = new Label();
             filterInstructors = new ComboBox();
             label27 = new Label();
             filterCategories = new ComboBox();
             label26 = new Label();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
             btnCreate = new Button();
-            btnClearAll = new Button();
+            btnClear = new Button();
             labelRequiredCategory = new Label();
             labelRequiredName = new Label();
             labelRequiredInstructor = new Label();
@@ -152,15 +152,15 @@
             label26.Size = new Size(160, 33);
             label26.TabIndex = 60;
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.Location = new Point(21, 241);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(838, 30);
-            inputSearchValue.TabIndex = 55;
-            inputSearchValue.TextChanged += inputSearchValue_TextChanged;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.Location = new Point(21, 241);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(838, 30);
+            inputSearch.TabIndex = 55;
+            inputSearch.TextChanged += inputSearchValue_TextChanged;
             // 
             // label23
             // 
@@ -265,23 +265,23 @@
             btnCreate.UseVisualStyleBackColor = false;
             btnCreate.Click += btnCreate_Click;
             // 
-            // btnClearAll
+            // btnClear
             // 
-            btnClearAll.BackColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderSize = 2;
-            btnClearAll.FlatAppearance.MouseDownBackColor = Color.White;
-            btnClearAll.FlatAppearance.MouseOverBackColor = Color.White;
-            btnClearAll.FlatStyle = FlatStyle.Flat;
-            btnClearAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnClearAll.ForeColor = Color.White;
-            btnClearAll.Location = new Point(865, 165);
-            btnClearAll.Name = "btnClearAll";
-            btnClearAll.Size = new Size(135, 32);
-            btnClearAll.TabIndex = 51;
-            btnClearAll.Text = "Clear All";
-            btnClearAll.UseVisualStyleBackColor = false;
-            btnClearAll.Click += btnClearAll_Click;
+            btnClear.BackColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderSize = 2;
+            btnClear.FlatAppearance.MouseDownBackColor = Color.White;
+            btnClear.FlatAppearance.MouseOverBackColor = Color.White;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(865, 165);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(135, 32);
+            btnClear.TabIndex = 51;
+            btnClear.Text = "Clear All";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClearAll_Click;
             // 
             // labelRequiredCategory
             // 
@@ -592,14 +592,14 @@
             panelCourses.Controls.Add(label27);
             panelCourses.Controls.Add(filterCategories);
             panelCourses.Controls.Add(label26);
-            panelCourses.Controls.Add(inputSearchValue);
+            panelCourses.Controls.Add(inputSearch);
             panelCourses.Controls.Add(label23);
             panelCourses.Controls.Add(btnRefresh);
             panelCourses.Controls.Add(btnSearch);
             panelCourses.Controls.Add(btnDelete);
             panelCourses.Controls.Add(btnUpdate);
             panelCourses.Controls.Add(btnCreate);
-            panelCourses.Controls.Add(btnClearAll);
+            panelCourses.Controls.Add(btnClear);
             panelCourses.Controls.Add(labelRequiredCategory);
             panelCourses.Controls.Add(labelRequiredName);
             panelCourses.Controls.Add(labelRequiredInstructor);
@@ -704,14 +704,14 @@
             DGVCourse.BackgroundColor = Color.White;
             DGVCourse.BorderStyle = BorderStyle.None;
             DGVCourse.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            DGVCourse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            DGVCourse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DGVCourse.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVCourse.EnableHeadersVisualStyles = false;
             DGVCourse.GridColor = Color.FromArgb(255, 72, 0);
@@ -721,11 +721,11 @@
             DGVCourse.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             DGVCourse.RowHeadersVisible = false;
             DGVCourse.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 138, 51);
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            DGVCourse.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(255, 138, 51);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            DGVCourse.RowsDefaultCellStyle = dataGridViewCellStyle4;
             DGVCourse.RowTemplate.Height = 29;
             DGVCourse.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVCourse.Size = new Size(1220, 450);
@@ -808,14 +808,14 @@
         private Label label27;
         private ComboBox filterCategories;
         private Label label26;
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Label label23;
         private Button btnRefresh;
         private Button btnSearch;
         private Button btnDelete;
         private Button btnUpdate;
         private Button btnCreate;
-        private Button btnClearAll;
+        private Button btnClear;
         private Label labelRequiredCategory;
         private Label labelRequiredName;
         private Label labelRequiredInstructor;

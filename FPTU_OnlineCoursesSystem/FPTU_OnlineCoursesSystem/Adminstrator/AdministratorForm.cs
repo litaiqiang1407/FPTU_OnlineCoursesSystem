@@ -1,212 +1,131 @@
 ﻿using FPTU_OnlineCoursesSystem.UIInteraction;
+using FPTU_OnlineCoursesSystem.Variables;
 
 namespace FPTU_OnlineCoursesSystem
 {
     public partial class AdministratorForm : Form
     {
+
         private Form activeForm = null;
+        private Button lastClickedButton;
+
         public AdministratorForm()
         {
             InitializeComponent();
+            applyHoverEffect();
+            InitializeButtons();
         }
 
-        private bool _isBtnInstructorsClicked = false;
-        private bool _isBtnStudentsClicked = false;
-        private bool _isBtnCategoriesClicked = false;
-        private bool _isBtnCoursesClicked = false;
-        private bool _isBtnEnrollmentsClicked = false;
-        private bool _isBtnRatingsClicked = false;
-        private bool _isBtnReportsClicked = false;
-
-        private void SetButtonImageAndText(Button button, string imageFilePath, string text)
+        private void InitializeButtons()
         {
-            if (imageFilePath == null)
-            {
-                button.BackgroundImage = new Bitmap(1, 1);
-            }
-            else
-            {
-                Image image = Image.FromFile(imageFilePath);
-                button.BackgroundImage = image;
-            }
-            button.Text = text;
+            btnInstructors.Click += Button_Click;
+            btnStudents.Click += Button_Click;
+            btnCategories.Click += Button_Click;
+            btnCourses.Click += Button_Click;
+            btnEnrollments.Click += Button_Click;
+            btnRatings.Click += Button_Click;
+            btnReports.Click += Button_Click;
         }
 
-        private void btnInstructors_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnInstructorsClicked)
-            {
-                SetButtonImageAndText((Button)sender, null, "Instructors");
-            }
-        }
 
-        private void btnInstructors_MouseLeave(object sender, EventArgs e)
+        private void OpenFormForButton(Button button)
         {
-            if (!_isBtnInstructorsClicked)
+            switch (button.AccessibleName)
             {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\instructors.png", "");
-            }
-        }
-
-        private void btnStudents_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnStudentsClicked)
-            {
-                SetButtonImageAndText((Button)sender, null, "Students");
+                case "Instructors":
+                    Navigator.OpenChildForm(activeForm, new InstructorsManagementForm(), panelMain);
+                    break;
+                case "Students":
+                    Navigator.OpenChildForm(activeForm, new StudentsManagementForm(), panelMain);
+                    break;
+                case "Categories":
+                    Navigator.OpenChildForm(activeForm, new CategoriesManagementForm(), panelMain);
+                    break;
+                case "Courses":
+                    Navigator.OpenChildForm(activeForm, new CoursesManagementForm(), panelMain);
+                    break;
+                case "Enrollments":
+                    Navigator.OpenChildForm(activeForm, new EnrollmentsManagementForm(), panelMain);
+                    break;
+                case "Ratings":
+                    Navigator.OpenChildForm(activeForm, new RatingsManagementForm(), panelMain);
+                    break;
+                case "Reports":
+                    Navigator.OpenChildForm(activeForm, new ReportsManagementForm(), panelMain);
+                    break;
+                default:
+                    break;
             }
         }
-
-        private void btnStudents_MouseLeave(object sender, EventArgs e)
+        private void hoverEffect(Button button, string imagePath)
         {
-            if (!_isBtnStudentsClicked)
+            // Event handler for mouse entering the button area
+            button.MouseEnter += (sender, e) =>
             {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\students.png", "");
-            }
-        }
+                if (button != lastClickedButton)
+                {
+                    button.Text = button.AccessibleName;
+                    button.BackgroundImage = null;
+                }
+            };
 
-        private void btnCategories_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnCategoriesClicked)
+            // Event handler for mouse leaving the button area
+            button.MouseLeave += (sender, e) =>
             {
-                SetButtonImageAndText((Button)sender, null, "Categories");
-            }
+                if (button != lastClickedButton)
+                {
+                    button.BackgroundImage = Image.FromFile(imagePath);
+                    button.Text = "";
+                }
+            };
         }
 
-        private void btnCategories_MouseLeave(object sender, EventArgs e)
+        private void applyHoverEffect()
         {
-            if (!_isBtnCategoriesClicked)
+            hoverEffect(btnInstructors, Path.Combine(Images.BaseImagePath, Images.instructors));
+            hoverEffect(btnStudents, Path.Combine(Images.BaseImagePath, Images.students));
+            hoverEffect(btnCategories, Path.Combine(Images.BaseImagePath, Images.categories));
+            hoverEffect(btnCourses, Path.Combine(Images.BaseImagePath, Images.courses));
+            hoverEffect(btnEnrollments, Path.Combine(Images.BaseImagePath, Images.enrollments));
+            hoverEffect(btnRatings, Path.Combine(Images.BaseImagePath, Images.ratings));
+            hoverEffect(btnReports, Path.Combine(Images.BaseImagePath, Images.reports));
+        }
+
+        private void applyButtonEffect(Button button)
+        {
+            button.Text = button.AccessibleName;
+            button.BackgroundImage = null;
+            button.ForeColor = Color.FromArgb(255, 72, 0);
+            button.BackColor = Color.White;
+        }
+
+        private void resetButtonEffect(Button button)
+        {
+            string imageName = button.AccessibleName.ToLower() + ".png";
+            button.BackgroundImage = Image.FromFile(Path.Combine(Images.BaseImagePath, imageName));
+            button.Text = "";
+            button.ForeColor = Color.White;
+            button.BackColor = Color.FromArgb(255, 72, 0);
+
+        }
+
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+
+            if (lastClickedButton != null)
             {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\categories.png", "");
+                resetButtonEffect(lastClickedButton);
             }
+
+            applyButtonEffect(clickedButton);
+
+            lastClickedButton = clickedButton;
+
+            OpenFormForButton(clickedButton);
         }
 
-        private void btnCourses_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnCoursesClicked)
-            {
-                SetButtonImageAndText((Button)sender, null, "Courses");
-            }
-        }
-
-        private void btnCourses_MouseLeave(object sender, EventArgs e)
-        {
-            if (!_isBtnCoursesClicked)
-            {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\courses.png", "");
-            }
-        }
-
-        private void btnEnrollments_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnEnrollmentsClicked)
-            {
-                SetButtonImageAndText((Button)sender, null, "Enrollments");
-            }
-        }
-
-        private void btnEnrollments_MouseLeave(object sender, EventArgs e)
-        {
-            if (!_isBtnEnrollmentsClicked)
-            {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\enrollments.png", "");
-            }
-        }
-
-        private void btnRatings_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnRatingsClicked)
-            {
-                SetButtonImageAndText((Button)sender, null, "Ratings");
-            }
-        }
-
-        private void btnRatings_MouseLeave(object sender, EventArgs e)
-        {
-            if (!_isBtnRatingsClicked)
-            {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\ratings.png", "");
-            }
-        }
-
-        private void btnReports_MouseEnter(object sender, EventArgs e)
-        {
-            if (!_isBtnReportsClicked)
-            {
-                SetButtonImageAndText((Button)sender, null, "Reports");
-            }
-        }
-
-        private void btnReports_MouseLeave(object sender, EventArgs e)
-        {
-            if (!_isBtnReportsClicked)
-            {
-                SetButtonImageAndText((Button)sender, @"D:\Assignment\Projects\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\FPTU_OnlineCoursesSystem\image\reports.png", "");
-            }
-        }
-
-
-        private void ApplyHoverEffect(Button button, Color foreColor, Color backColor)
-        {
-            button.ForeColor = foreColor;
-            button.BackColor = backColor;
-        }
-
-        private void btnInstructors_Click(object sender, EventArgs e)
-        {
-            _isBtnInstructorsClicked = true;
-            Navigator.OpenChildForm(activeForm, new InstructorsManagementForm(), panelMain);
-            SetButtonImageAndText((Button)sender, null, "Instructors");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
-
-        private void btnStudents_Click(object sender, EventArgs e)
-        {
-            _isBtnStudentsClicked = true;
-            Navigator.OpenChildForm(activeForm, new StudentsManagementForm(), panelMain);
-
-            SetButtonImageAndText((Button)sender, null, "Students");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
-
-        private void btnCategories_Click(object sender, EventArgs e)
-        {
-            _isBtnCategoriesClicked = true;
-            Navigator.OpenChildForm(activeForm, new CategoriesManagementForm(), panelMain);
-            SetButtonImageAndText((Button)sender, null, "Categories");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
-
-        private void btnCourses_Click(object sender, EventArgs e)
-        {
-            _isBtnCoursesClicked = true;
-            Navigator.OpenChildForm(activeForm, new CoursesManagementForm(), panelMain);
-            SetButtonImageAndText((Button)sender, null, "Courses");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
-
-        private void btnEnrollments_Click(object sender, EventArgs e)
-        {
-            _isBtnEnrollmentsClicked = true;
-            Navigator.OpenChildForm(activeForm, new EnrollmentsManagementForm(), panelMain);
-            SetButtonImageAndText((Button)sender, null, "Enrollments");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
-
-        private void btnRatings_Click(object sender, EventArgs e)
-        {
-            _isBtnRatingsClicked = true;
-            Navigator.OpenChildForm(activeForm, new RatingsManagementForm(), panelMain);
-            SetButtonImageAndText((Button)sender, null, "Ratings");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
-
-        private void btnReports_Click(object sender, EventArgs e)
-        {
-            _isBtnReportsClicked = true;
-            Navigator.OpenChildForm(activeForm, new ReportsManagementForm(), panelMain);
-            SetButtonImageAndText((Button)sender, null, "Reports");
-            ApplyHoverEffect((Button)sender, Color.FromArgb(255, 72, 0), Color.White);
-        }
         // Logout
         private void btnLogout_Click(object sender, EventArgs e)
         {

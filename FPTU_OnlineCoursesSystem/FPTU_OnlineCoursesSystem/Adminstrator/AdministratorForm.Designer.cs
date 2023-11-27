@@ -206,6 +206,7 @@
             // 
             // btnReports
             // 
+            btnReports.AccessibleName = "Reports";
             btnReports.BackgroundImage = (Image)resources.GetObject("btnReports.BackgroundImage");
             btnReports.BackgroundImageLayout = ImageLayout.Center;
             btnReports.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -220,12 +221,12 @@
             btnReports.Size = new Size(120, 60);
             btnReports.TabIndex = 6;
             btnReports.UseVisualStyleBackColor = true;
-            btnReports.Click += btnReports_Click;
-            btnReports.MouseEnter += btnReports_MouseEnter;
-            btnReports.MouseLeave += btnReports_MouseLeave;
+
+
             // 
             // btnRatings
             // 
+            btnRatings.AccessibleName = "Ratings";
             btnRatings.BackgroundImage = (Image)resources.GetObject("btnRatings.BackgroundImage");
             btnRatings.BackgroundImageLayout = ImageLayout.Center;
             btnRatings.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -240,12 +241,12 @@
             btnRatings.Size = new Size(120, 60);
             btnRatings.TabIndex = 5;
             btnRatings.UseVisualStyleBackColor = true;
-            btnRatings.Click += btnRatings_Click;
-            btnRatings.MouseEnter += btnRatings_MouseEnter;
-            btnRatings.MouseLeave += btnRatings_MouseLeave;
+
+
             // 
             // btnEnrollments
             // 
+            btnEnrollments.AccessibleName = "Enrollments";
             btnEnrollments.BackgroundImage = (Image)resources.GetObject("btnEnrollments.BackgroundImage");
             btnEnrollments.BackgroundImageLayout = ImageLayout.Center;
             btnEnrollments.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -260,12 +261,12 @@
             btnEnrollments.Size = new Size(120, 60);
             btnEnrollments.TabIndex = 4;
             btnEnrollments.UseVisualStyleBackColor = true;
-            btnEnrollments.Click += btnEnrollments_Click;
-            btnEnrollments.MouseEnter += btnEnrollments_MouseEnter;
-            btnEnrollments.MouseLeave += btnEnrollments_MouseLeave;
+
+
             // 
             // btnCourses
             // 
+            btnCourses.AccessibleName = "Courses";
             btnCourses.BackgroundImage = (Image)resources.GetObject("btnCourses.BackgroundImage");
             btnCourses.BackgroundImageLayout = ImageLayout.Center;
             btnCourses.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -280,12 +281,12 @@
             btnCourses.Size = new Size(120, 60);
             btnCourses.TabIndex = 3;
             btnCourses.UseVisualStyleBackColor = true;
-            btnCourses.Click += btnCourses_Click;
-            btnCourses.MouseEnter += btnCourses_MouseEnter;
-            btnCourses.MouseLeave += btnCourses_MouseLeave;
+
+
             // 
             // btnStudents
             // 
+            btnStudents.AccessibleName = "Students";
             btnStudents.BackgroundImage = (Image)resources.GetObject("btnStudents.BackgroundImage");
             btnStudents.BackgroundImageLayout = ImageLayout.Center;
             btnStudents.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -300,12 +301,12 @@
             btnStudents.Size = new Size(120, 60);
             btnStudents.TabIndex = 2;
             btnStudents.UseVisualStyleBackColor = true;
-            btnStudents.Click += btnStudents_Click;
-            btnStudents.MouseEnter += btnStudents_MouseEnter;
-            btnStudents.MouseLeave += btnStudents_MouseLeave;
+ 
+
             // 
             // btnCategories
             // 
+            btnCategories.AccessibleName = "Categories";
             btnCategories.BackgroundImage = (Image)resources.GetObject("btnCategories.BackgroundImage");
             btnCategories.BackgroundImageLayout = ImageLayout.Center;
             btnCategories.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -320,12 +321,12 @@
             btnCategories.Size = new Size(120, 60);
             btnCategories.TabIndex = 1;
             btnCategories.UseVisualStyleBackColor = true;
-            btnCategories.Click += btnCategories_Click;
-            btnCategories.MouseEnter += btnCategories_MouseEnter;
-            btnCategories.MouseLeave += btnCategories_MouseLeave;
+    
+
             // 
             // btnInstructors
             // 
+            btnInstructors.AccessibleName = "Instructors";
             btnInstructors.BackgroundImage = (Image)resources.GetObject("btnInstructors.BackgroundImage");
             btnInstructors.BackgroundImageLayout = ImageLayout.Center;
             btnInstructors.FlatAppearance.BorderColor = Color.FromArgb(255, 72, 0);
@@ -340,9 +341,8 @@
             btnInstructors.Size = new Size(120, 60);
             btnInstructors.TabIndex = 0;
             btnInstructors.UseVisualStyleBackColor = true;
-            btnInstructors.Click += btnInstructors_Click;
-            btnInstructors.MouseEnter += btnInstructors_MouseEnter;
-            btnInstructors.MouseLeave += btnInstructors_MouseLeave;
+          
+           
             // 
             // panelMain
             // 

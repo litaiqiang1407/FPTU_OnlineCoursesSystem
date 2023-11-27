@@ -13,5 +13,13 @@
         public static string SearchIconPath = "searchIcon.png";
         public static string HoverSearchIconPath = "hoverSearchIcon.png";
 
+        public static string instructors = "instructors.png";
+        public static string students = "students.png";
+        public static string categories = "categories.png";
+        public static string courses = "courses.png";
+        public static string enrollments = "enrollments.png";
+        public static string ratings = "ratings.png";
+        public static string reports = "reports.png";
+
     }
 }

@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RatingsManagementForm));
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             valueCourseID = new Label();
             valueStudentID = new Label();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
-            btnClearAll = new Button();
+            btnClear = new Button();
             valueRatingID = new Label();
             inputCourseName = new TextBox();
             label18 = new Label();
@@ -58,12 +58,14 @@
             label1 = new Label();
             button1 = new Button();
             panelCourses = new Panel();
+            labelCourseName = new Label();
+            labelStudentName = new Label();
+            btnCreate = new Button();
+            valueRating = new Label();
             DGVRating = new DataGridView();
             inputReview = new TextBox();
             label8 = new Label();
             label9 = new Label();
-            label10 = new Label();
-            btnCreate = new Button();
             panelCourses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DGVRating).BeginInit();
             SuspendLayout();
@@ -88,14 +90,15 @@
             valueStudentID.TabIndex = 72;
             valueStudentID.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.Location = new Point(21, 241);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(838, 30);
-            inputSearchValue.TabIndex = 55;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.Location = new Point(21, 241);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(838, 30);
+            inputSearch.TabIndex = 55;
+            inputSearch.TextChanged += inputSearch_TextChanged;
             // 
             // label23
             // 
@@ -114,6 +117,8 @@
             btnRefresh.BackgroundImageLayout = ImageLayout.Center;
             btnRefresh.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnRefresh.FlatAppearance.BorderSize = 2;
+            btnRefresh.FlatAppearance.MouseDownBackColor = Color.White;
+            btnRefresh.FlatAppearance.MouseOverBackColor = Color.White;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnRefresh.ForeColor = Color.White;
@@ -122,6 +127,7 @@
             btnRefresh.Size = new Size(70, 30);
             btnRefresh.TabIndex = 57;
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnSearch
             // 
@@ -130,6 +136,8 @@
             btnSearch.BackgroundImageLayout = ImageLayout.Center;
             btnSearch.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnSearch.FlatAppearance.BorderSize = 2;
+            btnSearch.FlatAppearance.MouseDownBackColor = Color.White;
+            btnSearch.FlatAppearance.MouseOverBackColor = Color.White;
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSearch.ForeColor = Color.White;
@@ -138,12 +146,15 @@
             btnSearch.Size = new Size(70, 30);
             btnSearch.TabIndex = 56;
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 
             btnDelete.BackColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderSize = 2;
+            btnDelete.FlatAppearance.MouseDownBackColor = Color.White;
+            btnDelete.FlatAppearance.MouseOverBackColor = Color.White;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnDelete.ForeColor = Color.White;
@@ -160,6 +171,8 @@
             btnUpdate.BackColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderSize = 2;
+            btnUpdate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnUpdate.FlatAppearance.MouseOverBackColor = Color.White;
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnUpdate.ForeColor = Color.White;
@@ -169,21 +182,25 @@
             btnUpdate.TabIndex = 53;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
-            // btnClearAll
+            // btnClear
             // 
-            btnClearAll.BackColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnClearAll.FlatAppearance.BorderSize = 2;
-            btnClearAll.FlatStyle = FlatStyle.Flat;
-            btnClearAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnClearAll.ForeColor = Color.White;
-            btnClearAll.Location = new Point(864, 165);
-            btnClearAll.Name = "btnClearAll";
-            btnClearAll.Size = new Size(135, 32);
-            btnClearAll.TabIndex = 51;
-            btnClearAll.Text = "Clear All";
-            btnClearAll.UseVisualStyleBackColor = false;
+            btnClear.BackColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnClear.FlatAppearance.BorderSize = 2;
+            btnClear.FlatAppearance.MouseDownBackColor = Color.White;
+            btnClear.FlatAppearance.MouseOverBackColor = Color.White;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(864, 165);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(135, 32);
+            btnClear.TabIndex = 51;
+            btnClear.Text = "Clear All";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // valueRatingID
             // 
@@ -369,21 +386,23 @@
             // panelCourses
             // 
             panelCourses.BackColor = Color.White;
+            panelCourses.Controls.Add(labelCourseName);
+            panelCourses.Controls.Add(labelStudentName);
             panelCourses.Controls.Add(btnCreate);
-            panelCourses.Controls.Add(label10);
+            panelCourses.Controls.Add(valueRating);
             panelCourses.Controls.Add(DGVRating);
             panelCourses.Controls.Add(inputReview);
             panelCourses.Controls.Add(label8);
             panelCourses.Controls.Add(label9);
             panelCourses.Controls.Add(valueCourseID);
             panelCourses.Controls.Add(valueStudentID);
-            panelCourses.Controls.Add(inputSearchValue);
+            panelCourses.Controls.Add(inputSearch);
             panelCourses.Controls.Add(label23);
             panelCourses.Controls.Add(btnRefresh);
             panelCourses.Controls.Add(btnSearch);
             panelCourses.Controls.Add(btnDelete);
             panelCourses.Controls.Add(btnUpdate);
-            panelCourses.Controls.Add(btnClearAll);
+            panelCourses.Controls.Add(btnClear);
             panelCourses.Controls.Add(valueRatingID);
             panelCourses.Controls.Add(inputCourseName);
             panelCourses.Controls.Add(label18);
@@ -407,20 +426,72 @@
             panelCourses.Size = new Size(1260, 800);
             panelCourses.TabIndex = 3;
             // 
+            // labelCourseName
+            // 
+            labelCourseName.AutoSize = true;
+            labelCourseName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCourseName.ForeColor = Color.Red;
+            labelCourseName.Location = new Point(205, 197);
+            labelCourseName.Name = "labelCourseName";
+            labelCourseName.Size = new Size(112, 17);
+            labelCourseName.TabIndex = 91;
+            labelCourseName.Text = "labelCourseName";
+            labelCourseName.Visible = false;
+            // 
+            // labelStudentName
+            // 
+            labelStudentName.AutoSize = true;
+            labelStudentName.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelStudentName.ForeColor = Color.Red;
+            labelStudentName.Location = new Point(369, 197);
+            labelStudentName.Name = "labelStudentName";
+            labelStudentName.Size = new Size(115, 17);
+            labelStudentName.TabIndex = 90;
+            labelStudentName.Text = "labelStudentName";
+            labelStudentName.Visible = false;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.FromArgb(255, 109, 0);
+            btnCreate.Enabled = false;
+            btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
+            btnCreate.FlatAppearance.BorderSize = 2;
+            btnCreate.FlatAppearance.MouseDownBackColor = Color.White;
+            btnCreate.FlatAppearance.MouseOverBackColor = Color.White;
+            btnCreate.FlatStyle = FlatStyle.Flat;
+            btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCreate.ForeColor = Color.White;
+            btnCreate.Location = new Point(1040, 60);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(200, 40);
+            btnCreate.TabIndex = 79;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            // 
+            // valueRating
+            // 
+            valueRating.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            valueRating.ForeColor = Color.FromArgb(255, 109, 0);
+            valueRating.Location = new Point(41, 166);
+            valueRating.Name = "valueRating";
+            valueRating.Size = new Size(133, 30);
+            valueRating.TabIndex = 78;
+            valueRating.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // DGVRating
             // 
             DGVRating.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGVRating.BackgroundColor = Color.White;
             DGVRating.BorderStyle = BorderStyle.None;
             DGVRating.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle7.SelectionForeColor = Color.White;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            DGVRating.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DGVRating.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGVRating.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVRating.EnableHeadersVisualStyles = false;
             DGVRating.GridColor = Color.FromArgb(255, 72, 0);
@@ -430,11 +501,11 @@
             DGVRating.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             DGVRating.RowHeadersVisible = false;
             DGVRating.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle8.BackColor = Color.White;
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(255, 138, 51);
-            dataGridViewCellStyle8.SelectionForeColor = Color.White;
-            DGVRating.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 138, 51);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            DGVRating.RowsDefaultCellStyle = dataGridViewCellStyle2;
             DGVRating.RowTemplate.Height = 29;
             DGVRating.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVRating.Size = new Size(1220, 450);
@@ -473,34 +544,6 @@
             label9.Text = "Review";
             label9.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label10
-            // 
-            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = Color.FromArgb(255, 109, 0);
-            label10.Location = new Point(41, 166);
-            label10.Name = "label10";
-            label10.Size = new Size(133, 30);
-            label10.TabIndex = 78;
-            label10.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // btnCreate
-            // 
-            btnCreate.BackColor = Color.FromArgb(255, 109, 0);
-            btnCreate.Enabled = false;
-            btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
-            btnCreate.FlatAppearance.BorderSize = 2;
-            btnCreate.FlatAppearance.MouseDownBackColor = Color.White;
-            btnCreate.FlatAppearance.MouseOverBackColor = Color.White;
-            btnCreate.FlatStyle = FlatStyle.Flat;
-            btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCreate.ForeColor = Color.White;
-            btnCreate.Location = new Point(1040, 60);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(200, 40);
-            btnCreate.TabIndex = 79;
-            btnCreate.Text = "Create";
-            btnCreate.UseVisualStyleBackColor = false;
-            // 
             // RatingsManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -510,6 +553,7 @@
             Controls.Add(panelCourses);
             FormBorderStyle = FormBorderStyle.None;
             Name = "RatingsManagementForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RatingsManagementForm";
             panelCourses.ResumeLayout(false);
             panelCourses.PerformLayout();
@@ -521,13 +565,13 @@
 
         private Label valueCourseID;
         private Label valueStudentID;
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Label label23;
         private Button btnRefresh;
         private Button btnSearch;
         private Button btnDelete;
         private Button btnUpdate;
-        private Button btnClearAll;
+        private Button btnClear;
         private Label valueRatingID;
         private TextBox inputCourseName;
         private Label label18;
@@ -550,7 +594,9 @@
         private Label label8;
         private Label label9;
         private DataGridView DGVRating;
-        private Label label10;
+        private Label valueRating;
         private Button btnCreate;
+        private Label labelCourseName;
+        private Label labelStudentName;
     }
 }
