@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data.SqlClient;
 using FPTU_OnlineCoursesSystem.DBInteraction;
 using FPTU_OnlineCoursesSystem.UIInteraction;
 using FPTU_OnlineCoursesSystem.Variables;
@@ -72,7 +63,7 @@ namespace FPTU_OnlineCoursesSystem
             }
         }
 
-        private void UpdateCourseCount(Label number, string action, string successMessage, string errorMessage)
+        private void UpdateCourseCount(Label number, string action)
         {
             if (int.TryParse(number.Text, out int currentNumberCourses))
             {
@@ -80,10 +71,6 @@ namespace FPTU_OnlineCoursesSystem
 
                 number.Text = (++currentNumberCourses).ToString();
                 number.Visible = true;
-            }
-            else
-            {
-                Helpers.ShowError(errorMessage);
             }
         }
 
@@ -190,18 +177,15 @@ namespace FPTU_OnlineCoursesSystem
         private void btnEnroll_Click(object sender, EventArgs e)
         {
             Label numberEnrolled = numberEnrollment;
-            UpdateCourseCount(numberEnrolled, "enrolled", "Enrolled successfully!", "Invalid number of courses enrolled.");
+            UpdateCourseCount(numberEnrolled, "enrolled");
         }
 
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
             Label numberCartAdded = numberCart;
-            UpdateCourseCount(numberCartAdded, "added to cart", "Added to cart successfully!", "Invalid number of courses in the cart.");
+            UpdateCourseCount(numberCartAdded, "added to cart");
         }
 
         #endregion
-
-
-
     }
 }
