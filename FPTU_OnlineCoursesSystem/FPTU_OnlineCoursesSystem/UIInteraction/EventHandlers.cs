@@ -57,7 +57,7 @@
 
     public static class CellClick
     {
-        public static void DGVCellClick(object sender, DataGridViewCellEventArgs e, Control[] controls, string[] columnNames, Button btnUpdate, Button btnDelete)
+        public static void DGVCellClick(object sender, DataGridViewCellEventArgs e, Control[] controls, string[] columnNames, Button btnST, Button btnND)
         {
             if (e.RowIndex >= 0)
             {
@@ -65,9 +65,8 @@
 
                 if (row != null)
                 {
-                    // Enable the "Update" and "Delete" buttons
-                    btnUpdate.Enabled = true;
-                    btnDelete.Enabled = true;
+                    btnST.Enabled = true;
+                    btnND.Enabled = true;
 
                     for (int i = 0; i < controls.Length; i++)
                     {
@@ -92,9 +91,8 @@
             }
             else
             {
-                // If no row is selected, disable the "Update" and "Delete" buttons
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
+                btnST.Enabled = false;
+                btnND.Enabled = false;
             }
         }
     }

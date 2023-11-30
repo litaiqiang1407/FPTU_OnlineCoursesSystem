@@ -17,7 +17,8 @@ namespace FPTU_OnlineCoursesSystem
             dynamicColumnFiltering();
             attachFilterEventHandlers();
             getNextID();
-            inputControls = new Control[] { valueID, inputName, inputGender, inputEmail, inputPhone, inputBirthdate, valueEnrollments };
+            inputControls = new Control[] { valueID, inputName, inputGender, 
+                inputEmail, inputPhone, inputBirthdate, valueEnrollments };
         }
 
         #region Variables
@@ -99,8 +100,8 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateName()
         {
             return Validator.ValidateField(inputName, labelName,
-                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, "Student's name" + ValidationMessages.InvalidText,
-                true);
+                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, 
+                ValidationMessages.InvalidText, true);
         }
 
         private bool validateEmail()
@@ -185,6 +186,7 @@ namespace FPTU_OnlineCoursesSystem
 
         #endregion
 
+        #region EventHandlers
         private void DGVStudent_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             CellClick.DGVCellClick(sender, e, inputControls, StudentVariables.columnNames, btnUpdate, btnDelete);
@@ -194,7 +196,6 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateAllFields())
             {
-                Helpers.ShowError("Please check student's information again.");
                 return;
             }
 
@@ -208,7 +209,6 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateAllFields())
             {
-                Helpers.ShowError("Please check student's information again.");
                 return;
             }
 
@@ -262,5 +262,7 @@ namespace FPTU_OnlineCoursesSystem
         {
             clearAllInputs();
         }
+
+        #endregion
     }
 }

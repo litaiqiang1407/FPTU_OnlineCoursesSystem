@@ -77,5 +77,29 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
                 }
             }
         }
+
+        // Method to execute a query and return the first column of the first row
+        public static object ExecuteScalar(string query, SqlParameter[] parameters)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var parameter in parameters)
+                        {
+                            parameter.Value = parameter.Value ?? DBNull.Value;
+                            command.Parameters.Add(parameter);
+                        }
+                    }
+
+                    return command.ExecuteScalar();
+                }
+            }
+        }
+
     }
 }

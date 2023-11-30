@@ -6,35 +6,26 @@ namespace FPTU_OnlineCoursesSystem.UIInteraction
 {
     public static class Helpers
     {
+        // Method to get the next ID of a table
         public static string GetNextID(string tableName)
         {
-            int nextID = 1;
-
             try
             {
-                string query = $"SELECT MAX({tableName}ID) FROM {tableName}";
-                DataTable resultTable = DBConnection.ExecuteQuery(query, null);
+                string query = $"SELECT IDENT_CURRENT('{tableName}') + 1 AS NextID";
+                object result = DBConnection.ExecuteScalar(query, null);
 
-                if (resultTable.Rows.Count > 0)
-                {
-                    object result = resultTable.Rows[0][0];
+                int nextID = result != null ? Convert.ToInt32(result) : 1;
 
-                    if (result != null && result != DBNull.Value)
-                    {
-                        nextID = Convert.ToInt32(result) + 1;
-                    }
-                }
+                return nextID.ToString();
             }
             catch (Exception ex)
             {
                 ShowError(ex.Message);
+                return "1"; // Default to 1 in case of an exception
             }
-
-            string nextValueIDText = nextID.ToString();
-
-            return nextValueIDText;
         }
 
+        // Method to parse a date string to a DateTime object
         public static DateTime? ParseDate(string inputText)
         {
             if (DateTime.TryParseExact(inputText, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parseDate))
@@ -45,11 +36,13 @@ namespace FPTU_OnlineCoursesSystem.UIInteraction
             return null;
         }
 
+        // Method to show a message box with an error icon
         public static void ShowError(string message)
         {
             MessageBox.Show("Error: " + message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        // Method to show a message box with an information icon
         public static void ShowSuccess(string message)
         {
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

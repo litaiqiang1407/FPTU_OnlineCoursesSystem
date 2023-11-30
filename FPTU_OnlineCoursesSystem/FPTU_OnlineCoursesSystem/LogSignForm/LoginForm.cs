@@ -20,12 +20,22 @@ namespace FPTU_OnlineCoursesSystem
             setupButtonHoverEffects();
         }
 
-        #region Helper Methods
+        #region UIInteraction
 
         private void setupButtonHoverEffects()
         {
             ButtonHover.ApplyHoverEffects(new[] { btnLogin, btnSignup });
         }
+
+        private void toggleVisibilityBasedOnLabelPassword()
+        {
+            cbxRememberMe.Visible = !labelPassword.Visible;
+            labelForgotPassword.Visible = !labelPassword.Visible;
+        }
+
+        #endregion
+
+        #region Validation
 
         private bool validateEmail()
         {
@@ -41,12 +51,6 @@ namespace FPTU_OnlineCoursesSystem
                 ValidationMessages.InvalidPassword, true);
         }
 
-        private void toggleVisibilityBasedOnLabelPassword()
-        {
-            cbxRememberMe.Visible = !labelPassword.Visible;
-            labelForgotPassword.Visible = !labelPassword.Visible;
-        }
-
         private bool validateAllFields()
         {
             bool isEmailValid = validateEmail();
@@ -58,6 +62,10 @@ namespace FPTU_OnlineCoursesSystem
             );
         }
 
+        #endregion
+
+        #region Security
+
         // check if email is registered
         private bool isEmailRegistered(string email)
         {
@@ -67,28 +75,7 @@ namespace FPTU_OnlineCoursesSystem
         // Authenticate user
         private bool authenticateUser(string email, string password, string accountType)
         {
-            string tableName = (accountType == "admin") ? "AdminAccount" : "StudentAccount";
-
-            string getPasswordQuery = $"SELECT {tableName}PasswordHash FROM {tableName} WHERE {tableName}Email = @Email";
-            SqlParameter[] getPasswordParameters = { new SqlParameter("@Email", email) };
-
-            DataTable resultTable = DBConnection.ExecuteQuery(getPasswordQuery, getPasswordParameters);
-
-            // Check if password is correct
-            if (resultTable.Rows.Count > 0)
-            {
-                string storedHash = resultTable.Rows[0][$"{tableName}PasswordHash"].ToString();
-
-                if (BCrypt.Net.BCrypt.Verify(password, storedHash))
-                {
-                    return true;
-                }
-                else
-                {
-                    Helpers.ShowError("Incorrect password.");
-                }
-            }
-            return false;
+            return Security.AuthenticateUser(email, password, accountType);
         }
 
 

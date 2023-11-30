@@ -7,7 +7,6 @@ namespace FPTU_OnlineCoursesSystem
 {
     public partial class EnrollmentsManagementForm : Form
     {
-
         public EnrollmentsManagementForm()
         {
             InitializeComponent();
@@ -17,7 +16,8 @@ namespace FPTU_OnlineCoursesSystem
             dynamicColumnFiltering();
             attachFilterEventHandlers();
             getNextID();
-            inputControls = new Control[] { valueEnrollmentID, valueStudentID, inputStudentName, valueCourseID, inputCourseName, inputEnrollmentDate, inputEnrollmentStatus, inputPaymentStatus };
+            inputControls = new Control[] { valueEnrollmentID, valueStudentID, inputStudentName, 
+                valueCourseID, inputCourseName, inputEnrollmentDate, inputEnrollmentStatus, inputPaymentStatus };
         }
 
         #region Variables
@@ -86,22 +86,21 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateStudentName()
         {
             return Validator.ValidateField(inputStudentName, labelStudentName,
-                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, "Student's name" + ValidationMessages.InvalidText,
-                true);
+                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, 
+                ValidationMessages.InvalidText, true);
         }
 
         private bool validateCourseName()
         {
             return Validator.ValidateField(inputCourseName, labelCourseName,
-                "Course name" + ValidationMessages.RequiredField, Validator.IsValidText, "Course's name" + ValidationMessages.InvalidText,
-                true);
+                "Course name" + ValidationMessages.RequiredField, Validator.IsValidText, 
+                ValidationMessages.InvalidText, true);
         }
 
         private bool validateEnrollmentDate()
         {
             return Validator.ValidateField(inputEnrollmentDate, labelEnrollmentDate,
-                "", Validator.IsValidDate, ValidationMessages.InvalidDate,
-                false);
+                "", Validator.IsValidDate, ValidationMessages.InvalidDate, false);
         }
 
         private bool validateAllFields()
@@ -162,6 +161,7 @@ namespace FPTU_OnlineCoursesSystem
         #endregion
 
         #region EventHandlers
+
         private void DGVEnrollment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             CellClick.DGVCellClick(sender, e, inputControls, EnrollmentVariables.columnNames, btnUpdate, btnDelete);
@@ -171,7 +171,6 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateAllFields())
             {
-                Helpers.ShowError("Please check enrollment's information again.");
                 return;
             }
 

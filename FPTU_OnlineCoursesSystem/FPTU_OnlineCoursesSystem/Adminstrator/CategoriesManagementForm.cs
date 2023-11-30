@@ -18,10 +18,12 @@ namespace FPTU_OnlineCoursesSystem
         }
 
         #region Variables
+
         string tableName = CategoryVariables.tableName;
 
         Control[] inputControls;
 
+        // Input values for insert query
         private object[] inputInsertValues()
         {
             string name = inputName.Text;
@@ -30,6 +32,7 @@ namespace FPTU_OnlineCoursesSystem
             return new object[] { name, description };
         }
 
+        // Input values for update query
         private object[] inputUpdateValues()
         {
             string ID = valueID.Text;
@@ -42,12 +45,14 @@ namespace FPTU_OnlineCoursesSystem
         #endregion
 
         #region UIInteractions
+
         // Get the next available valueID
         private void getNextID()
         {
             valueID.Text = Helpers.GetNextID(tableName);
         }
 
+        // Setup hover effects for buttons
         private void setupButtonHoverEffects()
         {
             ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete });
@@ -59,11 +64,13 @@ namespace FPTU_OnlineCoursesSystem
                 Path.Combine(Images.BaseImagePath, Images.HoverSearchIconPath));
         }
 
+        // Clear all input fields
         private void clearAllInputs()
         {
             ButtonClick.ClearAllInputs(tableName, inputControls);
         }
 
+        // Clear all input fields and reload data
         private void clearAndLoad()
         {
             clearAllInputs();
@@ -74,31 +81,36 @@ namespace FPTU_OnlineCoursesSystem
 
         #region Validation
 
+        // Validate category name
         private bool validateName()
         {
             return Validator.ValidateField(inputName, labelName,
-                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, "Student's name" + ValidationMessages.InvalidText,
+                "Catgory name" + ValidationMessages.RequiredField, Validator.IsValidText, ValidationMessages.InvalidText,
                 true);
         }
         #endregion
 
         #region CRUD
+
         // Load category data into DataGridView
         private void viewData()
         {
             CRUD.ViewData(DGVCategory, CategoryQueryString.dataQuery);
         }
 
+        // Insert category data
         private void insertCategoryData(object[] inputInsertValue)
         {
             CRUD.InsertData(CategoryQueryString.insertQuery, CategoryVariables.paramaters, inputInsertValue);
         }
 
-        private void updateCAtegoryData(object[] inputUpdateValue)
+        // Update category data
+        private void updateCategoryData(object[] inputUpdateValue)
         {
             CRUD.UpdateData(CategoryQueryString.updateQuery, CategoryVariables.fullParamaters, inputUpdateValue);
         }
 
+        // Delete category data
         private void deleteCategoryData(int ID)
         {
             CRUD.DeleteData(tableName, ID);
@@ -107,6 +119,8 @@ namespace FPTU_OnlineCoursesSystem
         #endregion
 
         #region Searching
+
+        // Search category data
         private void searchData(string searchValue)
         {
             Searching.SearchData(DGVCategory, CategoryQueryString.searchQuery, searchValue);
@@ -115,6 +129,8 @@ namespace FPTU_OnlineCoursesSystem
         #endregion
 
         #region Event Handlers
+
+        // Load data into input fields when a row is clicked
         private void DGVCategory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             CellClick.DGVCellClick(sender, e, inputControls, CategoryVariables.columnNames, btnUpdate, btnDelete);
@@ -124,7 +140,6 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateName())
             {
-                Helpers.ShowError("Please check category's information again.");
                 return;
             }
 
@@ -138,13 +153,11 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateName())
             {
-                Helpers.ShowError("Please check category's information again.");
                 return;
             }
 
-            updateCAtegoryData(inputUpdateValues());
+            updateCategoryData(inputUpdateValues());
             Helpers.ShowSuccess("Category updated successfully.");
-
             clearAndLoad();
         }
 
@@ -155,9 +168,6 @@ namespace FPTU_OnlineCoursesSystem
             Helpers.ShowSuccess("Category deleted successfully.");
             clearAndLoad();
         }
-
-        #endregion
-
 
         private void inputSearch_TextChanged(object sender, EventArgs e)
         {
@@ -175,6 +185,7 @@ namespace FPTU_OnlineCoursesSystem
             viewData();
         }
 
+        #endregion
 
     }
 }

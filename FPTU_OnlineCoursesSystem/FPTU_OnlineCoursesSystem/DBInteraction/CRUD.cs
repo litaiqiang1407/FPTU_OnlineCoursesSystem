@@ -24,11 +24,41 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
                 {
                     dataGridView.DataSource = null;
                 }
+
+               
             }
             catch (Exception ex)
             {
                 Helpers.ShowError("View data - " + ex.Message);
             }
+        }
+
+        public static string GetSingleValue(string queryString, SqlParameter[] parameters = null, string columnName = "")
+        {
+            try
+            {
+                // Execute the query using DBConnection class
+                DataTable result = DBConnection.ExecuteQuery(queryString, parameters);
+
+                if (result.Rows.Count > 0)
+                {
+                    if (!string.IsNullOrEmpty(columnName) && result.Columns.Contains(columnName))
+                    {
+                        return result.Rows[0][columnName].ToString();
+                    }
+                    else
+                    {
+                        // If no specific column name provided, return the first column of the first row
+                        return result.Rows[0][0].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helpers.ShowError("Get single value - " + ex.Message);
+            }
+
+            return string.Empty;
         }
 
         // Method to check if a value already exists in a table insert a new record if it doesn't

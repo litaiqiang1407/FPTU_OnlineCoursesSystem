@@ -104,7 +104,8 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateName()
         {
             return Validator.ValidateField(inputName, labelName,
-                "Instructor name" + ValidationMessages.RequiredField, Validator.IsValidText, "Instructor's name" + ValidationMessages.InvalidText,
+                "Instructor name" + ValidationMessages.RequiredField, 
+                Validator.IsValidText, ValidationMessages.InvalidText,
                 true);
         }
 
@@ -118,7 +119,7 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateSpecialization()
         {
             return Validator.ValidateField(inputSpecialization, labelSpecialization,
-                "", Validator.IsValidText, "Specialization" + ValidationMessages.InvalidText,
+                "", Validator.IsValidText, ValidationMessages.InvalidText,
                 false);
         }
 
@@ -197,11 +198,11 @@ namespace FPTU_OnlineCoursesSystem
         #endregion
 
         #region EventHandlers
+
         private void btnCreate_Click(object sender, EventArgs e)
         {
             if (!validateAllFields())
             {
-                Helpers.ShowError("Please check instructor's information again.");
                 return;
             }
 
@@ -215,7 +216,6 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateAllFields())
             {
-                Helpers.ShowError("Please check instructor's information again.");
                 return;
             }
 

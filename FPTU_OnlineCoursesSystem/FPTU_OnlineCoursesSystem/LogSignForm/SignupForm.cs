@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using FPTU_OnlineCoursesSystem.DBInteraction;
+﻿using FPTU_OnlineCoursesSystem.DBInteraction;
 using FPTU_OnlineCoursesSystem.DataValidator;
 using FPTU_OnlineCoursesSystem.UIInteraction;
 using FPTU_OnlineCoursesSystem.Variables;
@@ -17,7 +16,7 @@ namespace FPTU_OnlineCoursesSystem
             setupButtonHoverEffects();
         }
 
-        #region Helper
+        #region InputValues
 
         private string getSelectedGender()
         {
@@ -74,7 +73,7 @@ namespace FPTU_OnlineCoursesSystem
         {
             return Validator.ValidateField(inputName, labelNameRequired,
                 "Full Name" + ValidationMessages.RequiredField, Validator.IsValidText,
-                "Full Name" + ValidationMessages.InvalidText, true);
+                ValidationMessages.InvalidText, true);
         }
 
         // Function to validate the email field
@@ -132,7 +131,7 @@ namespace FPTU_OnlineCoursesSystem
         // Function to check if the email is already registered
         private bool isEmailRegistered(string email)
         {
-         return Security.EmailRegistered("signup", email);
+            return Security.EmailRegistered("signup", email);
         }
 
         // Function to hash the password

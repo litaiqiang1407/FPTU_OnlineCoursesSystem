@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FPTU_OnlineCoursesSystem.DBInteraction;
 using FPTU_OnlineCoursesSystem.UIInteraction;
+using FPTU_OnlineCoursesSystem.Variables;
 
 namespace FPTU_OnlineCoursesSystem
 {
@@ -18,166 +19,189 @@ namespace FPTU_OnlineCoursesSystem
         public StudentForm()
         {
             InitializeComponent();
-            LoadCoursesListData();
+            initializeFilterComboBoxes();
+            dynamicColumnFiltering();
+            viewListCourses();
+            setButtonHoverEffect();
+            attachFilterEventHandlers();
+            displayNumber();
+            informationControls = new Control[] { infoName, infoCategory, infoInstructor, infoEnrollment, infoRating, infoDate, infoDuration, infoPrice };
+        }
+        #region Variables
+
+        Control[] informationControls;
+        ComboBox[] filterComboBoxes;
+
+        private void initializeFilterComboBoxes()
+        {
+            filterComboBoxes = new ComboBox[] { filterCategory, filterInstructor, filterRating, filterPrice };
         }
 
-        // Load list courses data into DataGridView
-        private void LoadCoursesListData()
+        #endregion
+
+        #region UIInteraction
+
+        private void setButtonHoverEffect()
         {
-            try
-            {
-                // Query to retrieve course data
-                string coursesListQuery = "SELECT " +
-                                          "Course.CourseName AS 'Course', " +
-                                          "Category.CategoryName AS 'Category', " +
-                                          "Instructor.InstructorName AS 'Instructor', " +
-                                          "Course.NumberOfEnrollments AS 'Enrollments', " +
-                                          "Course.RatingValue AS 'Rating', " +
-                                          "CONVERT(VARCHAR, Course.CreationDate, 103) AS 'Date', " +
-                                          "Course.Duration, " +
-                                          "FORMAT(Course.CoursePrice, 'C') AS 'Price($)' " +
-                                          "FROM Course " +
-                                          "INNER JOIN Category  ON Course.CategoryID = Category.CategoryID " +
-                                          "INNER JOIN Instructor  ON Course.InstructorID = Instructor.InstructorID";
+            ButtonHover.ApplyHoverEffect(btnEnroll);
+            ButtonHover.ApplyHoverEffect(btnAddToCart, null, null, true);
 
-                // Use DBConnection to execute the query and get the result as a DataTable
-                DataTable dataTable = DBConnection.ExecuteQuery(coursesListQuery, null);
+            ButtonHover.ApplyHoverEffect(btnRefresh, Path.Combine(Images.BaseImagePath, Images.RefreshIconPath),
+                Path.Combine(Images.BaseImagePath, Images.HoverRefreshIconPath));
 
-                // Set the DataTable as the DataSource for DataGridView
-                DGVCoursesList.DataSource = dataTable;
-            }
-            catch (Exception ex)
-            {
-                Helpers.ShowError(ex.Message);
-            }
-        }       
-
-        private string GetCourseDescription(string courseName)
-        {
-            string description = string.Empty;
-
-            try
-            {
-                string query = "SELECT CourseDescription FROM Course WHERE CourseName = @CourseName";
-                SqlParameter[] parameters = { new SqlParameter("@CourseName", courseName) };
-
-                // Use DBConnection to execute the query and get the result as a DataTable
-                DataTable result = DBConnection.ExecuteQuery(query, parameters);
-
-                // Check if there are any rows returned
-                if (result.Rows.Count > 0)
-                {
-                    // Assuming 'CourseDescription' is a string column, retrieve the value
-                    description = result.Rows[0]["CourseDescription"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                Helpers.ShowError(ex.Message);
-            }
-            return description;
+            ButtonHover.ApplyHoverEffect(btnSearch, Path.Combine(Images.BaseImagePath, Images.SearchIconPath),
+                Path.Combine(Images.BaseImagePath, Images.HoverSearchIconPath));
         }
-
-        private void LoadReviewsForCourse(string courseName)
-        {
-            try
-            {
-                // Query to retrieve reviews for the selected course
-                string query = "SELECT Student.StudentName AS 'Student', " +
-                                "Rating.RatingValue AS 'Rating', " +
-                                "Rating.Review AS 'Content' " +
-                                "FROM Rating " +
-                                "INNER JOIN Student ON Rating.StudentID = Student.StudentID " +
-                                "INNER JOIN Course ON Rating.CourseID = Course.CourseID " +
-                                "WHERE Course.CourseName = @CourseName";
-
-                SqlParameter[] parameters = { new SqlParameter("@CourseName", courseName) };
-
-                // Use DBConnection to execute the query and get the result as a DataTable
-                DataTable dataTable = DBConnection.ExecuteQuery(query, parameters);
-
-                // Bind the review data to DGVReviewList
-                DGVCourseReview.DataSource = dataTable;
-            }
-            catch (Exception ex)
-            {
-                Helpers.ShowError(ex.Message);
-            }
-        }
-
-        private void PerformSearch(string searchValue)
-        {
-            try
-            {
-                // Query to retrieve course data
-                string searchQuery = "SELECT " +
-                                     "Course.CourseName AS 'Course', " +
-                                     "Category.CategoryName AS 'Category', " +
-                                     "Instructor.InstructorName AS 'Instructor', " +
-                                     "Course.NumberOfEnrollments AS 'Enrollments', " +
-                                     "Course.RatingValue AS 'Rating', " +
-                                     "CONVERT(VARCHAR, Course.CreationDate, 103) AS 'Date', " +
-                                     "Course.Duration, " +
-                                     "FORMAT(Course.CoursePrice, 'C') AS 'Price($)' " +
-                                     "FROM Course " +
-                                     "INNER JOIN Category ON Course.CategoryID = Category.CategoryID " +
-                                     "INNER JOIN Instructor ON Course.InstructorID = Instructor.InstructorID " +
-                                     "WHERE Course.CourseName LIKE @SearchValue";
-
-                SqlParameter[] parameters = { new SqlParameter("@SearchValue", "%" + searchValue + "%") };
-
-                // Use DBConnection to execute the query and get the result as a DataTable
-                DataTable dataTable = DBConnection.ExecuteQuery(searchQuery, parameters);
-
-                // Set the DataTable as the DataSource for your DataGridView
-                DGVCoursesList.DataSource = dataTable;
-            }
-            catch (Exception ex)
-            {
-                Helpers.ShowError(ex.Message);
-            }
-        }
-       
-        private void inputSearchValue_TextChanged(object sender, EventArgs e)
-        {
-            PerformSearch(inputSearchValue.Text);
-        }
-
-        private void DGVCoursesList_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void hideInformationImage()
         {
             courseInformationFrame.Image = null;
             courseInformationFrame.Enabled = false;
             courseInformationFrame.SendToBack();
+        }
+
+        private void displayNumber()
+        {
+            if (numberCart.Text != "0")
+            {
+                numberCart.Visible = true;
+            }
+
+            if (numberEnrollment.Text != "0")
+            {
+                numberEnrollment.Visible = true;
+            }
+        }
+
+        private void UpdateCourseCount(Label number, string action, string successMessage, string errorMessage)
+        {
+            if (int.TryParse(number.Text, out int currentNumberCourses))
+            {
+                Helpers.ShowSuccess($"{infoName.Text} {action} successfully!");
+
+                number.Text = (++currentNumberCourses).ToString();
+                number.Visible = true;
+            }
+            else
+            {
+                Helpers.ShowError(errorMessage);
+            }
+        }
+
+        #endregion
+
+        #region DatabaseInteraction
+        private void viewListCourses()
+        {
+            CRUD.ViewData(DGVCoursesList, StudentFormQueryString.courseDataQuery);
+        }
+
+        private string courseDescription(string courseName)
+        {
+            SqlParameter[] parameters = { new SqlParameter("@CourseName", courseName) };
+
+            return CRUD.GetSingleValue(StudentFormQueryString.courseDescriptionQuery, parameters, "CourseDescription");
+        }
+
+
+        private void courseReviews(string courseName)
+        {
+            SqlParameter[] parameters = { new SqlParameter("@CourseName", courseName) };
+
+            CRUD.ViewData(DGVCourseReview, StudentFormQueryString.courseReviewQuery, parameters);
+        }
+
+        #endregion
+
+        #region Searching
+        private void searchData(string searchValue)
+        {
+            Searching.SearchData(DGVCoursesList, StudentFormQueryString.searchQuery, searchValue);
+        }
+
+        private void dynamicColumnFiltering()
+        {
+            Searching.DynamicColumnFiltering(filterComboBoxes, StudentFormQueryString.comboBoxesQuery, StudentFormVariables.columnFilters);
+        }
+
+        private void filterData()
+        {
+            string[] columnFloat = { "RatingValue", "CoursePrice" };
+            Searching.FilterData(DGVCoursesList, StudentFormQueryString.filterQuery, filterComboBoxes, StudentFormVariables.columnFilters, columnFloat);
+        }
+
+        #endregion
+
+        #region EventHandlers
+        private void inputSearchValue_TextChanged(object sender, EventArgs e)
+        {
+            searchData(inputSearch.Text);
+        }
+
+        private void DGVCoursesList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            hideInformationImage();
+
+            // Call the common method to handle cell click
+            CellClick.DGVCellClick(sender, e, informationControls, StudentFormVariables.columnNames, btnEnroll, btnAddToCart);
+
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = DGVCoursesList.Rows[e.RowIndex];
 
                 if (row != null)
                 {
-                    infoName.Text = row.Cells["Course"].Value.ToString();
-                    infoCategory.Text = row.Cells["Category"].Value.ToString();
-                    infoInstructor.Text = row.Cells["Instructor"].Value.ToString();
-                    infoEnrollment.Text = row.Cells["Enrollments"].Value.ToString();
-                    infoRating.Text = row.Cells["Rating"].Value.ToString();
-                    infoDate.Text = row.Cells["Date"].Value.ToString();
-                    infoDuration.Text = row.Cells["Duration"].Value.ToString();
-                    infoPrice.Text = row.Cells["Price($)"].Value.ToString();
-
                     // Retrieve and display the course description
                     string courseName = row.Cells["Course"].Value.ToString();
-                    string courseDescription = GetCourseDescription(courseName);
-                    infoDescription.Text = courseDescription;
+                    infoDescription.Text = courseDescription(courseName);
 
                     // Load reviews for the selected course
-                    LoadReviewsForCourse(courseName);
+                    courseReviews(courseName);
                 }
             }
+        }
+
+        // Filter data
+        private void attachFilterEventHandlers()
+        {
+            foreach (var comboBox in filterComboBoxes)
+            {
+                comboBox.SelectedIndexChanged += FilterComboboxes_SelectedIndexChanged;
+            }
+        }
+
+        // Filter data
+        private void FilterComboboxes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filterData();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            inputSearch.Text = string.Empty;
+            ButtonClick.RefreshComboboxes(filterComboBoxes);
+            viewListCourses();
+        }
+
+        private void btnEnroll_Click(object sender, EventArgs e)
+        {
+            Label numberEnrolled = numberEnrollment;
+            UpdateCourseCount(numberEnrolled, "enrolled", "Enrolled successfully!", "Invalid number of courses enrolled.");
+        }
+
+        private void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            Label numberCartAdded = numberCart;
+            UpdateCourseCount(numberCartAdded, "added to cart", "Added to cart successfully!", "Invalid number of courses in the cart.");
+        }
+
+        #endregion
+
+
 
     }
 }

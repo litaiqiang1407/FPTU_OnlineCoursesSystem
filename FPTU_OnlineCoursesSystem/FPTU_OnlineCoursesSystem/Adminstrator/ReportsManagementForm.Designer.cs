@@ -46,7 +46,7 @@
             label6 = new Label();
             timeLabel = new Label();
             label3 = new Label();
-            topRevenueCourses = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            topRevenueChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             DGVCategoryList = new DataGridView();
             oo = new Label();
             valueTotalRevenue = new Button();
@@ -58,7 +58,7 @@
             label14 = new Label();
             categoryRevenueChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             panelCourses.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)topRevenueCourses).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)topRevenueChart).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGVCategoryList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categoryRevenueChart).BeginInit();
             SuspendLayout();
@@ -96,7 +96,7 @@
             panelCourses.Controls.Add(label6);
             panelCourses.Controls.Add(timeLabel);
             panelCourses.Controls.Add(label3);
-            panelCourses.Controls.Add(topRevenueCourses);
+            panelCourses.Controls.Add(topRevenueChart);
             panelCourses.Controls.Add(DGVCategoryList);
             panelCourses.Controls.Add(oo);
             panelCourses.Controls.Add(valueTotalRevenue);
@@ -162,28 +162,33 @@
             label3.Size = new Size(215, 32);
             label3.TabIndex = 84;
             // 
-            // topRevenueCourses
+            // topRevenueChart
             // 
-            topRevenueCourses.BorderlineColor = Color.FromArgb(255, 109, 0);
-            topRevenueCourses.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            topRevenueCourses.BorderlineWidth = 2;
+            topRevenueChart.BorderlineColor = Color.FromArgb(255, 109, 0);
+            topRevenueChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            topRevenueChart.BorderlineWidth = 2;
+            chartArea1.AxisX.LabelAutoFitMaxFontSize = 8;
+            chartArea1.AxisX.MajorGrid.LineWidth = 0;
             chartArea1.AxisX.TitleFont = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             chartArea1.AxisX.TitleForeColor = Color.FromArgb(255, 109, 0);
             chartArea1.AxisX2.LineWidth = 0;
             chartArea1.AxisX2.TitleFont = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea1.AxisY.MajorGrid.LineWidth = 0;
             chartArea1.AxisY.TitleFont = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             chartArea1.AxisY.TitleForeColor = Color.FromArgb(255, 109, 0);
+            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
             chartArea1.Name = "ChartArea1";
-            topRevenueCourses.ChartAreas.Add(chartArea1);
+            topRevenueChart.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
             legend1.HeaderSeparatorColor = Color.Transparent;
             legend1.ItemColumnSeparatorColor = Color.Transparent;
             legend1.Name = "Legend1";
-            topRevenueCourses.Legends.Add(legend1);
-            topRevenueCourses.Location = new Point(650, 60);
-            topRevenueCourses.Name = "topRevenueCourses";
-            topRevenueCourses.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            topRevenueCourses.PaletteCustomColors = new Color[]
+            topRevenueChart.Legends.Add(legend1);
+            topRevenueChart.Location = new Point(650, 60);
+            topRevenueChart.Name = "topRevenueChart";
+            topRevenueChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            topRevenueChart.PaletteCustomColors = new Color[]
     {
     Color.FromArgb(255, 138, 51)
     };
@@ -191,16 +196,16 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
             series1.IsXValueIndexed = true;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            topRevenueCourses.Series.Add(series1);
-            topRevenueCourses.Size = new Size(590, 360);
-            topRevenueCourses.TabIndex = 83;
-            topRevenueCourses.Text = "chart1";
+            series1.Name = "TopCoursesRevenue";
+            topRevenueChart.Series.Add(series1);
+            topRevenueChart.Size = new Size(590, 360);
+            topRevenueChart.TabIndex = 83;
+            topRevenueChart.Text = "chart1";
             title1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             title1.ForeColor = Color.FromArgb(255, 109, 0);
             title1.Name = "Title1";
             title1.Text = "Top Courses";
-            topRevenueCourses.Titles.Add(title1);
+            topRevenueChart.Titles.Add(title1);
             // 
             // DGVCategoryList
             // 
@@ -333,9 +338,13 @@
             categoryRevenueChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             categoryRevenueChart.BorderlineWidth = 2;
             chartArea2.AxisX.LineWidth = 2;
+            chartArea2.AxisX.Maximum = 12D;
+            chartArea2.AxisX.Minimum = 1D;
+            chartArea2.AxisX.Title = "Month";
             chartArea2.AxisX.TitleFont = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             chartArea2.AxisX.TitleForeColor = Color.FromArgb(255, 109, 0);
             chartArea2.AxisY.LineWidth = 2;
+            chartArea2.AxisY.Title = "Revenue";
             chartArea2.AxisY.TitleFont = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             chartArea2.AxisY.TitleForeColor = Color.FromArgb(255, 109, 0);
             chartArea2.AxisY2.LineWidth = 2;
@@ -344,7 +353,9 @@
             chartArea2.BorderWidth = 4;
             chartArea2.Name = "ChartArea1";
             categoryRevenueChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
+            legend2.DockedToChartArea = "ChartArea1";
+            legend2.IsDockedInsideChartArea = false;
+            legend2.Name = "Legend";
             legend2.Title = "Categories Name";
             legend2.TitleFont = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             legend2.TitleForeColor = Color.FromArgb(255, 109, 0);
@@ -352,10 +363,11 @@
             categoryRevenueChart.Location = new Point(20, 440);
             categoryRevenueChart.Name = "categoryRevenueChart";
             series2.BorderColor = Color.FromArgb(255, 109, 0);
+            series2.BorderWidth = 2;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
-            series2.Legend = "Legend1";
+            series2.Legend = "Legend";
             series2.MarkerBorderWidth = 2;
             series2.Name = " ";
             series2.XValueMember = "Month";
@@ -383,7 +395,7 @@
             Text = "ReportsManagementForm";
             panelCourses.ResumeLayout(false);
             panelCourses.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)topRevenueCourses).EndInit();
+            ((System.ComponentModel.ISupportInitialize)topRevenueChart).EndInit();
             ((System.ComponentModel.ISupportInitialize)DGVCategoryList).EndInit();
             ((System.ComponentModel.ISupportInitialize)categoryRevenueChart).EndInit();
             ResumeLayout(false);
@@ -403,7 +415,7 @@
         private Button valueTotalRevenue;
         private Label label4;
         private DataGridView DGVCategoryList;
-        private System.Windows.Forms.DataVisualization.Charting.Chart topRevenueCourses;
+        private System.Windows.Forms.DataVisualization.Charting.Chart topRevenueChart;
         private Label label6;
         private Label timeLabel;
         private Label label3;

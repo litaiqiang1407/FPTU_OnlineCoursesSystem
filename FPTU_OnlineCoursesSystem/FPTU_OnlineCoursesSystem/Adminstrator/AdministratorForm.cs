@@ -5,8 +5,10 @@ namespace FPTU_OnlineCoursesSystem
 {
     public partial class AdministratorForm : Form
     {
-        
+        // Active form
         private Form activeForm = null;
+
+        // Last clicked button
         private Button lastClickedButton;
 
         public AdministratorForm()
@@ -16,6 +18,7 @@ namespace FPTU_OnlineCoursesSystem
             InitializeButtons();
         }
 
+        // Initialize buttons
         private void InitializeButtons()
         {
             btnInstructors.Click += Button_Click;
@@ -58,6 +61,8 @@ namespace FPTU_OnlineCoursesSystem
             }
         }
 
+        #region Effect
+
         // Hover effect for buttons
         private void hoverEffect(Button button, string imagePath)
         {
@@ -69,6 +74,14 @@ namespace FPTU_OnlineCoursesSystem
                     button.Text = button.AccessibleName;
                     button.BackgroundImage = null;
                 }
+                else
+                {
+                    button.Text = button.AccessibleName;
+                    button.BackgroundImage = null;
+                    button.ForeColor = Color.White;
+                    button.BackColor = Color.FromArgb(255, 72, 0);
+                }
+               
             };
 
             // Event handler for mouse leaving the button area
@@ -78,6 +91,10 @@ namespace FPTU_OnlineCoursesSystem
                 {
                     button.BackgroundImage = Image.FromFile(imagePath);
                     button.Text = "";
+                }
+                else
+                {
+                    applyButtonEffect(button);
                 }
             };
         }
@@ -114,9 +131,13 @@ namespace FPTU_OnlineCoursesSystem
 
         }
 
+        #endregion
+
+        #region EventHandlers
         // Button click event handler
         private void Button_Click(object sender, EventArgs e)
         {
+            // Get clicked button
             Button clickedButton = (Button)sender;
 
             // If the clicked button is the same as the last clicked button, do nothing
@@ -131,13 +152,15 @@ namespace FPTU_OnlineCoursesSystem
             // Set last clicked button
             lastClickedButton = clickedButton;
 
+            // Open form for clicked button
             OpenFormForButton(clickedButton);
         }
 
         // Logout
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            Navigator.OpenChildForm(activeForm, new WelcomeForm(), panelMain);
+            Form welcomeForm = new WelcomeForm();
+            welcomeForm.Show();
         }
 
         // Exit application
@@ -146,6 +169,6 @@ namespace FPTU_OnlineCoursesSystem
             Application.Exit();
         }
 
-       
+        #endregion
     }
 }

@@ -13,12 +13,12 @@ namespace FPTU_OnlineCoursesSystem
         public CoursesManagementForm()
         {
             InitializeComponent();
-            getNextID();
-            viewData();
-            initializeFilterComboBoxes();                   
-            dynamicColumnFiltering();
-            attachFilterEventHandlers();
-            setButtonHoverEffects();          
+            getNextID(); // Fetch the next available ID for a new course
+            viewData(); // Load existing data into the DataGridView
+            initializeFilterComboBoxes(); // Initialize filter ComboBoxes for data filtering                
+            dynamicColumnFiltering(); // Set up dynamic column filtering based on filter ComboBox selections
+            attachFilterEventHandlers(); // Attach event handlers for filter ComboBox changes
+            setButtonHoverEffects(); //// Button hover effects     
             inputControls = new Control[] { valueID, inputName, inputCategory, inputInstructor, 
                 inputDescription, valueEnrollments, inputCreationDate, valueRating, inputPrice };
         }
@@ -35,6 +35,7 @@ namespace FPTU_OnlineCoursesSystem
                 filterCreationDate, filterRatingValue, filterPrice };
         }
 
+        // Parse date from the input date field
         private DateTime? parseDate()
         {
             return Helpers.ParseDate(inputCreationDate.Text);
@@ -75,6 +76,7 @@ namespace FPTU_OnlineCoursesSystem
             valueID.Text = Helpers.GetNextID(tableName);
         }
 
+        // Set hover effects for buttons
         private void setButtonHoverEffects()
         {
             ButtonHover.ApplyHoverEffects(new[] { btnCreate, btnUpdate, btnDelete, btnClear });
@@ -86,6 +88,7 @@ namespace FPTU_OnlineCoursesSystem
                 Path.Combine(Images.BaseImagePath, Images.HoverSearchIconPath));
         }
 
+        // Clear all inputs
         private void clearAllInputs()
         {
             ButtonClick.ClearAllInputs(tableName, inputControls);
@@ -102,13 +105,13 @@ namespace FPTU_OnlineCoursesSystem
 
         #region Validation
 
-        // Validate each field
         // Validate course name field
         private bool validateCourseName()
         {
+            // Use the Validator class to validate the 'Course Name' field
             return Validator.ValidateField(inputName, labelRequiredName, 
                 "Course Name" + ValidationMessages.RequiredField, 
-                Validator.IsValidText, "Course Name" + ValidationMessages.InvalidText, 
+                Validator.IsValidText, ValidationMessages.InvalidText, 
                 true);
         }
 
@@ -117,17 +120,14 @@ namespace FPTU_OnlineCoursesSystem
         {
             return Validator.ValidateField(inputInstructor, labelRequiredInstructor, 
                 "Instructor" + ValidationMessages.RequiredField, 
-                Validator.IsValidText, "Instructors" + ValidationMessages.InvalidText, 
-                true);
+                Validator.IsValidText, ValidationMessages.InvalidText, true);
         }
 
         // Validate category name field
         private bool validateCategoryName()
         {
             return Validator.ValidateField(inputCategory, labelRequiredCategory, 
-                "Category" + ValidationMessages.RequiredField, 
-                Validator.IsValidText, "Category" + ValidationMessages.InvalidText, 
-                true);
+                "", Validator.IsValidText, ValidationMessages.InvalidText, false);
         }
 
         // Validate creation date field
@@ -147,6 +147,7 @@ namespace FPTU_OnlineCoursesSystem
         // Validate all fields
         private bool validateAllFields()
         {
+            // Validate each individual field and combine the results
             bool isValidCourseName = validateCourseName();
             bool isValidInstructorName = validateInstructorName();
             bool isValidCategoryName = validateCategoryName();
@@ -234,6 +235,7 @@ namespace FPTU_OnlineCoursesSystem
             searchData(inputSearch.Text);
         }
 
+        // Filter data
         private void attachFilterEventHandlers()
         {
             foreach (var comboBox in filterComboBoxes)

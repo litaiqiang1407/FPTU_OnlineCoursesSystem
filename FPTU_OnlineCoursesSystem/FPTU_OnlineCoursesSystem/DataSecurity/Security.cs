@@ -1,6 +1,7 @@
 ﻿using FPTU_OnlineCoursesSystem.UIInteraction;
 using FPTU_OnlineCoursesSystem.DBInteraction;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace FPTU_OnlineCoursesSystem.DataSecurity
 {
@@ -40,5 +41,30 @@ namespace FPTU_OnlineCoursesSystem.DataSecurity
             return false;
         }
 
+        public static bool AuthenticateUser(string email, string password, string accountType)
+        {
+            string tableName = (accountType == "admin") ? "AdminAccount" : "StudentAccount";
+
+            string getPasswordQuery = $"SELECT {tableName}PasswordHash FROM {tableName} WHERE {tableName}Email = @Email";
+            SqlParameter[] getPasswordParameters = { new SqlParameter("@Email", email) };
+
+            DataTable resultTable = DBConnection.ExecuteQuery(getPasswordQuery, getPasswordParameters);
+
+            // Check if password is correct
+            if (resultTable.Rows.Count > 0)
+            {
+                string storedHash = resultTable.Rows[0][$"{tableName}PasswordHash"].ToString();
+
+                if (BCrypt.Net.BCrypt.Verify(password, storedHash))
+                {
+                    return true;
+                }
+                else
+                {
+                    Helpers.ShowError("Incorrect password.");
+                }
+            }
+            return false;
+        }
     }
 }

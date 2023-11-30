@@ -71,15 +71,15 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateStudentName()
         {
             return Validator.ValidateField(inputStudentName, labelStudentName,
-                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, "Student's name" + ValidationMessages.InvalidText,
-                true);
+                "Student name" + ValidationMessages.RequiredField, Validator.IsValidText, 
+                ValidationMessages.InvalidText, true);
         }
 
         private bool validateCourseName()
         {
             return Validator.ValidateField(inputCourseName, labelCourseName,
-                "Course name" + ValidationMessages.RequiredField, Validator.IsValidText, "Course's name" + ValidationMessages.InvalidText,
-                true);
+                "Course name" + ValidationMessages.RequiredField, Validator.IsValidText, 
+                ValidationMessages.InvalidText, true);
         }
 
         private bool validateAllFields()
@@ -129,6 +129,7 @@ namespace FPTU_OnlineCoursesSystem
 
         #endregion
 
+        #region EventHandlers
         private void DGVRating_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             CellClick.DGVCellClick(sender, e, inputControls, RatingVariables.columnNames, btnUpdate, btnDelete);
@@ -138,12 +139,12 @@ namespace FPTU_OnlineCoursesSystem
         {
             if (!validateAllFields())
             {
-                Helpers.ShowError("Please check rating's information again.");
                 return;
             }
 
             upsertData();
             updateRatingData(inputUpdateValues());
+            Helpers.ShowError("Update rating successfully!");
 
             clearAndLoad();
         }
@@ -153,6 +154,7 @@ namespace FPTU_OnlineCoursesSystem
             int ratingID = int.Parse(valueRatingID.Text);
 
             deleteRatingData(ratingID);
+            Helpers.ShowError("Delete rating successfully!");
 
             clearAndLoad();
         }
@@ -179,5 +181,7 @@ namespace FPTU_OnlineCoursesSystem
             clearAllInputs();
 
         }
+
+        #endregion
     }
 }

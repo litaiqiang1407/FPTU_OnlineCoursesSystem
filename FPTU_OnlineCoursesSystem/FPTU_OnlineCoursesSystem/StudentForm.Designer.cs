@@ -79,15 +79,15 @@
             btnAddToCart = new Button();
             btnEnroll = new Button();
             label2 = new Label();
-            comboBox1 = new ComboBox();
+            filterPrice = new ComboBox();
             label12 = new Label();
-            comboBox2 = new ComboBox();
+            filterRating = new ComboBox();
             label20 = new Label();
-            comboBox4 = new ComboBox();
+            filterInstructor = new ComboBox();
             label27 = new Label();
-            comboBox3 = new ComboBox();
+            filterCategory = new ComboBox();
             label26 = new Label();
-            inputSearchValue = new TextBox();
+            inputSearch = new TextBox();
             label23 = new Label();
             btnRefresh = new Button();
             btnSearch = new Button();
@@ -257,15 +257,15 @@
             panelMain.Controls.Add(btcCart);
             panelMain.Controls.Add(button4);
             panelMain.Controls.Add(panel5);
-            panelMain.Controls.Add(comboBox1);
+            panelMain.Controls.Add(filterPrice);
             panelMain.Controls.Add(label12);
-            panelMain.Controls.Add(comboBox2);
+            panelMain.Controls.Add(filterRating);
             panelMain.Controls.Add(label20);
-            panelMain.Controls.Add(comboBox4);
+            panelMain.Controls.Add(filterInstructor);
             panelMain.Controls.Add(label27);
-            panelMain.Controls.Add(comboBox3);
+            panelMain.Controls.Add(filterCategory);
             panelMain.Controls.Add(label26);
-            panelMain.Controls.Add(inputSearchValue);
+            panelMain.Controls.Add(inputSearch);
             panelMain.Controls.Add(label23);
             panelMain.Controls.Add(btnRefresh);
             panelMain.Controls.Add(btnSearch);
@@ -285,6 +285,7 @@
             numberEnrollment.Name = "numberEnrollment";
             numberEnrollment.Size = new Size(24, 24);
             numberEnrollment.TabIndex = 94;
+            numberEnrollment.Text = "0";
             numberEnrollment.TextAlign = ContentAlignment.MiddleCenter;
             numberEnrollment.Visible = false;
             // 
@@ -294,10 +295,11 @@
             numberNotification.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             numberNotification.ForeColor = Color.FromArgb(255, 109, 0);
             numberNotification.Image = (Image)resources.GetObject("numberNotification.Image");
-            numberNotification.Location = new Point(897, 134);
+            numberNotification.Location = new Point(920, 134);
             numberNotification.Name = "numberNotification";
             numberNotification.Size = new Size(24, 24);
             numberNotification.TabIndex = 93;
+            numberNotification.Text = "0";
             numberNotification.TextAlign = ContentAlignment.MiddleCenter;
             numberNotification.Visible = false;
             // 
@@ -306,10 +308,12 @@
             btnEnrollment.BackgroundImage = (Image)resources.GetObject("btnEnrollment.BackgroundImage");
             btnEnrollment.BackgroundImageLayout = ImageLayout.Center;
             btnEnrollment.FlatAppearance.BorderSize = 0;
+            btnEnrollment.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btnEnrollment.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
             btnEnrollment.FlatStyle = FlatStyle.Flat;
-            btnEnrollment.Location = new Point(1060, 126);
+            btnEnrollment.Location = new Point(1008, 122);
             btnEnrollment.Name = "btnEnrollment";
-            btnEnrollment.Size = new Size(70, 70);
+            btnEnrollment.Size = new Size(174, 79);
             btnEnrollment.TabIndex = 92;
             btnEnrollment.UseVisualStyleBackColor = true;
             // 
@@ -354,10 +358,11 @@
             numberCart.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             numberCart.ForeColor = Color.FromArgb(255, 109, 0);
             numberCart.Image = (Image)resources.GetObject("numberCart.Image");
-            numberCart.Location = new Point(1302, 134);
+            numberCart.Location = new Point(1276, 134);
             numberCart.Name = "numberCart";
             numberCart.Size = new Size(24, 24);
             numberCart.TabIndex = 90;
+            numberCart.Text = "0";
             numberCart.TextAlign = ContentAlignment.MiddleCenter;
             numberCart.Visible = false;
             // 
@@ -366,10 +371,12 @@
             btnNotification.BackgroundImage = (Image)resources.GetObject("btnNotification.BackgroundImage");
             btnNotification.BackgroundImageLayout = ImageLayout.Center;
             btnNotification.FlatAppearance.BorderSize = 0;
+            btnNotification.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btnNotification.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
             btnNotification.FlatStyle = FlatStyle.Flat;
-            btnNotification.Location = new Point(860, 126);
+            btnNotification.Location = new Point(832, 122);
             btnNotification.Name = "btnNotification";
-            btnNotification.Size = new Size(70, 70);
+            btnNotification.Size = new Size(174, 79);
             btnNotification.TabIndex = 89;
             btnNotification.UseVisualStyleBackColor = true;
             // 
@@ -378,10 +385,12 @@
             btcCart.BackgroundImage = (Image)resources.GetObject("btcCart.BackgroundImage");
             btcCart.BackgroundImageLayout = ImageLayout.Center;
             btcCart.FlatAppearance.BorderSize = 0;
+            btcCart.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btcCart.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
             btcCart.FlatStyle = FlatStyle.Flat;
-            btcCart.Location = new Point(1260, 126);
+            btcCart.Location = new Point(1182, 122);
             btcCart.Name = "btcCart";
-            btcCart.Size = new Size(70, 70);
+            btcCart.Size = new Size(174, 79);
             btcCart.TabIndex = 88;
             btcCart.UseVisualStyleBackColor = true;
             // 
@@ -679,6 +688,8 @@
             btnAddToCart.BackColor = Color.White;
             btnAddToCart.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnAddToCart.FlatAppearance.BorderSize = 2;
+            btnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 109, 0);
+            btnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 109, 0);
             btnAddToCart.FlatStyle = FlatStyle.Flat;
             btnAddToCart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddToCart.ForeColor = Color.FromArgb(255, 109, 0);
@@ -688,12 +699,15 @@
             btnAddToCart.TabIndex = 56;
             btnAddToCart.Text = "Add to Cart";
             btnAddToCart.UseVisualStyleBackColor = false;
+            btnAddToCart.Click += btnAddToCart_Click;
             // 
             // btnEnroll
             // 
             btnEnroll.BackColor = Color.FromArgb(255, 109, 0);
             btnEnroll.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnEnroll.FlatAppearance.BorderSize = 2;
+            btnEnroll.FlatAppearance.MouseDownBackColor = Color.White;
+            btnEnroll.FlatAppearance.MouseOverBackColor = Color.White;
             btnEnroll.FlatStyle = FlatStyle.Flat;
             btnEnroll.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEnroll.ForeColor = Color.White;
@@ -703,6 +717,7 @@
             btnEnroll.TabIndex = 55;
             btnEnroll.Text = "Enroll";
             btnEnroll.UseVisualStyleBackColor = false;
+            btnEnroll.Click += btnEnroll_Click;
             // 
             // label2
             // 
@@ -717,16 +732,17 @@
             label2.Text = "Course Information";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // comboBox1
+            // filterPrice
             // 
-            comboBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            comboBox1.ForeColor = Color.FromArgb(255, 109, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(579, 171);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(158, 31);
-            comboBox1.TabIndex = 85;
-            comboBox1.Text = "Price";
+            filterPrice.AccessibleName = "Price";
+            filterPrice.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            filterPrice.ForeColor = Color.FromArgb(255, 109, 0);
+            filterPrice.FormattingEnabled = true;
+            filterPrice.Location = new Point(579, 171);
+            filterPrice.Name = "filterPrice";
+            filterPrice.Size = new Size(158, 31);
+            filterPrice.TabIndex = 85;
+            filterPrice.Text = "Price";
             // 
             // label12
             // 
@@ -737,16 +753,17 @@
             label12.Size = new Size(160, 33);
             label12.TabIndex = 86;
             // 
-            // comboBox2
+            // filterRating
             // 
-            comboBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            comboBox2.ForeColor = Color.FromArgb(255, 109, 0);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(393, 171);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(158, 31);
-            comboBox2.TabIndex = 83;
-            comboBox2.Text = "Rating Value";
+            filterRating.AccessibleName = "Rating Value";
+            filterRating.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            filterRating.ForeColor = Color.FromArgb(255, 109, 0);
+            filterRating.FormattingEnabled = true;
+            filterRating.Location = new Point(393, 171);
+            filterRating.Name = "filterRating";
+            filterRating.Size = new Size(158, 31);
+            filterRating.TabIndex = 83;
+            filterRating.Text = "Rating Value";
             // 
             // label20
             // 
@@ -757,16 +774,17 @@
             label20.Size = new Size(160, 33);
             label20.TabIndex = 84;
             // 
-            // comboBox4
+            // filterInstructor
             // 
-            comboBox4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            comboBox4.ForeColor = Color.FromArgb(255, 109, 0);
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(207, 171);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(158, 31);
-            comboBox4.TabIndex = 78;
-            comboBox4.Text = "Instructors";
+            filterInstructor.AccessibleName = "Instructors";
+            filterInstructor.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            filterInstructor.ForeColor = Color.FromArgb(255, 109, 0);
+            filterInstructor.FormattingEnabled = true;
+            filterInstructor.Location = new Point(207, 171);
+            filterInstructor.Name = "filterInstructor";
+            filterInstructor.Size = new Size(158, 31);
+            filterInstructor.TabIndex = 78;
+            filterInstructor.Text = "Instructors";
             // 
             // label27
             // 
@@ -777,16 +795,17 @@
             label27.Size = new Size(160, 33);
             label27.TabIndex = 79;
             // 
-            // comboBox3
+            // filterCategory
             // 
-            comboBox3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            comboBox3.ForeColor = Color.FromArgb(255, 109, 0);
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(21, 171);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(158, 31);
-            comboBox3.TabIndex = 76;
-            comboBox3.Text = "Categories";
+            filterCategory.AccessibleName = "Categories";
+            filterCategory.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            filterCategory.ForeColor = Color.FromArgb(255, 109, 0);
+            filterCategory.FormattingEnabled = true;
+            filterCategory.Location = new Point(21, 171);
+            filterCategory.Name = "filterCategory";
+            filterCategory.Size = new Size(158, 31);
+            filterCategory.TabIndex = 76;
+            filterCategory.Text = "Categories";
             // 
             // label26
             // 
@@ -797,15 +816,15 @@
             label26.Size = new Size(160, 33);
             label26.TabIndex = 77;
             // 
-            // inputSearchValue
+            // inputSearch
             // 
-            inputSearchValue.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            inputSearchValue.Location = new Point(21, 121);
-            inputSearchValue.Name = "inputSearchValue";
-            inputSearchValue.PlaceholderText = "Search for anything....";
-            inputSearchValue.Size = new Size(718, 30);
-            inputSearchValue.TabIndex = 72;
-            inputSearchValue.TextChanged += inputSearchValue_TextChanged;
+            inputSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            inputSearch.Location = new Point(21, 121);
+            inputSearch.Name = "inputSearch";
+            inputSearch.PlaceholderText = "Search for anything....";
+            inputSearch.Size = new Size(718, 30);
+            inputSearch.TabIndex = 72;
+            inputSearch.TextChanged += inputSearchValue_TextChanged;
             // 
             // label23
             // 
@@ -824,6 +843,8 @@
             btnRefresh.BackgroundImageLayout = ImageLayout.Center;
             btnRefresh.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnRefresh.FlatAppearance.BorderSize = 2;
+            btnRefresh.FlatAppearance.MouseDownBackColor = Color.White;
+            btnRefresh.FlatAppearance.MouseOverBackColor = Color.White;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnRefresh.ForeColor = Color.White;
@@ -832,6 +853,7 @@
             btnRefresh.Size = new Size(70, 30);
             btnRefresh.TabIndex = 74;
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnSearch
             // 
@@ -840,6 +862,8 @@
             btnSearch.BackgroundImageLayout = ImageLayout.Center;
             btnSearch.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnSearch.FlatAppearance.BorderSize = 2;
+            btnSearch.FlatAppearance.MouseDownBackColor = Color.White;
+            btnSearch.FlatAppearance.MouseOverBackColor = Color.White;
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSearch.ForeColor = Color.White;
@@ -890,15 +914,15 @@
         private Panel panel1;
         private Button btnClose;
         private Panel panelMain;
-        private ComboBox comboBox1;
+        private ComboBox filterPrice;
         private Label label12;
-        private ComboBox comboBox2;
+        private ComboBox filterRating;
         private Label label20;
-        private ComboBox comboBox4;
+        private ComboBox filterInstructor;
         private Label label27;
-        private ComboBox comboBox3;
+        private ComboBox filterCategory;
         private Label label26;
-        private TextBox inputSearchValue;
+        private TextBox inputSearch;
         private Label label23;
         private Button btnRefresh;
         private Button btnSearch;

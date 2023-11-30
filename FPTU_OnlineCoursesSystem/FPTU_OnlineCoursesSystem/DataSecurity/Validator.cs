@@ -11,13 +11,13 @@ namespace FPTU_OnlineCoursesSystem.DataValidator
         // Method validates a text input (e.g., name) containing only letters and spaces
         public static bool IsValidText(string text)
         {
-            return Regex.IsMatch(text, ValidatorRegex.Text);
+            return Regex.IsMatch(text, ValidationRegex.Text);
         }
 
         // Method validates an email address 
         public static bool IsValidEmail(string email)
         {
-            return Regex.IsMatch(email, ValidatorRegex.Email);
+            return Regex.IsMatch(email, ValidationRegex.Email);
         }
 
         // Method validates a password with a minimum length of 8 characters
@@ -29,19 +29,19 @@ namespace FPTU_OnlineCoursesSystem.DataValidator
         // Method validates a phone number with a minimum length of 7 digits
         public static bool IsValidPhoneNumber(string number)
         {
-            return Regex.IsMatch(number, ValidatorRegex.PhoneNumber);
+            return Regex.IsMatch(number, ValidationRegex.PhoneNumber);
         }
 
         // Method validates a date in the format dd/mm/yy
         public static bool IsValidDate(string date)
         {
-            return Regex.IsMatch(date, ValidatorRegex.Date);
+            return Regex.IsMatch(date, ValidationRegex.Date);
         }
 
         // Method validates a price with optional decimal points
         public static bool IsValidPrice(string price)
         {
-            return Regex.IsMatch(price, ValidatorRegex.Price);
+            return Regex.IsMatch(price, ValidationRegex.Price);
         }
 
         #endregion

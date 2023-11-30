@@ -2,7 +2,7 @@
 {
 
     // A class to store regular expressions for data validation
-    public static class ValidatorRegex
+    public static class ValidationRegex
     {
 
         public static string Text = @"^[A-Za-z0-9\s:]+$"; // Alphanumeric characters and spaces
@@ -21,7 +21,7 @@
     {
         public static string RequiredField = " is required."; 
 
-        public static string InvalidText = " only contains letters and spaces."; 
+        public static string InvalidText = "No special characters."; 
 
         public static string InvalidEmail = "Email format: email@fpt.edu.vn";
 
@@ -106,8 +106,6 @@
 
         public static string[] paramaters = { "EnrollmentID", "StudentName", "CourseName","EnrollmentDate", "EnrollmentStatus", "PaymentStatus" };
 
-        //public static string[] fullParamaters = paramaters.Prepend("EnrollmentID").ToArray();
-
         public static string[] columnFilters = { "EnrollmentDate", "EnrollmentStatus", "PaymentStatus" };
     }
 
@@ -119,9 +117,13 @@
 
         public static string[] paramaters = { "RatingID", "StudentName", "CourseName", "Review" };
 
-        //public static string[] fullParamaters = paramaters.Prepend("RatingID").ToArray();
-
         public static string[] columnFilters = { "RatingValue" };
+    }   
+
+    public static class StudentFormVariables
+    {
+        public static string[] columnNames = { "Course", "Category", "Instructor", "Enrollments", "Rating", "Date", "Duration", "Price($)" };
+
+        public static string[] columnFilters = { "Category", "Instructor", "RatingValue", "CoursePrice" };
     }
-    
 }
