@@ -5,9 +5,9 @@ using FPTU_OnlineCoursesSystem.UIInteraction;
 
 namespace FPTU_OnlineCoursesSystem.DBInteraction
 {
+    // Class to perform CRUD operations on the database
     public static class CRUD
     {
-
         // Method to display data in a DataGridView
         public static void ViewData(DataGridView dataGridView, string queryString, SqlParameter[] parameters = null)
         {
@@ -33,6 +33,7 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
             }
         }
 
+        // Method to get a single value from the database
         public static string GetSingleValue(string queryString, SqlParameter[] parameters = null, string columnName = "")
         {
             try
@@ -84,8 +85,6 @@ namespace FPTU_OnlineCoursesSystem.DBInteraction
                 Helpers.ShowError("UpsertData - " + ex.Message);
             }
         }
-
-
 
         // Method to insert data into the database
         public static void InsertData(string queryString, string[] columnNames, object[] inputValues)

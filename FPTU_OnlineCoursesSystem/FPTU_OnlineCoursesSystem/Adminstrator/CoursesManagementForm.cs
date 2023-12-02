@@ -226,7 +226,7 @@ namespace FPTU_OnlineCoursesSystem
 
         private void DGVCourse_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            CellClick.DGVCellClick(sender, e, inputControls, CourseVariables.columnNames, btnUpdate, btnDelete);
+            CellClick.DGVCellClick(sender, e, inputControls, CourseVariables.columnNames, new[] { btnUpdate, btnDelete });
         }
 
         // Search data

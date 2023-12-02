@@ -260,7 +260,7 @@ namespace FPTU_OnlineCoursesSystem
 
         private void DGVInstructor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            CellClick.DGVCellClick(sender, e, inputControls, InstructorVariables.columnNames, btnUpdate, btnDelete);
+            CellClick.DGVCellClick(sender, e, inputControls, InstructorVariables.columnNames, new[] { btnUpdate, btnDelete });
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

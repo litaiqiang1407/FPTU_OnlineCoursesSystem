@@ -4,6 +4,7 @@ using FPTU_OnlineCoursesSystem.DBInteraction;
 
 namespace FPTU_OnlineCoursesSystem.UIInteraction
 {
+    // Class to store helper methods
     public static class Helpers
     {
         // Method to get the next ID of a table

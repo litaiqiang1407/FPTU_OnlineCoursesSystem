@@ -129,7 +129,7 @@ namespace FPTU_OnlineCoursesSystem
             hideInformationImage();
 
             // Call the common method to handle cell click
-            CellClick.DGVCellClick(sender, e, informationControls, StudentFormVariables.columnNames, btnEnroll, btnAddToCart);
+            CellClick.DGVCellClick(sender, e, informationControls, StudentFormVariables.columnNames, new[] { btnEnroll, btnAddToCart });
 
             if (e.RowIndex >= 0)
             {

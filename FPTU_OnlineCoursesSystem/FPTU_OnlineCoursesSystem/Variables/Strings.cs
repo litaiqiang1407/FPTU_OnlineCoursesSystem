@@ -34,6 +34,7 @@
         public static string InvalidPrice = "Price format: xx.xx";
     }
 
+    // A class to store Sign Up form variables
     public static class SignUpVariables
     {
         public static string studentAccountEamilParamater = "@StudentAccountEmail";
@@ -45,6 +46,7 @@
         public static string[] columnAdminAccountNames = { "AdminAccountEmail", "AdminAccountPasswordHash" };
     }
 
+    // A class to store Instructor form variables
     public static class InstructorVariables
     {
         public static string tableName = "Instructor";
@@ -58,6 +60,7 @@
         public static string[] columnFilters = { "InstructorGender", "Specialization", "Experience" };
     }
 
+    // A class to store Student form variables
     public static class  StudentVariables
     {
         public static string tableName = "Student";
@@ -71,7 +74,7 @@
         public static string[] columnFilters = { "StudentGender", "NumberOfEnrollments" };
     }
 
-
+    // A class to store Category form variables
     public static class CategoryVariables
     {
         public static string tableName = "Category";
@@ -83,6 +86,7 @@
         public static string[] fullParamaters = paramaters.Prepend("CategoryID").ToArray();
     }
 
+    // A class to store Course form variables
     public static class CourseVariables
     {
         public static string tableName = "Course";
@@ -98,6 +102,7 @@
         public static string[] columnFilters = { "Category", "Instructor", "Date", "RatingValue", "CoursePrice" };
     }
 
+    // A class to store Enrollment form variables
     public static class EnrollmentVariables
     {
         public static string tableName = "Enrollment";
@@ -109,6 +114,7 @@
         public static string[] columnFilters = { "EnrollmentDate", "EnrollmentStatus", "PaymentStatus" };
     }
 
+    // A class to store Rating form variables
     public static class RatingVariables
     {
         public static string tableName = "Rating";
@@ -120,6 +126,7 @@
         public static string[] columnFilters = { "RatingValue" };
     }   
 
+    // A class to store Payment form variables
     public static class StudentFormVariables
     {
         public static string[] columnNames = { "Course", "Category", "Instructor", "Enrollments", "Rating", "Date", "Duration", "Price($)" };

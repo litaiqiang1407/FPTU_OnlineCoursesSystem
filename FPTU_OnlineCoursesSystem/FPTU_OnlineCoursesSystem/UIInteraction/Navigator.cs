@@ -1,5 +1,6 @@
 ﻿namespace FPTU_OnlineCoursesSystem.UIInteraction
 {
+    // Navigator class to store methods to navigate between forms
     public static class Navigator
     {
         // Open a child form in the specified panel

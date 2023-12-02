@@ -4,12 +4,12 @@ using System.Data;
 
 namespace FPTU_OnlineCoursesSystem.DBInteraction
 {
+    // Class to handle database connection and queries
     public static class DBConnection
     {
         // Connection string to the database
         public static string connectionString = "Data Source=TAIKUN\\SQLEXPRESS;Initial Catalog=FPTU_OnlineCourseSystem_DB;" +
             "Integrated Security=True;MultipleActiveResultSets=true";
-
 
         // Method to get a new SqlConnection object using the connection string
         public static SqlConnection GetConnection()

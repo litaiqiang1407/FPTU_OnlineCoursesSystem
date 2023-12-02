@@ -250,6 +250,7 @@
             // btnCreate
             // 
             btnCreate.BackColor = Color.FromArgb(255, 109, 0);
+            btnCreate.Cursor = Cursors.Hand;
             btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderSize = 2;
             btnCreate.FlatAppearance.MouseDownBackColor = Color.White;

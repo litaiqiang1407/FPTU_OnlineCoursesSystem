@@ -1,22 +1,27 @@
 ﻿namespace FPTU_OnlineCoursesSystem.DBInteraction
 {
+    // SignUp Query String
     public static class SignUpQueryString
     {
         // A string to create a new student account
         public static string createStudentAccounttQuery = "INSERT INTO StudentAccount (StudentAccountEmail, StudentAccountPasswordHash) " +
                                                           "VALUES (@StudentAccountEmail, @StudentAccountPasswordHash)";
 
+        // A string to get the student account ID
         public static string getStudentIDQuery = "SELECT StudentAccountID " +
                                                  "FROM StudentAccount " +
                                                  "WHERE StudentAccountEmail = @StudentAccountEmail";
 
+        // A string to create a new student record
         public static string insertStudentInformationQuery = "INSERT INTO Student (StudentEmail, StudentName, StudentGender, StudentBirthDate, StudentPhone) " +
                                                              "VALUES (@StudentEmail, @StudentName, @StudentGender, @StudentBirthDate, @StudentPhone)";
 
-        public static string createAdminAccountQuery = "INSERT INTO AdminAccount (AdminAccountEmail, AdminAccountPasswordHash) " +
-                                                        "VALUES (@AdminAccountEmail, @AdminAccountPasswordHash)";
+        // A string to create a new student account
+        public static string createStudentAccountQuery = "INSERT INTO StudentAccount (StudentAccountEmail, StudentAccountPasswordHash) " +
+                                                        "VALUES (@StudentAccountEmail, @StudentAccountPasswordHash)";
     }
 
+    // Instructor Query String
     public static class InstructorQueryString
     {
         // A string to get instructor data
@@ -31,6 +36,7 @@
                                          "CONVERT(VARCHAR, InstructorBirthDate, 103) AS 'Birthdate' " +
                                          "FROM Instructor";
 
+        // A string to search for instructor data
         public static string searchQuery = "SELECT " +
                                            "InstructorID AS 'ID', " +
                                            "InstructorName AS 'Name', " +
@@ -48,14 +54,18 @@
                                            "OR InstructorPhone LIKE @SearchValue " +
                                            "OR InstructorBirthDate LIKE @SearchValue";
 
+        // A string to get instructor specialization to the combobox
         public static string specializationQuery = "SELECT DISTINCT Specialization FROM Instructor";
 
+        // A string to get instructor experience to the combobox
         public static string experienceQuery = "SELECT DISTINCT Experience FROM Instructor";
 
+        // A string to get gender to the combobox
         public static string genderQuery = "SELECT DISTINCT InstructorGender FROM Instructor";
 
         public static string[] comboBoxesQuery = { genderQuery, specializationQuery, experienceQuery  };
 
+        // A string to filter instructor data
         public static string filterQuery = "SELECT " +
                                            "InstructorID AS 'ID', " +
                                            "InstructorName AS 'Name', " +
@@ -77,6 +87,7 @@
                                            "VALUES (@InstructorName, @InstructorGender, @Specialization, " +
                                            "@Experience, @InstructorEmail, @InstructorPhone, @InstructorBirthDate)";
 
+        // A string to update an instructor record in the database
         public static string updateQuery = "UPDATE Instructor " +
                                            "SET InstructorName = @InstructorName, " +
                                            "InstructorGender = @InstructorGender, Specialization = @Specialization, " +

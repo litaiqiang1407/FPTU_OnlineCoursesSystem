@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstructorsManagementForm));
             panelInstructors = new Panel();
             labelPhone = new Label();
@@ -158,14 +158,14 @@
             DGVInstructor.BackgroundColor = Color.White;
             DGVInstructor.BorderStyle = BorderStyle.None;
             DGVInstructor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 109, 0);
-            dataGridViewCellStyle3.SelectionForeColor = Color.White;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            DGVInstructor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 109, 0);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DGVInstructor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DGVInstructor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DGVInstructor.EnableHeadersVisualStyles = false;
             DGVInstructor.GridColor = Color.FromArgb(255, 72, 0);
@@ -175,11 +175,11 @@
             DGVInstructor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             DGVInstructor.RowHeadersVisible = false;
             DGVInstructor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(255, 138, 51);
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            DGVInstructor.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 138, 51);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            DGVInstructor.RowsDefaultCellStyle = dataGridViewCellStyle2;
             DGVInstructor.RowTemplate.Height = 29;
             DGVInstructor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVInstructor.Size = new Size(1220, 450);
@@ -349,6 +349,7 @@
             // btnCreate
             // 
             btnCreate.BackColor = Color.FromArgb(255, 109, 0);
+            btnCreate.Cursor = Cursors.Hand;
             btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderSize = 2;
             btnCreate.FlatAppearance.MouseDownBackColor = Color.White;

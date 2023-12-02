@@ -164,7 +164,7 @@ namespace FPTU_OnlineCoursesSystem
 
         private void DGVEnrollment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            CellClick.DGVCellClick(sender, e, inputControls, EnrollmentVariables.columnNames, btnUpdate, btnDelete);
+            CellClick.DGVCellClick(sender, e, inputControls, EnrollmentVariables.columnNames, new[] { btnUpdate, btnDelete });
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using FPTU_OnlineCoursesSystem.Variables;
 
 namespace FPTU_OnlineCoursesSystem.DataValidator
 {
+    // Class contains methods for validating user input and fields
     public static class Validator
     {
         #region ValidInput

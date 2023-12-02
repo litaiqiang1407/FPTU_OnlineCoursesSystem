@@ -189,7 +189,7 @@ namespace FPTU_OnlineCoursesSystem
         #region EventHandlers
         private void DGVStudent_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            CellClick.DGVCellClick(sender, e, inputControls, StudentVariables.columnNames, btnUpdate, btnDelete);
+            CellClick.DGVCellClick(sender, e, inputControls, StudentVariables.columnNames, new[] { btnUpdate, btnDelete });
         }
 
         private void btnCreate_Click(object sender, EventArgs e)

@@ -133,7 +133,7 @@ namespace FPTU_OnlineCoursesSystem
         // Load data into input fields when a row is clicked
         private void DGVCategory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            CellClick.DGVCellClick(sender, e, inputControls, CategoryVariables.columnNames, btnUpdate, btnDelete);
+            CellClick.DGVCellClick(sender, e, inputControls, CategoryVariables.columnNames, new[] { btnUpdate, btnDelete });
         }
 
         private void btnCreate_Click(object sender, EventArgs e)

@@ -5,9 +5,9 @@ using System.Data;
 
 namespace FPTU_OnlineCoursesSystem.DataSecurity
 {
+    // A class to store security methods
     public static class Security
     {
-
         // Check if email is registered
         public static bool EmailRegistered(string process, string email)
         {
@@ -41,6 +41,7 @@ namespace FPTU_OnlineCoursesSystem.DataSecurity
             return false;
         }
 
+        // Check user's account type and match password
         public static bool AuthenticateUser(string email, string password, string accountType)
         {
             string tableName = (accountType == "admin") ? "AdminAccount" : "StudentAccount";

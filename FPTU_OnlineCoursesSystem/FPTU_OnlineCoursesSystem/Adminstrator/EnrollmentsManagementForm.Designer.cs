@@ -162,6 +162,7 @@
             // btnDelete
             // 
             btnDelete.BackColor = Color.FromArgb(255, 109, 0);
+            btnDelete.Enabled = false;
             btnDelete.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnDelete.FlatAppearance.BorderSize = 2;
             btnDelete.FlatAppearance.MouseDownBackColor = Color.White;
@@ -180,6 +181,7 @@
             // btnUpdate
             // 
             btnUpdate.BackColor = Color.FromArgb(255, 109, 0);
+            btnUpdate.Enabled = false;
             btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnUpdate.FlatAppearance.BorderSize = 2;
             btnUpdate.FlatAppearance.MouseDownBackColor = Color.White;
@@ -345,7 +347,7 @@
             // 
             // btnCreate
             // 
-            btnCreate.BackColor = Color.FromArgb(255, 109, 0);
+            btnCreate.BackColor = Color.FromArgb(100, 255, 109, 0);
             btnCreate.Enabled = false;
             btnCreate.FlatAppearance.BorderColor = Color.FromArgb(255, 109, 0);
             btnCreate.FlatAppearance.BorderSize = 2;

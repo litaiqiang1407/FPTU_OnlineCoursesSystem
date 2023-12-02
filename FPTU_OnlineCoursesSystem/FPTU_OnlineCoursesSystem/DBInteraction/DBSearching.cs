@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 
 namespace FPTU_OnlineCoursesSystem.DBInteraction
 {
+    // Search data in a DataGridView
     public static class Searching
     {
-
         // Method to search data in a DataGridView
         public static void SearchData(DataGridView dataGridView, string searchQuery, string searchValue)
         {
