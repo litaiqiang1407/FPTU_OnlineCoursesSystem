@@ -55,7 +55,6 @@ namespace FPTU_OnlineCoursesSystem
             }
         }
 
-
         // Function to load data with filter
         private void loadDataWithFilter(string selectedMonth, string selectedYear)
         {
