@@ -179,7 +179,7 @@
             inputPassword.PasswordChar = '•';
             inputPassword.PlaceholderText = "Enter your password....";
             inputPassword.Size = new Size(358, 30);
-            inputPassword.TabIndex = 5;
+            inputPassword.TabIndex = 1;
             inputPassword.KeyDown += inputPassword_KeyDown;
             // 
             // label333

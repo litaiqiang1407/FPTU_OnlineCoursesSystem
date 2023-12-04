@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Adminstrator\CoursesManagementForm.cs">
+    <Compile Update="AdminstratorForm\CoursesManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LogSignForm\ForgotPasswordForm.cs">
@@ -10,25 +10,25 @@
     <Compile Update="LogSignForm\SignupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\AdministratorForm.cs">
+    <Compile Update="AdminstratorForm\AdministratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LogSignForm\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\CategoriesManagementForm.cs">
+    <Compile Update="AdminstratorForm\CategoriesManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\EnrollmentsManagementForm.cs">
+    <Compile Update="AdminstratorForm\EnrollmentsManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\InstructorsManagementForm.cs">
+    <Compile Update="AdminstratorForm\InstructorsManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\RatingsManagementForm.cs">
+    <Compile Update="AdminstratorForm\RatingsManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\ReportsManagementForm.cs">
+    <Compile Update="AdminstratorForm\ReportsManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LogSignForm\WelcomeForm.cs">
@@ -40,7 +40,7 @@
     <Compile Update="StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Adminstrator\StudentsManagementForm.cs">
+    <Compile Update="AdminstratorForm\StudentsManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

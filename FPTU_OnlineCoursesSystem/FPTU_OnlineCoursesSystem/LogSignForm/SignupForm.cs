@@ -18,6 +18,7 @@ namespace FPTU_OnlineCoursesSystem
 
         #region InputValues
 
+        // Get selected gender
         private string getSelectedGender()
         {
             if (inputMale.Checked)
@@ -36,11 +37,13 @@ namespace FPTU_OnlineCoursesSystem
             return null;
         }
 
+        // Get parsed birthdate
         private DateTime? parsedBirthdate()
         {
             return Helpers.ParseDate(inputBirthdate.Text);
         }
 
+        // Student information values
         private object[] studentInformationValues()
         {
             string email = inputEmail.Text;
@@ -72,7 +75,7 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateName()
         {
             return Validator.ValidateField(inputName, labelNameRequired,
-                "Full Name" + ValidationMessages.RequiredField, Validator.IsValidText,
+                ValidationMessages.RequiredField, Validator.IsValidText,
                 ValidationMessages.InvalidText, true);
         }
 
@@ -80,7 +83,7 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateEmail()
         {
             return Validator.ValidateField(inputEmail, labelEmailRequired,
-                "Email Address" + ValidationMessages.RequiredField, Validator.IsValidEmail,
+                ValidationMessages.RequiredField, Validator.IsValidEmail,
                 ValidationMessages.InvalidEmail, true);
         }
 
@@ -88,7 +91,7 @@ namespace FPTU_OnlineCoursesSystem
         private bool validatePassword()
         {
             return Validator.ValidateField(inputPassword, labelPasswordRequired,
-                "Password" + ValidationMessages.RequiredField, Validator.IsValidPassword,
+                ValidationMessages.RequiredField, Validator.IsValidPassword,
                 ValidationMessages.InvalidPassword, true);
         }
 

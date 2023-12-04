@@ -40,14 +40,14 @@ namespace FPTU_OnlineCoursesSystem
         private bool validateEmail()
         {
             return Validator.ValidateField(inputEmail, labelEmailRequired,
-                "Email" + ValidationMessages.RequiredField, Validator.IsValidEmail,
+                ValidationMessages.RequiredField, Validator.IsValidEmail,
                 ValidationMessages.InvalidEmail, true);
         }
 
         private bool validatePassword()
         {
             return Validator.ValidateField(inputPassword, labelPassword,
-                "Password" + ValidationMessages.RequiredField, Validator.IsValidPassword,
+                ValidationMessages.RequiredField, Validator.IsValidPassword,
                 ValidationMessages.InvalidPassword, true);
         }
 

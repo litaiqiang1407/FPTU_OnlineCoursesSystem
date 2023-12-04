@@ -19,7 +19,7 @@
     // A class to store validation messages
     public static class ValidationMessages 
     {
-        public static string RequiredField = " is required."; 
+        public static string RequiredField = "This information is mandatory"; 
 
         public static string InvalidText = "No special characters."; 
 

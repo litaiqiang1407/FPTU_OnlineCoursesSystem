@@ -63,6 +63,7 @@
             btnClose.BackColor = Color.FromArgb(255, 72, 0);
             btnClose.BackgroundImage = (Image)resources.GetObject("btnClose.BackgroundImage");
             btnClose.BackgroundImageLayout = ImageLayout.Zoom;
+            btnClose.Cursor = Cursors.Hand;
             btnClose.FlatAppearance.BorderColor = Color.White;
             btnClose.FlatAppearance.BorderSize = 0;
             btnClose.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 84, 0);
